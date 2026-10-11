@@ -4,3 +4,7 @@
 .track-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
 @media(max-width:700px){.track-grid{grid-template-columns:1fr 1fr}.track:nth-child(2){border-right:1px solid var(--line);margin-right:11px;padding-left:0}.track:nth-child(3){border-top:0;border-right:0;margin:0;padding-left:4px}.track:nth-child(4){border-right:1px solid var(--line);border-top:1px solid var(--line);margin-right:11px;padding-left:0}.track:nth-child(5){border-top:1px solid var(--line);padding-left:4px}}
 .date-pick input{appearance:none;background:transparent;color:var(--muted);border:0;font:10px var(--mono);padding:4px 0;width:108px;color-scheme:dark}.date-pick input:focus{outline:1px solid var(--lime);outline-offset:3px}
+.exercise-details{grid-column:1 / -1;min-width:0}
+.exercise-button{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.exercise-gif{width:100%;max-width:400px;min-width:0;height:auto;object-fit:contain}
+@media(max-width:700px){.exercise{grid-template-columns:25px minmax(0,1fr) auto}.exercise-tail .exercise-rpe{display:none}.exercise-details{padding:0 0 16px}.exercise-meta{line-height:1.5}.set-table{width:100%}}
