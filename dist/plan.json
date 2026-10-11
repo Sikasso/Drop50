@@ -1,0 +1,346 @@
+{
+  "plan_id": "drop50-2026-10",
+  "title": "Drop 50: steady cut with strength retained",
+  "user": {
+    "sex": "male",
+    "age_years": 36,
+    "height_in": 70,
+    "starting_weight_lb": 255,
+    "goal_weight_lb": 205,
+    "training_experience": "experienced lifter"
+  },
+  "dates": {
+    "start": "2026-10-12",
+    "year_end_phase_end": "2026-12-31",
+    "long_term_horizon_months": "6-12"
+  },
+  "goal_guidance": {
+    "rate_lb_per_week": "A practical default is about 1.0-1.5 lb/week, which puts losing 50 lb at roughly 8-12 months. Six months would require about 1.9 lb/week on average and is not the default target; choose a longer timeline rather than forcing an aggressive pace. Individual progress varies, and recovery and strength should remain good.",
+    "year_end_checkpoint": "Use the first 11 weeks to establish repeatable habits and trend toward roughly 8-15 lb lost; do not force a deadline if the weekly trend or recovery argues for slower progress.",
+    "measurement": "Weigh under similar conditions 4-7 mornings per week and use the rolling 7-day average. Assess waist monthly and gym performance weekly."
+  },
+  "nutrition": {
+    "calories_start_kcal_day": 2400,
+    "calorie_estimate_note": "Starting estimate, not a measured maintenance value: resting energy is roughly 2040 kcal/day by Mifflin-St Jeor; total needs depend heavily on daily movement, which is unknown. Begin near 2400 kcal/day, log intake consistently, and let 3 weeks of average-weight data calibrate it. This is intended as a modest initial deficit, not a promise of a specific rate.",
+    "protein_g_day": "170-190",
+    "protein_note": "A practical target based on goal-weight mass and training, rather than multiplying current bodyweight by an athlete range; distribute across 3-5 meals, e.g. 35-50 g at each meal.",
+    "habits": [
+      "Build meals around lean protein, vegetables or fruit, and a high-fiber carbohydrate; include measured fats rather than eliminating them.",
+      "Keep preferred foods in planned portions and track oils, drinks, sauces, and weekend intake consistently.",
+      "Drink to thirst and keep hydration routine; no supplement is required for fat loss."
+    ],
+    "adjustment_rules": [
+      "Hold the starting target for 3 full weeks unless energy, health, or training deteriorates. Compare weekly average weights, not single weigh-ins.",
+      "If loss averages under 0.4 lb/week for 3 consecutive weeks with at least 85% adherence, reduce by 150-200 kcal/day or add about 1000 daily steps; change one lever, then hold 2-3 weeks.",
+      "If loss exceeds 1.5 lb/week for 2 weeks after the initial water-weight change, or persistent hunger, fatigue, or strength loss appears, add 150-200 kcal/day and reassess.",
+      "Re-estimate after each 10-15 lb lost or 6-8 weeks, since energy needs change with body weight and activity."
+    ]
+  },
+  "activity": {
+    "lifting_days_per_week": 3,
+    "schedule": "Alternate A/B/C with at least one rest day between sessions (e.g. Mon/Wed/Fri). If only 2 days fit a week, continue the sequence next session rather than cramming workouts together.",
+    "steps": "For week 1, record a 7-day step baseline. Add 500-750 steps/day each week until reaching a sustainable baseline plus 2500-3000, or around 7000-9000/day if tolerated. Increase gradually and use easy walks; reduce the ramp if joint pain or recovery worsens.",
+    "cardio": "Optional: begin with 2 easy 20-minute walks weekly, then gradually build toward 150 minutes/week of moderate activity as schedule and joints allow. Keep it conversational and separate from lifting if that helps recovery."
+  },
+  "training_rules": {
+    "warmup": "5-8 minutes easy movement, then 2-4 progressively heavier warm-up sets before the first demanding lower- and upper-body lift. Warm-up sets do not count toward work sets.",
+    "effort": "Use the listed reps with about 2-3 reps in reserve (RIR) for most sets. Stop with clean technique; routine failure is unnecessary. A final isolation set may reach 1-2 RIR if feeling good.",
+    "progression": "Double progression: keep the load until every work set reaches the top of its rep range at the target RIR with sound form on two exposures. Then add the smallest practical increment (about 2.5-5 lb upper body, 5-10 lb lower body) and return to the lower end of the range.",
+    "rest": "Rest 2-3 minutes on compounds, 60-120 seconds on isolation work, and longer when needed to keep reps controlled.",
+    "pain": "Muscular effort is expected; stop an exercise for sharp or escalating joint pain and use the listed alternative or seek qualified clinical advice if it persists."
+  },
+  "phases": [
+    {
+      "name": "Settle in",
+      "dates": "2026-10-12 to 2026-10-25",
+      "prescription": "Do 2 work sets per exercise at 3 RIR. Learn current comfortable loads, start food and weight logs, and establish step baseline."
+    },
+    {
+      "name": "Build consistency",
+      "dates": "2026-10-26 to 2026-11-22",
+      "prescription": "Do 3 sets for the first 3 exercises and 2 sets for the rest, at 2-3 RIR. Progress reps before load."
+    },
+    {
+      "name": "Steady progression",
+      "dates": "2026-11-23 to 2026-12-31",
+      "prescription": "Continue the same volume. Add load only when the progression rule is met. If performance or sleep falters for a week, keep loads steady; if it persists, take a lighter week at half the work sets."
+    },
+    {
+      "name": "Continue to 205",
+      "dates": "2027-01-01 onward, review every 4 weeks",
+      "prescription": "Repeat the three-day template, adjust calories using trend rules, and take a lighter week every 6-10 weeks or when fatigue accumulates. Reassess rate, waist, strength, steps, and calorie target monthly."
+    }
+  ],
+  "exercise_library": [
+    {
+      "id": "goblet_squat",
+      "name": "Goblet squat",
+      "cues": [
+        "Brace before each rep and keep the dumbbell close to your chest.",
+        "Sit between your hips while knees track over toes.",
+        "Use a depth you can control with feet planted."
+      ],
+      "common_mistake": "Heels lifting or knees collapsing inward as depth increases.",
+      "alternative": "Leg press"
+    },
+    {
+      "id": "dumbbell_bench_press",
+      "name": "Dumbbell bench press",
+      "cues": [
+        "Set shoulder blades gently back and down on the bench.",
+        "Lower dumbbells under control toward mid-chest.",
+        "Press up without bouncing or forcing the shoulders forward."
+      ],
+      "common_mistake": "Over-arching the lower back or letting elbows flare straight out.",
+      "alternative": "Machine chest press"
+    },
+    {
+      "id": "lat_pulldown",
+      "name": "Lat pulldown",
+      "cues": [
+        "Grip just outside shoulder width and sit tall.",
+        "Drive elbows down toward your sides.",
+        "Return until arms are long without shrugging."
+      ],
+      "common_mistake": "Leaning far back and turning the pull into a swing.",
+      "alternative": "Assisted pull-up"
+    },
+    {
+      "id": "romanian_deadlift",
+      "name": "Dumbbell Romanian deadlift",
+      "cues": [
+        "Keep a soft knee bend and brace your trunk.",
+        "Push hips back while weights track close to legs.",
+        "Stop at a strong hamstring stretch, then stand by driving hips forward."
+      ],
+      "common_mistake": "Rounding the back or lowering past the point you can keep a hip hinge.",
+      "alternative": "Cable pull-through"
+    },
+    {
+      "id": "lateral_raise",
+      "name": "Dumbbell lateral raise",
+      "cues": [
+        "Use a light load and soft elbows.",
+        "Raise arms out slightly forward to about shoulder height.",
+        "Lower slowly without swinging your torso."
+      ],
+      "common_mistake": "Shrugging or using momentum to lift heavy dumbbells.",
+      "alternative": "Cable lateral raise"
+    },
+    {
+      "id": "dumbbell_curl",
+      "name": "Dumbbell curl",
+      "cues": [
+        "Stand tall with elbows close to your sides.",
+        "Curl without moving the upper arms forward.",
+        "Lower under control to near-full elbow extension."
+      ],
+      "common_mistake": "Rocking the torso or letting elbows drift well forward.",
+      "alternative": "Cable curl"
+    },
+    {
+      "id": "leg_press",
+      "name": "Leg press",
+      "cues": [
+        "Set feet about shoulder width and brace against the back pad.",
+        "Lower only as far as hips stay down and knees remain comfortable.",
+        "Drive through the whole foot without locking knees hard."
+      ],
+      "common_mistake": "Letting the pelvis curl off the pad at the bottom.",
+      "alternative": "Goblet squat"
+    },
+    {
+      "id": "dumbbell_overhead_press",
+      "name": "Seated dumbbell overhead press",
+      "cues": [
+        "Use a stable bench and stack wrists over elbows.",
+        "Brace ribs over pelvis before pressing.",
+        "Press smoothly overhead without shrugging into pain."
+      ],
+      "common_mistake": "Overarching the back to turn the press into an incline press.",
+      "alternative": "Machine shoulder press"
+    },
+    {
+      "id": "seated_cable_row",
+      "name": "Seated cable row",
+      "cues": [
+        "Sit tall with a small natural torso angle.",
+        "Pull elbows toward your waist and pause briefly.",
+        "Reach forward under control without rounding the low back."
+      ],
+      "common_mistake": "Rocking the torso to move the stack.",
+      "alternative": "Chest-supported machine row"
+    },
+    {
+      "id": "hamstring_curl",
+      "name": "Seated hamstring curl",
+      "cues": [
+        "Align the machine pivot with your knee.",
+        "Keep hips against the seat as you curl.",
+        "Return slowly to a comfortable stretch."
+      ],
+      "common_mistake": "Lifting hips or letting the weight stack crash.",
+      "alternative": "Lying hamstring curl"
+    },
+    {
+      "id": "split_squat",
+      "name": "Dumbbell split squat",
+      "cues": [
+        "Take a stable split stance and keep feet on separate tracks.",
+        "Lower straight down with front knee tracking over toes.",
+        "Push through the front foot to rise; use a post for balance if needed."
+      ],
+      "common_mistake": "Feet on one tightrope or forcing depth despite loss of balance.",
+      "alternative": "Supported bodyweight split squat"
+    }
+  ],
+  "workouts": [
+    {
+      "id": "A",
+      "name": "Full body A",
+      "exercises": [
+        {
+          "exercise_id": "goblet_squat",
+          "sets": "2 then 3 per phase",
+          "reps": "8-12",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "dumbbell_bench_press",
+          "sets": "2 then 3 per phase",
+          "reps": "6-10",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "lat_pulldown",
+          "sets": "2 then 3 per phase",
+          "reps": "8-12",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "romanian_deadlift",
+          "sets": "2",
+          "reps": "8-10",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "lateral_raise",
+          "sets": "2",
+          "reps": "12-15",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "dumbbell_curl",
+          "sets": "2",
+          "reps": "10-15",
+          "rir": "1-3"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Full body B",
+      "exercises": [
+        {
+          "exercise_id": "leg_press",
+          "sets": "2 then 3 per phase",
+          "reps": "8-12",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "dumbbell_overhead_press",
+          "sets": "2 then 3 per phase",
+          "reps": "6-10",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "seated_cable_row",
+          "sets": "2 then 3 per phase",
+          "reps": "8-12",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "hamstring_curl",
+          "sets": "2",
+          "reps": "10-15",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "split_squat",
+          "sets": "2",
+          "reps": "8-10 each side",
+          "rir": "2-3"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Full body C",
+      "exercises": [
+        {
+          "exercise_id": "dumbbell_bench_press",
+          "sets": "2 then 3 per phase",
+          "reps": "8-12",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "romanian_deadlift",
+          "sets": "2 then 3 per phase",
+          "reps": "8-10",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "lat_pulldown",
+          "sets": "2 then 3 per phase",
+          "reps": "8-12",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "leg_press",
+          "sets": "2",
+          "reps": "10-15",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "seated_cable_row",
+          "sets": "2",
+          "reps": "10-12",
+          "rir": "2-3"
+        },
+        {
+          "exercise_id": "lateral_raise",
+          "sets": "2",
+          "reps": "12-15",
+          "rir": "2-3"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Gradual, steady weight loss around 1-2 lb/week is more sustainable for many people; individual pace varies.",
+      "title": "CDC: Steps for Losing Weight",
+      "url": "https://www.cdc.gov/healthy-weight-growth/losing-weight/"
+    },
+    {
+      "claim": "Personalized calorie targets should account for activity and changing body weight; the Body Weight Planner estimates goal-based calorie and activity plans.",
+      "title": "NIDDK Body Weight Planner",
+      "url": "https://www.niddk.nih.gov/health-information/weight-management/body-weight-planner"
+    },
+    {
+      "claim": "Most exercising individuals can use 1.4-2.0 g protein/kg/day; practical target here is anchored to goal weight to avoid an unnecessarily large current-weight calculation.",
+      "title": "ISSN Position Stand: Protein and Exercise",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5477153/"
+    },
+    {
+      "claim": "ACSM's 2026 evidence review reports that training to momentary fatigue/failure does not consistently improve outcomes; 2-3 sets per exercise is a reasonable foundation.",
+      "title": "ACSM 2026 Resistance Training Position Stand",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41843416/"
+    },
+    {
+      "claim": "Adults are advised to accumulate at least 150 minutes moderate activity weekly and muscle-strengthen on 2 or more days; the plan ramps toward this as tolerated.",
+      "title": "CDC: Physical Activity and Your Weight and Health",
+      "url": "https://www.cdc.gov/healthy-weight-growth/physical-activity/"
+    }
+  ]
+}
