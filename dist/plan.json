@@ -1,346 +1,1155 @@
 {
-  "plan_id": "drop50-2026-10",
-  "title": "Drop 50: steady cut with strength retained",
-  "user": {
-    "sex": "male",
-    "age_years": 36,
-    "height_in": 70,
-    "starting_weight_lb": 255,
-    "goal_weight_lb": 205,
-    "training_experience": "experienced lifter"
+ "version": 2,
+ "title": "Drop50 — Lean in 90",
+ "source": "trainer.neal full-body 3x/week framework",
+ "slots": {
+  "A": {
+   "label": "Squat",
+   "kind": "compound",
+   "rest": 150
   },
-  "dates": {
-    "start": "2026-10-12",
-    "year_end_phase_end": "2026-12-31",
-    "long_term_horizon_months": "6-12"
+  "B": {
+   "label": "Hinge",
+   "kind": "compound",
+   "rest": 150
   },
-  "goal_guidance": {
-    "rate_lb_per_week": "A practical default is about 1.0-1.5 lb/week, which puts losing 50 lb at roughly 8-12 months. Six months would require about 1.9 lb/week on average and is not the default target; choose a longer timeline rather than forcing an aggressive pace. Individual progress varies, and recovery and strength should remain good.",
-    "year_end_checkpoint": "Use the first 11 weeks to establish repeatable habits and trend toward roughly 8-15 lb lost; do not force a deadline if the weekly trend or recovery argues for slower progress.",
-    "measurement": "Weigh under similar conditions 4-7 mornings per week and use the rolling 7-day average. Assess waist monthly and gym performance weekly."
+  "C": {
+   "label": "Vertical push",
+   "kind": "compound",
+   "rest": 120
   },
-  "nutrition": {
-    "calories_start_kcal_day": 2400,
-    "calorie_estimate_note": "Starting estimate, not a measured maintenance value: resting energy is roughly 2040 kcal/day by Mifflin-St Jeor; total needs depend heavily on daily movement, which is unknown. Begin near 2400 kcal/day, log intake consistently, and let 3 weeks of average-weight data calibrate it. This is intended as a modest initial deficit, not a promise of a specific rate.",
-    "protein_g_day": "170-190",
-    "protein_note": "A practical target based on goal-weight mass and training, rather than multiplying current bodyweight by an athlete range; distribute across 3-5 meals, e.g. 35-50 g at each meal.",
-    "habits": [
-      "Build meals around lean protein, vegetables or fruit, and a high-fiber carbohydrate; include measured fats rather than eliminating them.",
-      "Keep preferred foods in planned portions and track oils, drinks, sauces, and weekend intake consistently.",
-      "Drink to thirst and keep hydration routine; no supplement is required for fat loss."
+  "D": {
+   "label": "Horizontal push",
+   "kind": "compound",
+   "rest": 120
+  },
+  "E": {
+   "label": "Pull",
+   "kind": "compound",
+   "rest": 120
+  },
+  "F": {
+   "label": "Arms",
+   "kind": "arms",
+   "rest": 75
+  },
+  "X": {
+   "label": "Finisher",
+   "kind": "finisher",
+   "rest": 60
+  }
+ },
+ "phases": [
+  {
+   "month": 1,
+   "name": "Quality & Form",
+   "scheme": "straight",
+   "rir_label": "2–3 in the tank",
+   "summary": "Moderate reps, perfect technique, never to failure. Let your body learn the movements.",
+   "rules": [
+    "Focus on good technique and controlling the weight.",
+    "Moderate rep ranges (8–12).",
+    "Don't train to failure.",
+    "Build a strong foundation."
+   ],
+   "presc": {
+    "compound": [
+     {
+      "min": 8,
+      "max": 12,
+      "rir": 2.5
+     },
+     {
+      "min": 8,
+      "max": 12,
+      "rir": 2.5
+     },
+     {
+      "min": 8,
+      "max": 12,
+      "rir": 2.5
+     }
     ],
-    "adjustment_rules": [
-      "Hold the starting target for 3 full weeks unless energy, health, or training deteriorates. Compare weekly average weights, not single weigh-ins.",
-      "If loss averages under 0.4 lb/week for 3 consecutive weeks with at least 85% adherence, reduce by 150-200 kcal/day or add about 1000 daily steps; change one lever, then hold 2-3 weeks.",
-      "If loss exceeds 1.5 lb/week for 2 weeks after the initial water-weight change, or persistent hunger, fatigue, or strength loss appears, add 150-200 kcal/day and reassess.",
-      "Re-estimate after each 10-15 lb lost or 6-8 weeks, since energy needs change with body weight and activity."
+    "arms": [
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 2.5
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 2.5
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 2.5
+     }
+    ],
+    "finisher": [
+     {
+      "min": 12,
+      "max": 15,
+      "rir": 2.5
+     },
+     {
+      "min": 12,
+      "max": 15,
+      "rir": 2.5
+     }
     ]
+   }
   },
-  "activity": {
-    "lifting_days_per_week": 3,
-    "schedule": "Alternate A/B/C with at least one rest day between sessions (e.g. Mon/Wed/Fri). If only 2 days fit a week, continue the sequence next session rather than cramming workouts together.",
-    "steps": "For week 1, record a 7-day step baseline. Add 500-750 steps/day each week until reaching a sustainable baseline plus 2500-3000, or around 7000-9000/day if tolerated. Increase gradually and use easy walks; reduce the ramp if joint pain or recovery worsens.",
-    "cardio": "Optional: begin with 2 easy 20-minute walks weekly, then gradually build toward 150 minutes/week of moderate activity as schedule and joints allow. Keep it conversational and separate from lifting if that helps recovery."
+  {
+   "month": 2,
+   "name": "Reverse Pyramid",
+   "scheme": "rpt",
+   "rir_label": "1–2 in the tank",
+   "summary": "Heaviest set first, then drop the weight and add reps. Still not to failure.",
+   "rules": [
+    "Set 1: heavy, 4–6 reps.",
+    "Set 2: lighter, 8–10 reps.",
+    "Set 3: lighter, 10–12 reps.",
+    "Leave 1–2 reps in reserve on all sets."
+   ],
+   "presc": {
+    "compound": [
+     {
+      "min": 4,
+      "max": 6,
+      "rir": 1.5
+     },
+     {
+      "min": 8,
+      "max": 10,
+      "rir": 1.5
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 1.5
+     }
+    ],
+    "arms": [
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 1.5
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 1.5
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 1.5
+     }
+    ],
+    "finisher": [
+     {
+      "min": 12,
+      "max": 15,
+      "rir": 1.5
+     },
+     {
+      "min": 12,
+      "max": 15,
+      "rir": 1.5
+     }
+    ]
+   }
   },
-  "training_rules": {
-    "warmup": "5-8 minutes easy movement, then 2-4 progressively heavier warm-up sets before the first demanding lower- and upper-body lift. Warm-up sets do not count toward work sets.",
-    "effort": "Use the listed reps with about 2-3 reps in reserve (RIR) for most sets. Stop with clean technique; routine failure is unnecessary. A final isolation set may reach 1-2 RIR if feeling good.",
-    "progression": "Double progression: keep the load until every work set reaches the top of its rep range at the target RIR with sound form on two exposures. Then add the smallest practical increment (about 2.5-5 lb upper body, 5-10 lb lower body) and return to the lower end of the range.",
-    "rest": "Rest 2-3 minutes on compounds, 60-120 seconds on isolation work, and longer when needed to keep reps controlled.",
-    "pain": "Muscular effort is expected; stop an exercise for sharp or escalating joint pain and use the listed alternative or seek qualified clinical advice if it persists."
+  {
+   "month": 3,
+   "name": "Increase Intensity",
+   "scheme": "rpt",
+   "rir_label": "to failure",
+   "summary": "Same reverse pyramid, every set taken to failure. This is where strength and physique jump.",
+   "rules": [
+    "Same reverse pyramid.",
+    "Go to failure on each set.",
+    "Squats and hinges: stop at the last clean rep.",
+    "Use a spotter or machines when pushing presses to failure."
+   ],
+   "presc": {
+    "compound": [
+     {
+      "min": 4,
+      "max": 6,
+      "rir": 0
+     },
+     {
+      "min": 8,
+      "max": 10,
+      "rir": 0
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 0
+     }
+    ],
+    "arms": [
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 0
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 0
+     },
+     {
+      "min": 10,
+      "max": 12,
+      "rir": 0
+     }
+    ],
+    "finisher": [
+     {
+      "min": 12,
+      "max": 15,
+      "rir": 0
+     },
+     {
+      "min": 12,
+      "max": 15,
+      "rir": 0
+     }
+    ]
+   }
+  }
+ ],
+ "exercises": [
+  {
+   "id": "leg_press",
+   "name": "Leg press",
+   "slot": "A",
+   "basis": "total",
+   "inc": 10,
+   "frames": 3,
+   "cues": [
+    "Feet shoulder-width, mid-platform; brace into the back pad.",
+    "Lower until hips are about to curl off the pad.",
+    "Drive through the whole foot; stop just short of locking the knees."
+   ],
+   "mistake": "Pelvis rolling off the pad at the bottom."
   },
-  "phases": [
-    {
-      "name": "Settle in",
-      "dates": "2026-10-12 to 2026-10-25",
-      "prescription": "Do 2 work sets per exercise at 3 RIR. Learn current comfortable loads, start food and weight logs, and establish step baseline."
-    },
-    {
-      "name": "Build consistency",
-      "dates": "2026-10-26 to 2026-11-22",
-      "prescription": "Do 3 sets for the first 3 exercises and 2 sets for the rest, at 2-3 RIR. Progress reps before load."
-    },
-    {
-      "name": "Steady progression",
-      "dates": "2026-11-23 to 2026-12-31",
-      "prescription": "Continue the same volume. Add load only when the progression rule is met. If performance or sleep falters for a week, keep loads steady; if it persists, take a lighter week at half the work sets."
-    },
-    {
-      "name": "Continue to 205",
-      "dates": "2027-01-01 onward, review every 4 weeks",
-      "prescription": "Repeat the three-day template, adjust calories using trend rules, and take a lighter week every 6-10 weeks or when fatigue accumulates. Reassess rate, waist, strength, steps, and calorie target monthly."
-    }
+  {
+   "id": "hack_squat",
+   "name": "Hack squat",
+   "slot": "A",
+   "basis": "total",
+   "inc": 10,
+   "frames": 2,
+   "unit_note": "plates added",
+   "cues": [
+    "Shoulders and back flat on the pad, feet mid-platform.",
+    "Sit straight down, knees tracking over toes.",
+    "Stand by pushing the floor away; keep hips on the pad."
+   ],
+   "mistake": "Heels lifting or knees caving in on the way up."
+  },
+  {
+   "id": "split_squat",
+   "name": "Dumbbell split squat",
+   "slot": "A",
+   "basis": "each",
+   "inc": 5,
+   "uni": true,
+   "frames": 3,
+   "cues": [
+    "Long stance, feet on two separate tracks.",
+    "Drop the back knee straight down; front knee over toes.",
+    "Push through the front foot. Do all reps, then switch legs."
+   ],
+   "mistake": "Narrow tightrope stance that kills balance."
+  },
+  {
+   "id": "goblet_squat",
+   "name": "Goblet squat",
+   "slot": "A",
+   "basis": "single",
+   "inc": 5,
+   "frames": 3,
+   "swap_only": true,
+   "cues": [
+    "Hold the dumbbell tight to your chest and brace.",
+    "Sit between your hips, knees tracking over toes.",
+    "Stand tall without letting the chest drop."
+   ],
+   "mistake": "Heels lifting or knees collapsing inward."
+  },
+  {
+   "id": "romanian_deadlift",
+   "name": "Dumbbell Romanian deadlift",
+   "slot": "B",
+   "basis": "each",
+   "inc": 5,
+   "frames": 3,
+   "cues": [
+    "Soft knees, brace, dumbbells against your thighs.",
+    "Push hips back until you feel a strong hamstring stretch.",
+    "Stand by driving the hips forward; squeeze glutes at the top."
+   ],
+   "mistake": "Rounding the back to reach lower."
+  },
+  {
+   "id": "hip_thrust",
+   "name": "Barbell hip thrust",
+   "slot": "B",
+   "basis": "total",
+   "inc": 10,
+   "frames": 2,
+   "cues": [
+    "Upper back on the bench edge, bar padded over the hips.",
+    "Tuck the chin and ribs; drive through the heels.",
+    "Lock out with glutes, pause one second, lower under control."
+   ],
+   "mistake": "Arching the lower back instead of extending the hips."
+  },
+  {
+   "id": "back_extension",
+   "name": "45° back extension",
+   "slot": "B",
+   "basis": "added",
+   "inc": 5,
+   "frames": 2,
+   "cues": [
+    "Pad just below the hip crease so you can hinge freely.",
+    "Hinge down with a long spine; hold a plate to add load.",
+    "Rise until body is in a straight line — no hyperextending."
+   ],
+   "mistake": "Swinging up past straight and cranking the low back."
+  },
+  {
+   "id": "dumbbell_overhead_press",
+   "name": "Seated dumbbell press",
+   "slot": "C",
+   "basis": "each",
+   "inc": 5,
+   "frames": 3,
+   "cues": [
+    "Bench upright, wrists stacked over elbows.",
+    "Brace ribs down before every rep.",
+    "Press up and slightly in; lower to ear level."
+   ],
+   "mistake": "Arching back so it turns into an incline press."
+  },
+  {
+   "id": "machine_shoulder_press",
+   "name": "Machine shoulder press",
+   "slot": "C",
+   "basis": "total",
+   "inc": 10,
+   "frames": 2,
+   "cues": [
+    "Set the seat so handles start at shoulder height.",
+    "Back flat on the pad, core braced.",
+    "Press without shrugging; control the return."
+   ],
+   "mistake": "Seat too low, which pinches the shoulders."
+  },
+  {
+   "id": "arnold_press",
+   "name": "Arnold press",
+   "slot": "C",
+   "basis": "each",
+   "inc": 5,
+   "frames": 2,
+   "cues": [
+    "Start palms facing you at chin height.",
+    "Rotate palms forward as you press up.",
+    "Reverse the rotation on the way down."
+   ],
+   "mistake": "Rushing the rotation and losing control at the top."
+  },
+  {
+   "id": "dumbbell_bench_press",
+   "name": "Dumbbell bench press",
+   "slot": "D",
+   "basis": "each",
+   "inc": 5,
+   "frames": 3,
+   "cues": [
+    "Shoulder blades back and down, feet planted.",
+    "Lower to mid-chest, elbows about 45° from your body.",
+    "Press up without bouncing."
+   ],
+   "mistake": "Elbows flared straight out to the sides."
+  },
+  {
+   "id": "incline_dumbbell_press",
+   "name": "Incline dumbbell press",
+   "slot": "D",
+   "basis": "each",
+   "inc": 5,
+   "frames": 2,
+   "cues": [
+    "Bench at 30°, shoulder blades pinned.",
+    "Lower to upper chest with forearms vertical.",
+    "Press up and slightly together."
+   ],
+   "mistake": "Bench too steep, turning it into a shoulder press."
+  },
+  {
+   "id": "machine_chest_press",
+   "name": "Machine chest press",
+   "slot": "D",
+   "basis": "total",
+   "inc": 10,
+   "frames": 2,
+   "cues": [
+    "Handles at mid-chest height.",
+    "Shoulder blades back against the pad.",
+    "Press out smoothly; let the stack touch down lightly."
+   ],
+   "mistake": "Shoulders rolling forward off the pad."
+  },
+  {
+   "id": "lat_pulldown",
+   "name": "Lat pulldown",
+   "slot": "E",
+   "basis": "total",
+   "inc": 10,
+   "frames": 3,
+   "cues": [
+    "Grip just outside shoulders, thighs locked under the pad.",
+    "Drive elbows down to your sides, bar to upper chest.",
+    "Let arms go long at the top without shrugging."
+   ],
+   "mistake": "Leaning way back and swinging the weight."
+  },
+  {
+   "id": "seated_cable_row",
+   "name": "Seated cable row",
+   "slot": "E",
+   "basis": "total",
+   "inc": 10,
+   "frames": 3,
+   "cues": [
+    "Sit tall, slight knee bend.",
+    "Pull elbows to your waist and pause.",
+    "Reach forward under control without rounding."
+   ],
+   "mistake": "Rocking the torso to move the stack."
+  },
+  {
+   "id": "one_arm_dumbbell_row",
+   "name": "One-arm dumbbell row",
+   "slot": "E",
+   "basis": "single",
+   "inc": 5,
+   "uni": true,
+   "frames": 2,
+   "cues": [
+    "Hand and knee on the bench, back flat.",
+    "Pull the dumbbell toward your hip.",
+    "Lower to a full stretch. All reps, then switch."
+   ],
+   "mistake": "Twisting the torso to heave the weight."
+  },
+  {
+   "id": "close_grip_pulldown",
+   "name": "Close-grip pulldown",
+   "slot": "E",
+   "basis": "total",
+   "inc": 10,
+   "frames": 2,
+   "swap_only": true,
+   "cues": [
+    "Close or neutral grip, chest up.",
+    "Pull to upper chest, elbows tight.",
+    "Control the bar back up."
+   ],
+   "mistake": "Pulling with the arms instead of the back."
+  },
+  {
+   "id": "dumbbell_curl",
+   "name": "Dumbbell curl",
+   "slot": "F",
+   "arm": "bi",
+   "basis": "each",
+   "inc": 5,
+   "frames": 3,
+   "cues": [
+    "Stand tall, elbows pinned to your sides.",
+    "Curl without letting the elbows drift forward.",
+    "Lower all the way under control."
+   ],
+   "mistake": "Rocking the torso for momentum."
+  },
+  {
+   "id": "hammer_curl",
+   "name": "Hammer curl",
+   "slot": "F",
+   "arm": "bi",
+   "basis": "each",
+   "inc": 5,
+   "frames": 2,
+   "cues": [
+    "Palms facing each other the whole time.",
+    "Elbows stay at your sides.",
+    "Squeeze at the top, lower slowly."
+   ],
+   "mistake": "Swinging the dumbbells up."
+  },
+  {
+   "id": "incline_dumbbell_curl",
+   "name": "Incline dumbbell curl",
+   "slot": "F",
+   "arm": "bi",
+   "basis": "each",
+   "inc": 5,
+   "frames": 2,
+   "cues": [
+    "Bench at 45–60°, arms hanging straight down.",
+    "Curl without moving the upper arm forward.",
+    "Full stretch at the bottom of every rep."
+   ],
+   "mistake": "Shoulders rolling forward to cheat the curl."
+  },
+  {
+   "id": "rope_pushdown",
+   "name": "Rope pushdown",
+   "slot": "F",
+   "arm": "tri",
+   "basis": "total",
+   "inc": 5,
+   "frames": 2,
+   "cues": [
+    "Elbows pinned at your sides.",
+    "Push down and spread the rope at the bottom.",
+    "Control it back to 90° at the elbow."
+   ],
+   "mistake": "Elbows flaring and shoulders taking over."
+  },
+  {
+   "id": "overhead_rope_extension",
+   "name": "Overhead rope extension",
+   "slot": "F",
+   "arm": "tri",
+   "basis": "total",
+   "inc": 5,
+   "frames": 2,
+   "cues": [
+    "Face away from the cable, staggered stance.",
+    "Elbows point forward, upper arms still.",
+    "Extend fully overhead, then stretch back."
+   ],
+   "mistake": "Elbows flaring wide."
+  },
+  {
+   "id": "machine_dip",
+   "name": "Machine dip",
+   "slot": "F",
+   "arm": "tri",
+   "basis": "total",
+   "inc": 10,
+   "frames": 2,
+   "cues": [
+    "Sit tall, handles just below the chest.",
+    "Press down until arms are straight.",
+    "Return slowly to about 90° at the elbow."
+   ],
+   "mistake": "Shrugging the shoulders up toward the ears."
+  },
+  {
+   "id": "lateral_raise",
+   "name": "Dumbbell lateral raise",
+   "slot": "X",
+   "basis": "each",
+   "inc": 5,
+   "frames": 3,
+   "cues": [
+    "Light dumbbells, soft elbows.",
+    "Raise out and slightly forward to shoulder height.",
+    "Lower slowly — no torso swing."
+   ],
+   "mistake": "Shrugging or heaving with momentum."
+  },
+  {
+   "id": "hamstring_curl",
+   "name": "Seated hamstring curl",
+   "slot": "X",
+   "basis": "total",
+   "inc": 10,
+   "frames": 3,
+   "cues": [
+    "Line the machine pivot up with your knee.",
+    "Hips stay down on the seat.",
+    "Curl hard, return slowly."
+   ],
+   "mistake": "Letting the stack crash between reps."
+  }
+ ],
+ "pools": {
+  "A": [
+   "leg_press",
+   "hack_squat",
+   "split_squat",
+   "goblet_squat"
   ],
-  "exercise_library": [
-    {
-      "id": "goblet_squat",
-      "name": "Goblet squat",
-      "cues": [
-        "Brace before each rep and keep the dumbbell close to your chest.",
-        "Sit between your hips while knees track over toes.",
-        "Use a depth you can control with feet planted."
-      ],
-      "common_mistake": "Heels lifting or knees collapsing inward as depth increases.",
-      "alternative": "Leg press"
-    },
-    {
-      "id": "dumbbell_bench_press",
-      "name": "Dumbbell bench press",
-      "cues": [
-        "Set shoulder blades gently back and down on the bench.",
-        "Lower dumbbells under control toward mid-chest.",
-        "Press up without bouncing or forcing the shoulders forward."
-      ],
-      "common_mistake": "Over-arching the lower back or letting elbows flare straight out.",
-      "alternative": "Machine chest press"
-    },
-    {
-      "id": "lat_pulldown",
-      "name": "Lat pulldown",
-      "cues": [
-        "Grip just outside shoulder width and sit tall.",
-        "Drive elbows down toward your sides.",
-        "Return until arms are long without shrugging."
-      ],
-      "common_mistake": "Leaning far back and turning the pull into a swing.",
-      "alternative": "Assisted pull-up"
-    },
-    {
-      "id": "romanian_deadlift",
-      "name": "Dumbbell Romanian deadlift",
-      "cues": [
-        "Keep a soft knee bend and brace your trunk.",
-        "Push hips back while weights track close to legs.",
-        "Stop at a strong hamstring stretch, then stand by driving hips forward."
-      ],
-      "common_mistake": "Rounding the back or lowering past the point you can keep a hip hinge.",
-      "alternative": "Cable pull-through"
-    },
-    {
-      "id": "lateral_raise",
-      "name": "Dumbbell lateral raise",
-      "cues": [
-        "Use a light load and soft elbows.",
-        "Raise arms out slightly forward to about shoulder height.",
-        "Lower slowly without swinging your torso."
-      ],
-      "common_mistake": "Shrugging or using momentum to lift heavy dumbbells.",
-      "alternative": "Cable lateral raise"
-    },
-    {
-      "id": "dumbbell_curl",
-      "name": "Dumbbell curl",
-      "cues": [
-        "Stand tall with elbows close to your sides.",
-        "Curl without moving the upper arms forward.",
-        "Lower under control to near-full elbow extension."
-      ],
-      "common_mistake": "Rocking the torso or letting elbows drift well forward.",
-      "alternative": "Cable curl"
-    },
-    {
-      "id": "leg_press",
-      "name": "Leg press",
-      "cues": [
-        "Set feet about shoulder width and brace against the back pad.",
-        "Lower only as far as hips stay down and knees remain comfortable.",
-        "Drive through the whole foot without locking knees hard."
-      ],
-      "common_mistake": "Letting the pelvis curl off the pad at the bottom.",
-      "alternative": "Goblet squat"
-    },
-    {
-      "id": "dumbbell_overhead_press",
-      "name": "Seated dumbbell overhead press",
-      "cues": [
-        "Use a stable bench and stack wrists over elbows.",
-        "Brace ribs over pelvis before pressing.",
-        "Press smoothly overhead without shrugging into pain."
-      ],
-      "common_mistake": "Overarching the back to turn the press into an incline press.",
-      "alternative": "Machine shoulder press"
-    },
-    {
-      "id": "seated_cable_row",
-      "name": "Seated cable row",
-      "cues": [
-        "Sit tall with a small natural torso angle.",
-        "Pull elbows toward your waist and pause briefly.",
-        "Reach forward under control without rounding the low back."
-      ],
-      "common_mistake": "Rocking the torso to move the stack.",
-      "alternative": "Chest-supported machine row"
-    },
-    {
-      "id": "hamstring_curl",
-      "name": "Seated hamstring curl",
-      "cues": [
-        "Align the machine pivot with your knee.",
-        "Keep hips against the seat as you curl.",
-        "Return slowly to a comfortable stretch."
-      ],
-      "common_mistake": "Lifting hips or letting the weight stack crash.",
-      "alternative": "Lying hamstring curl"
-    },
-    {
-      "id": "split_squat",
-      "name": "Dumbbell split squat",
-      "cues": [
-        "Take a stable split stance and keep feet on separate tracks.",
-        "Lower straight down with front knee tracking over toes.",
-        "Push through the front foot to rise; use a post for balance if needed."
-      ],
-      "common_mistake": "Feet on one tightrope or forcing depth despite loss of balance.",
-      "alternative": "Supported bodyweight split squat"
-    }
+  "B": [
+   "romanian_deadlift",
+   "hip_thrust",
+   "back_extension"
   ],
-  "workouts": [
-    {
-      "id": "A",
-      "name": "Full body A",
-      "exercises": [
-        {
-          "exercise_id": "goblet_squat",
-          "sets": "2 then 3 per phase",
-          "reps": "8-12",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "dumbbell_bench_press",
-          "sets": "2 then 3 per phase",
-          "reps": "6-10",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "lat_pulldown",
-          "sets": "2 then 3 per phase",
-          "reps": "8-12",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "romanian_deadlift",
-          "sets": "2",
-          "reps": "8-10",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "lateral_raise",
-          "sets": "2",
-          "reps": "12-15",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "dumbbell_curl",
-          "sets": "2",
-          "reps": "10-15",
-          "rir": "1-3"
-        }
-      ]
-    },
-    {
-      "id": "B",
-      "name": "Full body B",
-      "exercises": [
-        {
-          "exercise_id": "leg_press",
-          "sets": "2 then 3 per phase",
-          "reps": "8-12",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "dumbbell_overhead_press",
-          "sets": "2 then 3 per phase",
-          "reps": "6-10",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "seated_cable_row",
-          "sets": "2 then 3 per phase",
-          "reps": "8-12",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "hamstring_curl",
-          "sets": "2",
-          "reps": "10-15",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "split_squat",
-          "sets": "2",
-          "reps": "8-10 each side",
-          "rir": "2-3"
-        }
-      ]
-    },
-    {
-      "id": "C",
-      "name": "Full body C",
-      "exercises": [
-        {
-          "exercise_id": "dumbbell_bench_press",
-          "sets": "2 then 3 per phase",
-          "reps": "8-12",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "romanian_deadlift",
-          "sets": "2 then 3 per phase",
-          "reps": "8-10",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "lat_pulldown",
-          "sets": "2 then 3 per phase",
-          "reps": "8-12",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "leg_press",
-          "sets": "2",
-          "reps": "10-15",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "seated_cable_row",
-          "sets": "2",
-          "reps": "10-12",
-          "rir": "2-3"
-        },
-        {
-          "exercise_id": "lateral_raise",
-          "sets": "2",
-          "reps": "12-15",
-          "rir": "2-3"
-        }
-      ]
-    }
+  "C": [
+   "dumbbell_overhead_press",
+   "machine_shoulder_press",
+   "arnold_press"
   ],
-  "sources": [
-    {
-      "claim": "Gradual, steady weight loss around 1-2 lb/week is more sustainable for many people; individual pace varies.",
-      "title": "CDC: Steps for Losing Weight",
-      "url": "https://www.cdc.gov/healthy-weight-growth/losing-weight/"
-    },
-    {
-      "claim": "Personalized calorie targets should account for activity and changing body weight; the Body Weight Planner estimates goal-based calorie and activity plans.",
-      "title": "NIDDK Body Weight Planner",
-      "url": "https://www.niddk.nih.gov/health-information/weight-management/body-weight-planner"
-    },
-    {
-      "claim": "Most exercising individuals can use 1.4-2.0 g protein/kg/day; practical target here is anchored to goal weight to avoid an unnecessarily large current-weight calculation.",
-      "title": "ISSN Position Stand: Protein and Exercise",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5477153/"
-    },
-    {
-      "claim": "ACSM's 2026 evidence review reports that training to momentary fatigue/failure does not consistently improve outcomes; 2-3 sets per exercise is a reasonable foundation.",
-      "title": "ACSM 2026 Resistance Training Position Stand",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41843416/"
-    },
-    {
-      "claim": "Adults are advised to accumulate at least 150 minutes moderate activity weekly and muscle-strengthen on 2 or more days; the plan ramps toward this as tolerated.",
-      "title": "CDC: Physical Activity and Your Weight and Health",
-      "url": "https://www.cdc.gov/healthy-weight-growth/physical-activity/"
-    }
+  "D": [
+   "dumbbell_bench_press",
+   "incline_dumbbell_press",
+   "machine_chest_press"
+  ],
+  "E": [
+   "lat_pulldown",
+   "seated_cable_row",
+   "one_arm_dumbbell_row",
+   "close_grip_pulldown"
+  ],
+  "Fb": [
+   "dumbbell_curl",
+   "hammer_curl",
+   "incline_dumbbell_curl"
+  ],
+  "Ft": [
+   "rope_pushdown",
+   "overhead_rope_extension",
+   "machine_dip"
+  ],
+  "X": [
+   "lateral_raise",
+   "hamstring_curl"
   ]
+ },
+ "rotation": [
+  {
+   "id": "W1D1",
+   "week": 1,
+   "day": 1,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "hack_squat"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "romanian_deadlift"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "arnold_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "machine_chest_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "seated_cable_row"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "hammer_curl",
+      "overhead_rope_extension"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W1D2",
+   "week": 1,
+   "day": 2,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "split_squat"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "back_extension"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "machine_shoulder_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "incline_dumbbell_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "one_arm_dumbbell_row"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "incline_dumbbell_curl",
+      "rope_pushdown"
+     ]
+    },
+    {
+     "slot": "X",
+     "ex": [
+      "lateral_raise"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W1D3",
+   "week": 1,
+   "day": 3,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "leg_press"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "hip_thrust"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "dumbbell_overhead_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "machine_chest_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "lat_pulldown"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "hammer_curl",
+      "overhead_rope_extension"
+     ]
+    },
+    {
+     "slot": "X",
+     "ex": [
+      "hamstring_curl"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W2D1",
+   "week": 2,
+   "day": 1,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "split_squat"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "back_extension"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "arnold_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "incline_dumbbell_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "seated_cable_row"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "dumbbell_curl",
+      "machine_dip"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W2D2",
+   "week": 2,
+   "day": 2,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "hack_squat"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "hip_thrust"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "dumbbell_overhead_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "dumbbell_bench_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "one_arm_dumbbell_row"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "hammer_curl",
+      "rope_pushdown"
+     ]
+    },
+    {
+     "slot": "X",
+     "ex": [
+      "lateral_raise"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W2D3",
+   "week": 2,
+   "day": 3,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "leg_press"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "romanian_deadlift"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "machine_shoulder_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "incline_dumbbell_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "seated_cable_row"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "incline_dumbbell_curl",
+      "machine_dip"
+     ]
+    },
+    {
+     "slot": "X",
+     "ex": [
+      "hamstring_curl"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W3D1",
+   "week": 3,
+   "day": 1,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "hack_squat"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "back_extension"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "dumbbell_overhead_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "dumbbell_bench_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "lat_pulldown"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "dumbbell_curl",
+      "overhead_rope_extension"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W3D2",
+   "week": 3,
+   "day": 2,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "leg_press"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "romanian_deadlift"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "arnold_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "machine_chest_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "one_arm_dumbbell_row"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "incline_dumbbell_curl",
+      "rope_pushdown"
+     ]
+    },
+    {
+     "slot": "X",
+     "ex": [
+      "lateral_raise"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "W3D3",
+   "week": 3,
+   "day": 3,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "split_squat"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "hip_thrust"
+     ]
+    },
+    {
+     "slot": "C",
+     "ex": [
+      "machine_shoulder_press"
+     ]
+    },
+    {
+     "slot": "D",
+     "ex": [
+      "dumbbell_bench_press"
+     ]
+    },
+    {
+     "slot": "E",
+     "ex": [
+      "lat_pulldown"
+     ]
+    },
+    {
+     "slot": "F",
+     "ex": [
+      "dumbbell_curl",
+      "machine_dip"
+     ]
+    },
+    {
+     "slot": "X",
+     "ex": [
+      "hamstring_curl"
+     ]
+    }
+   ]
+  }
+ ],
+ "one_rule": "Track your weights and reps and try to beat them every week.",
+ "diet": {
+  "headline": "If you're not in a calorie deficit, you can forget about losing fat and getting lean.",
+  "deficit": [
+   500,
+   700
+  ],
+  "macros_g_per_kg": {
+   "protein": [
+    1.8,
+    2.2
+   ],
+   "carbs": [
+    2,
+    4
+   ],
+   "fat": [
+    0.6,
+    1.0
+   ]
+  },
+  "macro_basis": "goal",
+  "foods": [
+   "Lean meats (chicken, turkey, lean beef)",
+   "Fish (salmon, tuna, white fish)",
+   "Eggs",
+   "Rice, potatoes, oats, pasta",
+   "Vegetables (broccoli, spinach, peppers)",
+   "Fruit (banana, berries, apple)",
+   "Greek yogurt",
+   "Cottage cheese",
+   "Wholegrain bread",
+   "Healthy fats (olive oil, nuts, avocado)",
+   "Protein powder",
+   "Low-calorie foods (salad, soups)"
+  ],
+  "meal_plans": [
+   {
+    "name": "Option 1",
+    "kcal": 2000,
+    "meals": [
+     "Oats, protein powder, banana",
+     "Chicken, rice, vegetables",
+     "Greek yogurt, berries",
+     "Lean beef, potatoes, vegetables"
+    ]
+   },
+   {
+    "name": "Option 2",
+    "kcal": 2500,
+    "meals": [
+     "Eggs, wholegrain toast, fruit",
+     "Turkey, pasta, vegetables",
+     "Protein shake, banana, nuts",
+     "Salmon, rice, vegetables"
+    ]
+   },
+   {
+    "name": "Option 3",
+    "kcal": 2500,
+    "meals": [
+     "Greek yogurt, oats, berries",
+     "Chicken wrap (wholegrain), salad",
+     "Cottage cheese, fruit, nuts",
+     "Lean beef, potatoes, vegetables"
+    ]
+   }
+  ],
+  "motto": "Simple and boring = faster results."
+ },
+ "steps": {
+  "goal": 10000,
+  "split": [
+   [
+    "Early morning",
+    3000
+   ],
+   [
+    "Mid afternoon",
+    4000
+   ],
+   [
+    "Late evening",
+    3000
+   ]
+  ]
+ },
+ "media_credit": "New exercise photos: free-exercise-db (public domain, Unlicense)."
 }

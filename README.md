@@ -1,29 +1,34 @@
 # Drop50
 
-A static weight-loss and strength-training tracker. The app runs in the browser and stores its data in that browser's local storage.
+A personal, phone-first training log: a 3×/week full-body program (trainer.neal's 90-day framework) with a
+3-week exercise rotation, one-tap set logging, "beat last time" targets, and daily weight/steps/food tiles.
+Static site on GitHub Pages; data stays on the phone.
 
-## Publish with GitHub Pages
+## Use it on iPhone
 
-1. Create an empty GitHub repository (public or private, according to your Pages plan) and push this project to its `main` branch.
-2. In the repository, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source.
-3. The included workflow deploys the contents of `dist/` on each push to `main`. The published URL appears under **Settings → Pages** after the first successful run.
+1. Open the Pages URL in Safari → Share → **Add to Home Screen**.
+2. Use only the home-screen icon. Its storage is separate from Safari, so anything logged in a Safari tab won't show up there.
+3. After workouts, tap **Save a backup to Files** now and then (Settings → Your data). Restore from the same place.
+4. Settings → **Erase all data** clears test entries before the real start date.
+
+New versions install in the background; Today shows **Update now** when one is ready.
+
+## Layout
+
+- `dist/` — the site (no build step): `index.html`, `styles.css`, `app.js` (UI), `engine.js` (program +
+  progression logic, shared with tests), `plan.json` (program data), `sw.js` (offline cache), `media/` (demo frames).
+- `tools/build_plan.py` — regenerates `dist/plan.json`; `tools/rot.py` searches the balanced rotation.
+- `tools/release.sh` — stamps a new version into `app.js` + `sw.js` and runs the tests. Run before every push.
+- `tests/` — `node --test tests/`.
+- `docs/SPEC-v2.md` — the design spec.
 
 ## Run locally
 
-From the project directory, run:
-
 ```sh
-python3 -m http.server 8000 --directory dist
+python3 -m http.server 47311 --directory dist   # then open http://127.0.0.1:47311
+node --test tests/
 ```
 
-Then open <http://localhost:8000>.
-
-## Data and limitations
-
-App data stays in the browser's local storage. Use the app's export/backup feature to save a copy; local storage does not sync across devices or browsers. The app is a general fitness tool and does not guarantee medical outcomes or replace professional medical advice.
-
-## Implementation and checks
-
-The interface uses custom CSS transitions inspired by Motion Primitives; it does not bundle that React library. The exercise loops are simplified movement schematics, paired with written cues.
-
-Node checks cover view rendering, session rotation, phase volume, save/reload, date isolation, historical sessions, import validation, and weekly averages. Browser visual/layout QA remains pending.
+Media: the original 11 demos are generated monochrome sprites; the 14 newer ones are photos from
+[free-exercise-db](https://github.com/yuhonas/free-exercise-db) (public domain), graded to match.
+This is a general fitness tool, not medical advice.
