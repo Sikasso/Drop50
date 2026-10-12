@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-12 — One-step Health sync
+- The sync icon or a pull on Today runs your shortcut (default name "Drop50 Sync", editable in Settings → Apple Health). Coming back to Drop50 brings the numbers in automatically; a one-tap sheet appears only if iOS blocks the clipboard read.
+- The steps tile shows 0 instead of a dash when Health reports 0.
+
 ## 2026-10-11 — Apple Health sync
 - Pull down on Today (or tap the sync icon) to paste steps, weight, calories and protein from a "Health → Drop50" Shortcut. Setup guide is in Settings → Apple Health.
 - Toasts no longer block taps underneath them.

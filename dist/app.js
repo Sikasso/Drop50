@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.11-2150";
+const VERSION = "2026.10.12-0039";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -156,7 +156,7 @@ function tiles(d) {
   const steps = l.steps || 0, ringP = pct(steps, p.stepGoal), C = 2 * Math.PI * 13;
   return `<div class="tiles">
     <button class="tile" data-act="metric" data-k="steps"><span class="k">Steps <svg class="ring" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" stroke="var(--s3)"/><circle cx="15" cy="15" r="13" stroke="var(--t1)" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - ringP / 100)}" transform="rotate(-90 15 15)" stroke-linecap="round"/></svg></span>
-      <span class="v num">${l.steps ? l.steps.toLocaleString() : "—"}</span><span class="s">Goal ${p.stepGoal.toLocaleString()}</span></button>
+      <span class="v num">${l.steps != null ? l.steps.toLocaleString() : "—"}</span><span class="s">Goal ${p.stepGoal.toLocaleString()}</span></button>
     <button class="tile" data-act="metric" data-k="weight"><span class="k">Weight</span><span class="v num">${l.weight ? fmtN(l.weight) : "—"}<small>lb</small></span><span class="s">${avg ? `7-day avg ${avg.toFixed(1)}` : "Weigh in after waking"}</span></button>
     <button class="tile" data-act="metric" data-k="calories"><span class="k">Calories</span><span class="v num">${l.calories ? l.calories.toLocaleString() : "—"}</span><span class="s">of ${p.calories.toLocaleString()}<span class="meter"><i style="width:${pct(l.calories, p.calories)}%"></i></span></span></button>
     <button class="tile" data-act="metric" data-k="protein"><span class="k">Protein</span><span class="v num">${l.protein ? l.protein : "—"}<small>g</small></span><span class="s">of ${p.protein} g<span class="meter"><i style="width:${pct(l.protein, p.protein)}%"></i></span></span></button>
@@ -413,21 +413,25 @@ function saveSettings() {
 }
 
 /* ================= Apple Health (Shortcut → clipboard) ================= */
-// Must run inside a tap or touchend: iOS only allows clipboard reads from a user gesture, then shows its Paste bubble.
+// Reads the shortcut's clipboard hand-off. On return from Shortcuts it runs automatically; if iOS blocks a read without a tap, the Finish sheet offers one.
 function syncHealth() {
   if (!navigator.clipboard?.readText) { healthSetupSheet(); return; }
-  navigator.clipboard.readText().then((text) => {
+  navigator.clipboard.readText().then(importHealth).catch(() => toast("Couldn't read the clipboard. Try again."));
+}
+function importHealth(text) {
+  {
     const h = E.parseHealth(text), d = today();
-    if (!h) { toast("No Health numbers on the clipboard. Run the Health → Drop50 shortcut first."); return; }
+    if (!h) { toast(`No Health numbers on the clipboard. Run ${state.profile.shortcutName || "Drop50 Sync"} first.`); return; }
     state.logs[d] = E.mergeHealth(state.logs[d], h);
-    state.healthSyncAt = new Date().toISOString(); save(); render(); haptic();
+    try { localStorage.removeItem(PENDING); } catch {}
+    state.healthSyncAt = new Date().toISOString(); save(); closeSheet(); render(); haptic();
     const bits = [h.steps != null && `${h.steps.toLocaleString()} steps`, h.weight && `${fmtN(Math.round(h.weight * 10) / 10)} lb`, h.calories && `${h.calories.toLocaleString()} kcal`, h.protein && `${h.protein} g protein`].filter(Boolean);
     toast(`Synced ${bits.join(", ")}`);
-  }).catch(() => toast("Sync cancelled. Tap Paste when iOS asks."));
+  }
 }
 function healthSetupSheet() {
   const step = (t) => `<li>${t}</li>`;
-  openSheet(`<h2>Sync Apple Health</h2><p class="lede">A Shortcut reads Health and copies the numbers; Drop50 pastes them in. Set it up once, about 3 minutes.</p>
+  openSheet(`<h2>Sync Apple Health</h2><p class="lede">A shortcut reads Health and copies the numbers; Drop50 brings them in. Already built yours? Just check the name below.</p>
     <div class="form" style="margin-top:0"><b>Build the shortcut</b><ol>
       ${step("Open <b>Shortcuts</b>, tap <b>+</b>, name it <b>Health → Drop50</b>.")}
       ${step("Add <b>Find Health Samples</b>: Type <b>Steps</b>, Start Date <b>is today</b>, Group By <b>Day</b>.")}
@@ -436,11 +440,34 @@ function healthSetupSheet() {
       ${step("Add <b>Text</b> and type <b>drop50 steps=</b>[first Health Samples] <b>weight=</b>[second] <b>calories=</b>[third] <b>protein=</b>[fourth], inserting each result as a variable.")}
       ${step("Add <b>Copy to Clipboard</b>. Run it once and allow Health access.")}
     </ol></div>
+    <div class="form"><b>Connect it to Drop50</b>
+      <label class="row field-row" style="padding:10px 0 4px"><span class="grow">Shortcut name</span><input id="shortcutName" type="text" autocapitalize="off" autocomplete="off" value="${esc(state.profile.shortcutName || "Drop50 Sync")}" style="width:170px"></label>
+      <div class="warn">Type it exactly as it appears in Shortcuts.</div></div>
     <div class="form"><b>Every day</b><ol>
-      ${step("Run the shortcut. Fastest: Settings → Accessibility → Touch → <b>Back Tap</b> → Double Tap → Health → Drop50.")}
-      ${step("Open Drop50 and <b>pull down</b> on Today, or tap the sync icon. Tap <b>Paste</b> when iOS asks.")}
+      ${step("On Today, <b>pull down</b> or tap the sync icon. Drop50 runs your shortcut.")}
+      ${step("Come back to Drop50 (tap <b>◀</b> in the top-left corner or swipe the bottom bar). Today's numbers fill in.")}
     </ol><div class="warn">Steps from Health replace what's in Drop50 for today. Weight, calories and protein only fill in when Health has them.</div></div>
-    <div class="stack"><button class="cta" data-act="sync">Sync now</button></div>`);
+    <div class="stack"><button class="cta" data-act="save-shortcut">Save and run the shortcut</button><button class="cta ghost small" data-act="paste-health">Already ran it? Bring in the numbers</button></div>`);
+}
+
+// Drop50 launches the user's shortcut, then waits for them to come back and paste.
+const PENDING = "drop50.pendingSync";
+function openExternal(url) { location.href = url; }
+function runShortcut() {
+  closeSheet();
+  try { localStorage.setItem(PENDING, String(Date.now())); } catch {}
+  openExternal(`shortcuts://run-shortcut?name=${encodeURIComponent(state.profile.shortcutName || "Drop50 Sync")}`);
+}
+function checkPendingSync() {
+  let t = 0; try { t = Number(localStorage.getItem(PENDING) || 0); } catch {}
+  if (!t) return;
+  if (Date.now() - t > 10 * 60000) { localStorage.removeItem(PENDING); return; }
+  if (ui.workoutOpen) return;
+  navigator.clipboard?.readText?.().then(importHealth).catch(() => { if (!$(".sheet")) finishSyncSheet(); }) ?? finishSyncSheet();
+}
+function finishSyncSheet() {
+  openSheet(`<h2>Finish Health sync</h2><p class="lede">${esc(state.profile.shortcutName || "Drop50 Sync")} copied today's numbers. Tap to bring them in.</p>
+    <div class="stack"><button class="cta" data-act="paste-health">Bring in Health data</button><button class="cta ghost small" data-act="run-shortcut">Run the shortcut again</button></div>`);
 }
 
 /* ================= pull to sync (Today) ================= */
@@ -465,7 +492,7 @@ function healthSetupSheet() {
   document.addEventListener("touchend", () => {
     if (y0 == null) return;
     y0 = null; const go = armed; reset();
-    if (go) syncHealth(); // touchend is a user gesture, so the clipboard read is allowed
+    if (go) runShortcut();
   });
 })();
 
@@ -600,7 +627,10 @@ const actions = {
   },
   "metric-clear": (b) => { const d = today(); if (state.logs[d]) delete state.logs[d][b.dataset.k]; save(); closeSheet(); render(); },
   settings: () => settingsSheet(),
-  sync: () => { closeSheet(); syncHealth(); },
+  sync: () => runShortcut(),
+  "run-shortcut": () => runShortcut(),
+  "paste-health": () => syncHealth(),
+  "save-shortcut": () => { const v = $("#shortcutName").value.trim(); if (!v) return toast("Enter your shortcut's name"); state.profile.shortcutName = v; save(); runShortcut(); },
   "health-setup": () => healthSetupSheet(),
   day: (b) => { b.classList.toggle("on"); b.setAttribute("aria-pressed", b.classList.contains("on")); },
   "save-settings": () => saveSettings(),
@@ -634,6 +664,7 @@ document.addEventListener("visibilitychange", () => {
   if (active() && ui.workoutOpen) keepAwake(true);
   navigator.serviceWorker?.getRegistration().then((r) => r?.update()).catch(() => {});
   render();
+  checkPendingSync();
 });
 
 /* ================= boot ================= */
@@ -643,6 +674,7 @@ async function boot() {
   catch { $("#app").innerHTML = `<p class="empty">Drop50 needs one online visit to download your plan. Connect and reopen.</p>`; return; }
   if (active() && minutesSince(active().startedAt) < 12 * 60) ui.workoutOpen = true;
   render();
+  checkPendingSync(); // app may have been unloaded while Shortcuts ran
   navigator.storage?.persist?.().catch(() => {});
   if ("serviceWorker" in navigator && location.protocol !== "file:") {
     const reg = await navigator.serviceWorker.register("sw.js").catch(() => null);

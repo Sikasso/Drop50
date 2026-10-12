@@ -11,7 +11,7 @@ Static site on GitHub Pages; data stays on the phone.
 3. After workouts, tap **Save a backup to Files** now and then (Settings → Your data). Restore from the same place.
 4. Settings → **Erase all data** clears test entries before the real start date.
 
-Apple Health: Settings → Apple Health has the 3-minute Shortcut setup. Run the shortcut (Back Tap works), then pull down on Today and tap Paste.
+Apple Health: build a "Drop50 Sync" shortcut that copies `drop50 steps=… weight=…` (Settings → Apple Health has the steps and the name field). Pull down on Today or tap the sync icon; Drop50 runs the shortcut and imports the numbers when you return.
 
 New versions install in the background; Today shows **Update now** when one is ready.
 

@@ -193,7 +193,7 @@
   E.STORE = "drop50.v2";
   E.defaultState = (today = E.localISO()) => ({
     v: 2,
-    profile: { age: 36, height: 70, startWeight: 255, goalWeight: 205, startDate: today <= "2026-10-19" ? "2026-10-19" : E.nextMonday(today), days: [1, 3, 5], calories: 2400, protein: 180, stepGoal: 10000 },
+    profile: { age: 36, height: 70, startWeight: 255, goalWeight: 205, startDate: today <= "2026-10-19" ? "2026-10-19" : E.nextMonday(today), days: [1, 3, 5], calories: 2400, protein: 180, stepGoal: 10000, shortcutName: "Drop50 Sync" },
     inc: {},
     logs: {},
     sessions: [],
