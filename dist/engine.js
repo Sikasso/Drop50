@@ -165,6 +165,30 @@
     return { kg: Math.round(kg), protein: r(m.protein), carbs: r(m.carbs), fat: r(m.fat) };
   };
 
+  /* ---------- Apple Health hand-off (Shortcut → clipboard) ---------- */
+  // Accepts "drop50 steps=8,123 count weight=254.6 lb …" or a JSON dictionary; must mention drop50.
+  E.HEALTH_KEYS = { steps: ["steps"], weight: ["weight"], calories: ["calories", "kcal", "energy"], protein: ["protein"] };
+  E.parseHealth = (text) => {
+    if (typeof text !== "string" || !/drop50/i.test(text)) return null;
+    const out = {};
+    for (const [key, names] of Object.entries(E.HEALTH_KEYS)) {
+      for (const name of names) {
+        const m = text.match(new RegExp(`"?\\b${name}\\b"?\\s*[:=]\\s*"?\\s*(\\d[\\d,]*(?:\\.\\d+)?)\\s*(kg)?`, "i"));
+        if (m) { out[key] = Number(m[1].replace(/,/g, "")) * (key === "weight" && m[2] ? 2.20462262 : 1); break; }
+      }
+    }
+    if (out.steps != null) out.steps = Math.round(out.steps);
+    if (out.weight != null && !(out.weight >= 80 && out.weight <= 800)) delete out.weight; // junk
+    for (const k of ["calories", "protein"]) if (!(out[k] > 0)) delete out[k];
+    return Object.keys(out).length ? out : null;
+  };
+  // Health is the authority for steps; weight/food only overwrite when Health actually has a value.
+  E.mergeHealth = (log = {}, h) => {
+    const next = { ...log };
+    for (const [k, v] of Object.entries(h)) next[k] = k === "weight" ? Math.round(v * 10) / 10 : Math.round(v);
+    return next;
+  };
+
   /* ---------- state ---------- */
   E.STORE = "drop50.v2";
   E.defaultState = (today = E.localISO()) => ({

@@ -167,3 +167,16 @@ test("assets: every exercise has its demo frames; app and service worker version
   assert.equal(v("app.js"), v("sw.js"));
   for (const f of ["index.html", "styles.css", "manifest.webmanifest", "icons/apple-touch-icon.png", "icons/icon-192.png", "icons/icon-512.png"]) assert.ok(fs.existsSync(path.join(dist, f)), f);
 });
+
+test("health hand-off: parses Shortcut text and JSON, ignores unrelated clipboard, converts kg", () => {
+  assert.deepEqual(E.parseHealth("drop50 steps=8,123 count weight=254.6 lb calories= protein="), { steps: 8123, weight: 254.6 });
+  assert.deepEqual(E.parseHealth('{"app":"drop50","steps":"10432","weight":"253.8 lb","calories":"2,310 kcal","protein":"182 g"}'),
+    { steps: 10432, weight: 253.8, calories: 2310, protein: 182 });
+  const kg = E.parseHealth("Drop50\nsteps: 6500\nweight: 115.2 kg");
+  assert.equal(kg.steps, 6500);
+  assert.equal(Math.round(kg.weight * 10) / 10, 254);
+  assert.equal(E.parseHealth("steps=8000"), null);
+  assert.equal(E.parseHealth("drop50"), null);
+  assert.equal(E.parseHealth(null), null);
+  assert.deepEqual(E.mergeHealth({ weight: 255, calories: 1800 }, { steps: 9000.4 }), { weight: 255, calories: 1800, steps: 9000 });
+});

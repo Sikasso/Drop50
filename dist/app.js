@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.11-2125";
+const VERSION = "2026.10.11-2150";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -15,6 +15,7 @@ const CHEV = `<svg class="chev" viewBox="0 0 8 13"><path d="M1.5 1.5l5 5-5 5" fi
 const CHECK = `<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`;
 const GEAR = `<svg viewBox="0 0 24 24"><path d="M12 15.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm8.1-2.3l1.7 1.3c.2.1.2.4.1.6l-1.6 2.8c-.1.2-.4.3-.6.2l-2-.8c-.4.3-.9.6-1.4.8l-.3 2.1c0 .2-.2.4-.5.4h-3.2c-.2 0-.4-.2-.5-.4l-.3-2.1c-.5-.2-1-.5-1.4-.8l-2 .8c-.2.1-.5 0-.6-.2l-1.6-2.8c-.1-.2-.1-.5.1-.6l1.7-1.3a6 6 0 010-1.7L2.2 9.8c-.2-.1-.2-.4-.1-.6l1.6-2.8c.1-.2.4-.3.6-.2l2 .8c.4-.3.9-.6 1.4-.8l.3-2.1c.1-.2.3-.4.5-.4h3.2c.3 0 .5.2.5.4l.3 2.1c.5.2 1 .5 1.4.8l2-.8c.2-.1.5 0 .6.2l1.6 2.8c.1.2.1.5-.1.6l-1.7 1.3a6 6 0 010 1.7z"/></svg>`;
 const DOWN = `<svg viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const SYNC = `<svg viewBox="0 0 24 24"><path d="M12 4.5a7.5 7.5 0 016.9 4.6M19.5 4.5v4.8h-4.8M12 19.5a7.5 7.5 0 01-6.9-4.6M4.5 19.5v-4.8h4.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const MORE = `<svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="18" cy="12" r="1.9"/></svg>`;
 
 /* ================= storage ================= */
@@ -123,7 +124,7 @@ function todayView() {
   const nextDay = nextTrainingDay();
   return `
   <header class="head"><div><div class="date">${fmtDate(d, { weekday: "long", month: "long", day: "numeric" })}</div><h1>Today</h1></div>
-    <button class="round-btn" data-act="settings" aria-label="Settings">${GEAR}</button></header>
+    <div class="head-btns"><button class="round-btn" data-act="sync" aria-label="Sync from Apple Health">${SYNC}</button><button class="round-btn" data-act="settings" aria-label="Settings">${GEAR}</button></div></header>
   ${installHint()}${updateBanner()}
   ${stale ? `<div class="banner"><p>You have an unfinished workout from ${fmtDate(s.date)}.</p><div class="acts"><button class="pill" data-act="resume">Resume</button><button class="pill" data-act="end">Save as finished</button><button class="pill" data-act="discard-sheet">Discard</button></div></div>` : ""}
   <section class="hero" aria-label="Today's workout">
@@ -134,7 +135,7 @@ function todayView() {
     <div class="hero-foot"><span>${cycle > 1 ? `Cycle ${cycle} · ` : ""}Session ${(seq % plan.rotation.length) + 1} of ${plan.rotation.length}</span><span>About 55 min</span></div>
   </section>
   ${!s && nextDay && !state.profile.days.includes(E.parse(d).getDay()) ? `<p class="foot" style="margin:10px 4px 0">Rest day on your schedule. Next planned session: ${fmtDate(nextDay, { weekday: "long" })}. Walking counts.</p>` : ""}
-  <div class="section"><h2>Daily</h2><span class="aside">${fmtDate(d, { month: "short", day: "numeric" })}</span></div>
+  <div class="section"><h2>Daily</h2><span class="aside">${state.healthSyncAt && E.localISO(new Date(state.healthSyncAt)) === d ? `Health synced ${new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(new Date(state.healthSyncAt))}` : "Pull down to sync Health"}</span></div>
   ${tiles(d)}
   <div class="section"><h2>This week</h2><span class="aside">${weekDone()} of ${state.profile.days.length} sessions</span></div>
   ${weekStrip(d)}`;
@@ -390,6 +391,8 @@ function settingsSheet() {
       ${f("Steps / day", "stepGoal", p.stepGoal)}
     </div>
     <div class="stack"><button class="cta" data-act="save-settings">Save settings</button></div>
+    <div class="section"><h2 style="font-size:17px">Apple Health</h2></div>
+    <div class="group"><button class="row" style="width:100%;text-align:left" data-act="health-setup"><span class="grow">Set up Health sync<div class="sub">${state.healthSyncAt ? `Last synced ${fmtDate(E.localISO(new Date(state.healthSyncAt)))}` : "Steps, weight and food from Apple Health"}</div></span>${CHEV}</button></div>
     <div class="section"><h2 style="font-size:17px">Your data</h2></div>
     <div class="group">
       <button class="row" style="width:100%;text-align:left" data-act="backup"><span class="grow">Save a backup to Files<div class="sub">${state.lastBackupAt ? `Last backup ${fmtDate(E.localISO(new Date(state.lastBackupAt)))}` : "No backup yet"}</div></span>${CHEV}</button>
@@ -408,6 +411,63 @@ function saveSettings() {
   if (!(p.calories >= 1200 && p.protein >= 50 && p.stepGoal >= 1000)) return toast("Check your daily targets");
   state.profile = p; save(); closeSheet(); render(); toast("Settings saved");
 }
+
+/* ================= Apple Health (Shortcut → clipboard) ================= */
+// Must run inside a tap or touchend: iOS only allows clipboard reads from a user gesture, then shows its Paste bubble.
+function syncHealth() {
+  if (!navigator.clipboard?.readText) { healthSetupSheet(); return; }
+  navigator.clipboard.readText().then((text) => {
+    const h = E.parseHealth(text), d = today();
+    if (!h) { toast("No Health numbers on the clipboard. Run the Health → Drop50 shortcut first."); return; }
+    state.logs[d] = E.mergeHealth(state.logs[d], h);
+    state.healthSyncAt = new Date().toISOString(); save(); render(); haptic();
+    const bits = [h.steps != null && `${h.steps.toLocaleString()} steps`, h.weight && `${fmtN(Math.round(h.weight * 10) / 10)} lb`, h.calories && `${h.calories.toLocaleString()} kcal`, h.protein && `${h.protein} g protein`].filter(Boolean);
+    toast(`Synced ${bits.join(", ")}`);
+  }).catch(() => toast("Sync cancelled. Tap Paste when iOS asks."));
+}
+function healthSetupSheet() {
+  const step = (t) => `<li>${t}</li>`;
+  openSheet(`<h2>Sync Apple Health</h2><p class="lede">A Shortcut reads Health and copies the numbers; Drop50 pastes them in. Set it up once, about 3 minutes.</p>
+    <div class="form" style="margin-top:0"><b>Build the shortcut</b><ol>
+      ${step("Open <b>Shortcuts</b>, tap <b>+</b>, name it <b>Health → Drop50</b>.")}
+      ${step("Add <b>Find Health Samples</b>: Type <b>Steps</b>, Start Date <b>is today</b>, Group By <b>Day</b>.")}
+      ${step("Add <b>Find Health Samples</b>: Type <b>Weight</b>, Sort by <b>Start Date</b>, Order <b>Latest First</b>, Limit <b>1</b>.")}
+      ${step("Optional, if a food app logs to Health: two more for <b>Dietary Energy</b> and <b>Protein</b>, Start Date is today, Group By Day.")}
+      ${step("Add <b>Text</b> and type <b>drop50 steps=</b>[first Health Samples] <b>weight=</b>[second] <b>calories=</b>[third] <b>protein=</b>[fourth], inserting each result as a variable.")}
+      ${step("Add <b>Copy to Clipboard</b>. Run it once and allow Health access.")}
+    </ol></div>
+    <div class="form"><b>Every day</b><ol>
+      ${step("Run the shortcut. Fastest: Settings → Accessibility → Touch → <b>Back Tap</b> → Double Tap → Health → Drop50.")}
+      ${step("Open Drop50 and <b>pull down</b> on Today, or tap the sync icon. Tap <b>Paste</b> when iOS asks.")}
+    </ol><div class="warn">Steps from Health replace what's in Drop50 for today. Weight, calories and protein only fill in when Health has them.</div></div>
+    <div class="stack"><button class="cta" data-act="sync">Sync now</button></div>`);
+}
+
+/* ================= pull to sync (Today) ================= */
+(() => {
+  let y0 = null, dy = 0, armed = false;
+  const ind = document.createElement("div");
+  ind.className = "pull"; ind.innerHTML = SYNC; document.body.append(ind);
+  const reset = () => { ind.style.transform = ""; ind.classList.remove("show", "armed"); $("#app").style.transform = ""; $("#app").classList.remove("pulling"); };
+  document.addEventListener("touchstart", (e) => {
+    y0 = ui.tab === "today" && !ui.workoutOpen && !$(".sheet") && scrollY <= 0 && e.touches.length === 1 ? e.touches[0].clientY : null; dy = 0; armed = false;
+  }, { passive: true });
+  document.addEventListener("touchmove", (e) => {
+    if (y0 == null) return;
+    dy = e.touches[0].clientY - y0;
+    if (dy <= 0 || scrollY > 0) { reset(); return; }
+    const pull = Math.min(110, dy * 0.5);
+    armed = pull >= 64;
+    $("#app").classList.add("pulling"); $("#app").style.transform = `translateY(${pull}px)`;
+    ind.classList.add("show"); ind.classList.toggle("armed", armed);
+    ind.style.transform = `translate(-50%, ${pull - 44}px) rotate(${pull * 3.2}deg)`;
+  }, { passive: true });
+  document.addEventListener("touchend", () => {
+    if (y0 == null) return;
+    y0 = null; const go = armed; reset();
+    if (go) syncHealth(); // touchend is a user gesture, so the clipboard read is allowed
+  });
+})();
 
 /* ================= backup ================= */
 function backupFile() {
@@ -540,6 +600,8 @@ const actions = {
   },
   "metric-clear": (b) => { const d = today(); if (state.logs[d]) delete state.logs[d][b.dataset.k]; save(); closeSheet(); render(); },
   settings: () => settingsSheet(),
+  sync: () => { closeSheet(); syncHealth(); },
+  "health-setup": () => healthSetupSheet(),
   day: (b) => { b.classList.toggle("on"); b.setAttribute("aria-pressed", b.classList.contains("on")); },
   "save-settings": () => saveSettings(),
   backup: () => backup(),

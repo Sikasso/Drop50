@@ -78,7 +78,7 @@ Existing 11 generated monochrome sprites: re-encode to WebP (~1.8 MB PNG → ~10
 
 Node tests: rotation/sequence, phase by date, straight + RPT suggestions (incl. transition and live back-off), migration v1→v2, backup validation. Headless Chrome at 402×874 @3x: screenshot every view + a scripted logged session; check no horizontal overflow and console errors. Deploy via existing Pages workflow; verify live URL.
 
-Deferred: Apple Health sync (Shortcut route; note iOS home-screen apps have storage separate from Safari, so a URL hand-off from Shortcuts lands in Safari — needs a clipboard or server path), cloud sync/desktop, food logging beyond totals.
+Apple Health (added 2026-10-11): a user-built Shortcut copies `drop50 steps=… weight=… calories=… protein=…` to the clipboard; pull-to-sync or the sync icon reads it (clipboard reads need a user gesture, so touchend/tap) via `E.parseHealth` and merges it with `E.mergeHealth`. Health replaces steps; the other fields fill in only when present. A kg weight is converted. Deferred: a relay server for automatic sync plus a desktop view, and food logging beyond totals.
 
 ## 7. Review changes (Opus review, 2026-10-11)
 

@@ -45,6 +45,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin: 6px 0 18px; }
 .head .date { color: var(--t2); font-size: 15px; font-weight: 500; }
 .head h1 { margin: 2px 0 0; font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: -0.03em; }
+.head-btns { display: flex; gap: 10px; }
 .round-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--s1); display: grid; place-items: center; flex: none; }
 .round-btn svg { width: 20px; height: 20px; fill: var(--t1); }
 .section { margin: 30px 0 10px; display: flex; align-items: baseline; justify-content: space-between; }
@@ -298,6 +299,15 @@ body.in-workout .tabbar, body.kb .tabbar { opacity: 0; pointer-events: none; tra
 .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; color: var(--t2); font-size: 13px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 
+/* ---------- pull to sync ---------- */
+#app { transition: transform 0.35s var(--ease); }
+#app.pulling { transition: none; }
+.pull { position: fixed; z-index: 15; left: 50%; top: calc(var(--top) + 4px); width: 40px; height: 40px; border-radius: 50%; background: var(--s2); display: grid; place-items: center; opacity: 0; transform: translate(-50%, -44px); pointer-events: none; transition: opacity 0.2s, background 0.2s; }
+.pull svg { width: 22px; height: 22px; }
+.pull.show { opacity: 1; }
+.pull.armed { background: var(--t1); }
+.pull.armed svg path { stroke: #000; }
+
 /* ---------- toast ---------- */
 .toast {
   position: fixed; z-index: 60; left: 50%; bottom: calc(var(--bot) + 86px); transform: translate(-50%, 20px);
@@ -305,7 +315,7 @@ body.in-workout .tabbar, body.kb .tabbar { opacity: 0; pointer-events: none; tra
   padding: 12px 18px; border-radius: 22px; font-size: 15px; font-weight: 600; opacity: 0; pointer-events: none;
   transition: opacity 0.25s, transform 0.35s var(--ease); max-width: calc(100% - 32px); text-align: center;
 }
-.toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
 body.in-workout .toast { bottom: calc(var(--bot) + 84px); }
 
 @media (prefers-reduced-motion: reduce) {
