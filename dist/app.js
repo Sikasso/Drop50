@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.13-0917";
+const VERSION = "2026.10.13-0940";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -158,7 +158,7 @@ function tiles(d) {
     <button class="tile" data-act="metric" data-k="steps"><span class="k">Steps <svg class="ring" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" stroke="var(--s3)"/><circle cx="15" cy="15" r="13" stroke="var(--t1)" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - ringP / 100)}" transform="rotate(-90 15 15)" stroke-linecap="round"/></svg></span>
       <span class="v num">${l.steps != null ? l.steps.toLocaleString() : "—"}</span><span class="s">Goal ${p.stepGoal.toLocaleString()}</span></button>
     <button class="tile" data-act="metric" data-k="weight"><span class="k">Weight</span><span class="v num">${l.weight ? fmtN(l.weight) : "—"}<small>lb</small></span><span class="s">${avg ? `7-day avg ${avg.toFixed(1)}` : "Weigh in after waking"}</span></button>
-    <button class="tile" data-act="metric" data-k="calories"><span class="k">Calories</span><span class="v num">${l.calories ? l.calories.toLocaleString() : "—"}</span><span class="s">of ${p.calories.toLocaleString()}<span class="meter"><i style="width:${pct(l.calories, p.calories)}%"></i></span></span></button>
+    <button class="tile" data-act="metric" data-k="active"><span class="k">Burned</span><span class="v num">${l.active != null ? l.active.toLocaleString() : "—"}<small>kcal</small></span><span class="s">Active calories</span></button>
     <button class="tile" data-act="metric" data-k="protein"><span class="k">Protein</span><span class="v num">${l.protein ? l.protein : "—"}<small>g</small></span><span class="s">of ${p.protein} g<span class="meter"><i style="width:${pct(l.protein, p.protein)}%"></i></span></span></button>
   </div>`;
 }
@@ -345,6 +345,7 @@ function metricSheet(k) {
   const cfg = {
     weight: { t: "Weight", u: "lb", lede: "Morning, after the bathroom, before food. The 7-day average is what counts.", ph: fmtN(E.weights(state.logs).at(-1)?.[1] ?? p.startWeight), mode: "decimal" },
     steps: { t: "Steps", u: "steps", lede: `${plan.steps.split.map(([w, v]) => `${w.toLowerCase()} ${v.toLocaleString()}`).join(", ")}.`, ph: "0", mode: "numeric" },
+    active: { t: "Calories burned", u: "kcal", lede: "Active calories from Apple Health. Health sync fills this in.", ph: "0", mode: "numeric" },
     calories: { t: "Calories", u: "kcal", lede: `Target ${p.calories.toLocaleString()}. Add as you eat or enter the day's total.`, ph: "0", mode: "numeric", add: [300, 500, 700] },
     protein: { t: "Protein", u: "g", lede: `Target ${p.protein} g — 35–50 g a meal gets you there.`, ph: "0", mode: "numeric", add: [25, 40, 50] },
   }[k];
@@ -419,13 +420,13 @@ function syncHealth() {
   navigator.clipboard.readText().then(importHealth).catch(() => toast("Couldn't read the clipboard. Try again."));
 }
 function importHealth(text) {
-  {
+  { state.healthLastText = String(text ?? "").slice(0, 300); save();
     const h = E.parseHealth(text), d = today();
     if (!h) { toast(`No Health numbers on the clipboard. Run ${state.profile.shortcutName || "Drop50 Sync"} first.`); return; }
     state.logs[d] = E.mergeHealth(state.logs[d], h);
     try { localStorage.removeItem(PENDING); } catch {}
     state.healthSyncAt = new Date().toISOString(); save(); closeSheet(); render(); haptic();
-    const bits = [h.steps != null && `${h.steps.toLocaleString()} steps`, h.weight && `${fmtN(Math.round(h.weight * 10) / 10)} lb`, h.calories && `${h.calories.toLocaleString()} kcal`, h.protein && `${h.protein} g protein`].filter(Boolean);
+    const bits = [h.steps != null && `${h.steps.toLocaleString()} steps`, h.weight && `${fmtN(Math.round(h.weight * 10) / 10)} lb`, h.active != null && `${h.active.toLocaleString()} kcal burned`, h.calories && `${h.calories.toLocaleString()} kcal`, h.protein && `${h.protein} g protein`].filter(Boolean);
     toast(`Synced ${bits.join(", ")}`);
   }
 }
@@ -436,10 +437,11 @@ function healthSetupSheet() {
       ${step("Open <b>Shortcuts</b>, tap <b>+</b>, name it <b>Health → Drop50</b>.")}
       ${step("Add <b>Find Health Samples</b>: Type <b>Steps</b>, Start Date <b>is today</b>, Group By <b>Day</b>.")}
       ${step("Add <b>Find Health Samples</b>: Type <b>Weight</b>, Sort by <b>Start Date</b>, Order <b>Latest First</b>, Limit <b>1</b>.")}
-      ${step("Optional, if a food app logs to Health: two more for <b>Dietary Energy</b> and <b>Protein</b>, Start Date is today, Group By Day.")}
-      ${step("Add <b>Text</b> and type <b>drop50 steps=</b>[first Health Samples] <b>weight=</b>[second] <b>calories=</b>[third] <b>protein=</b>[fourth], inserting each result as a variable.")}
+      ${step("Add <b>Find Health Samples</b>: Type <b>Active Energy</b>, Start Date <b>is today</b>, Group By <b>Day</b>.")}
+      ${step("Add <b>Text</b>: <b>drop50 steps=</b>[steps] <b>weight=</b>[weight] <b>active=</b>[active energy], inserting each result as a variable.")}
       ${step("Add <b>Copy to Clipboard</b>. Run it once and allow Health access.")}
     </ol></div>
+    ${state.healthLastText ? `<div class="form"><b>Last thing your shortcut sent</b><div class="warn num" style="margin-top:6px;word-break:break-word;-webkit-user-select:text;user-select:text">${esc(state.healthLastText)}</div></div>` : ""}
     <div class="form"><b>Connect it to Drop50</b>
       <label class="row field-row" style="padding:10px 0 4px"><span class="grow">Shortcut name</span><input id="shortcutName" type="text" autocapitalize="off" autocomplete="off" value="${esc(state.profile.shortcutName || "Drop50 Sync")}" style="width:170px"></label>
       <div class="warn">Type it exactly as it appears in Shortcuts.</div></div>

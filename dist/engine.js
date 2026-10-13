@@ -167,7 +167,7 @@
 
   /* ---------- Apple Health hand-off (Shortcut → clipboard) ---------- */
   // Accepts "drop50 steps=8,123 count weight=254.6 lb …" or a JSON dictionary; must mention drop50.
-  E.HEALTH_KEYS = { steps: ["steps"], weight: ["weight"], calories: ["calories", "kcal", "energy"], protein: ["protein"] };
+  E.HEALTH_KEYS = { steps: ["steps"], weight: ["weight"], active: ["active", "burned"], calories: ["calories", "dietary"], protein: ["protein"] };
   E.parseHealth = (text) => {
     if (typeof text !== "string" || !/drop50/i.test(text)) return null;
     const out = {};
@@ -177,7 +177,7 @@
         if (m) { out[key] = Number(m[1].replace(/,/g, "")) * (key === "weight" && m[2] ? 2.20462262 : 1); break; }
       }
     }
-    if (out.steps != null) out.steps = Math.round(out.steps);
+    for (const k of ["steps", "active"]) if (out[k] != null) out[k] = Math.round(out[k]);
     if (out.weight != null && !(out.weight >= 80 && out.weight <= 800)) delete out.weight; // junk
     for (const k of ["calories", "protein"]) if (!(out[k] > 0)) delete out[k];
     return Object.keys(out).length ? out : null;
@@ -209,7 +209,7 @@
     for (const [d, l] of Object.entries(raw.logs || {})) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(d) || !l) continue;
       const keep = {};
-      for (const k of ["weight", "steps", "calories", "protein"]) if (l[k] !== "" && l[k] != null && Number.isFinite(Number(l[k]))) keep[k] = Number(l[k]);
+      for (const k of ["weight", "steps", "active", "calories", "protein"]) if (l[k] !== "" && l[k] != null && Number.isFinite(Number(l[k]))) keep[k] = Number(l[k]);
       if (Object.keys(keep).length) logs[d] = keep;
     }
     const profile = { ...base.profile };

@@ -175,6 +175,7 @@ test("health hand-off: parses Shortcut text and JSON, ignores unrelated clipboar
   const kg = E.parseHealth("Drop50\nsteps: 6500\nweight: 115.2 kg");
   assert.equal(kg.steps, 6500);
   assert.equal(Math.round(kg.weight * 10) / 10, 254);
+  assert.deepEqual(E.parseHealth("drop50 steps=9,870 count weight=251.4 lb active=612.7 kcal"), { steps: 9870, weight: 251.4, active: 613 });
   assert.equal(E.parseHealth("steps=8000"), null);
   assert.equal(E.parseHealth("drop50"), null);
   assert.equal(E.parseHealth(null), null);

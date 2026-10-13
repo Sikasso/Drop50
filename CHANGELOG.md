@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-10-13 — Calories burned
+- The Calories tile now shows calories burned (Active Energy from Health, `active=` in the shortcut text). Settings → Apple Health shows the last text the shortcut sent.
+
 ## 2026-10-13 — Program start
 - Program started (first workout logged in a hotel gym). Added seated dumbbell overhead extension as a dumbbell-only triceps swap.
 
