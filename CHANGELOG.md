@@ -1,6 +1,9 @@
 # Changelog
 
 ## 2026-10-13 — Program start
+- Program started (first workout logged in a hotel gym). Added seated dumbbell overhead extension as a dumbbell-only triceps swap.
+
+## 2026-10-13 — Program start
 - Program started today (hotel gym). Added seated dumbbell overhead extension as a dumbbell-only triceps swap.
 
 ## 2026-10-12 — One-step Health sync
