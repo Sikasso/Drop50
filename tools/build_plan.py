@@ -80,6 +80,9 @@ EX = [
   dict(id="machine_dip", name="Machine dip", slot="F", arm="tri", basis="total", inc=10, frames=2,
        cues=["Sit tall, handles just below the chest.", "Press down until arms are straight.", "Return slowly to about 90° at the elbow."],
        mistake="Shrugging the shoulders up toward the ears."),
+  dict(id="dumbbell_overhead_extension", name="Seated dumbbell overhead extension", slot="F", arm="tri", basis="single", inc=5, frames=2, swap_only=True,
+       cues=["Sit tall, both hands cupping one dumbbell overhead.", "Lower it behind your head, elbows pointing up.", "Extend fully without flaring the elbows."],
+       mistake="Elbows drifting wide and the low back arching."),
   # finishers (optional)
   dict(id="lateral_raise", name="Dumbbell lateral raise", slot="X", basis="each", inc=5, frames=3,
        cues=["Light dumbbells, soft elbows.", "Raise out and slightly forward to shoulder height.", "Lower slowly — no torso swing."],
@@ -146,7 +149,7 @@ plan = {
   ],
   "exercises": EX,
   "pools": {"A": POOLS["A"] + ["goblet_squat"], "B": POOLS["B"], "C": POOLS["C"], "D": POOLS["D"],
-            "E": POOLS["E"] + ["close_grip_pulldown"], "Fb": POOLS["Fb"], "Ft": POOLS["Ft"], "X": ["lateral_raise", "hamstring_curl"]},
+            "E": POOLS["E"] + ["close_grip_pulldown"], "Fb": POOLS["Fb"], "Ft": POOLS["Ft"] + ["dumbbell_overhead_extension"], "X": ["lateral_raise", "hamstring_curl"]},
   "rotation": rotation,
   "one_rule": "Track your weights and reps and try to beat them every week.",
   "diet": {

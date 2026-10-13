@@ -559,6 +559,22 @@
    "mistake": "Shrugging the shoulders up toward the ears."
   },
   {
+   "id": "dumbbell_overhead_extension",
+   "name": "Seated dumbbell overhead extension",
+   "slot": "F",
+   "arm": "tri",
+   "basis": "single",
+   "inc": 5,
+   "frames": 2,
+   "swap_only": true,
+   "cues": [
+    "Sit tall, both hands cupping one dumbbell overhead.",
+    "Lower it behind your head, elbows pointing up.",
+    "Extend fully without flaring the elbows."
+   ],
+   "mistake": "Elbows drifting wide and the low back arching."
+  },
+  {
    "id": "lateral_raise",
    "name": "Dumbbell lateral raise",
    "slot": "X",
@@ -623,7 +639,8 @@
   "Ft": [
    "rope_pushdown",
    "overhead_rope_extension",
-   "machine_dip"
+   "machine_dip",
+   "dumbbell_overhead_extension"
   ],
   "X": [
    "lateral_raise",

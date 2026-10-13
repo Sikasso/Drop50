@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-10-13 — Program start
+- Program started today (hotel gym). Added seated dumbbell overhead extension as a dumbbell-only triceps swap.
+
 ## 2026-10-12 — One-step Health sync
 - The sync icon or a pull on Today runs your shortcut (default name "Drop50 Sync", editable in Settings → Apple Health). Coming back to Drop50 brings the numbers in automatically; a one-tap sheet appears only if iOS blocks the clipboard read.
 - The steps tile shows 0 instead of a dash when Health reports 0.
