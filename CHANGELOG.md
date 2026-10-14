@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-14 — Tap a day
+- Tap any day in This week to see its steps, weight, calories burned, protein and workout; tiles edit that day. Back to today returns.
+- `calories=` / `kcal=` from the shortcut now count as calories burned (food calories only via `dietary=`). Protein bar and weight decimals fixed.
+
 ## 2026-10-13 — Calories burned
 - The Calories tile now shows calories burned (Active Energy from Health, `active=` in the shortcut text). Settings → Apple Health shows the last text the shortcut sent.
 

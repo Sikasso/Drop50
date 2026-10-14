@@ -167,7 +167,7 @@
 
   /* ---------- Apple Health hand-off (Shortcut → clipboard) ---------- */
   // Accepts "drop50 steps=8,123 count weight=254.6 lb …" or a JSON dictionary; must mention drop50.
-  E.HEALTH_KEYS = { steps: ["steps"], weight: ["weight"], active: ["active", "burned"], calories: ["calories", "dietary"], protein: ["protein"] };
+  E.HEALTH_KEYS = { steps: ["steps"], weight: ["weight"], active: ["active", "burned", "calories", "kcal", "energy"], calories: ["dietary", "eaten"], protein: ["protein"] };
   E.parseHealth = (text) => {
     if (typeof text !== "string" || !/drop50/i.test(text)) return null;
     const out = {};

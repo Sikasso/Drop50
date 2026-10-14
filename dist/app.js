@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.13-0940";
+const VERSION = "2026.10.14-0049";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -135,19 +135,34 @@ function todayView() {
     <div class="hero-foot"><span>${cycle > 1 ? `Cycle ${cycle} · ` : ""}Session ${(seq % plan.rotation.length) + 1} of ${plan.rotation.length}</span><span>About 55 min</span></div>
   </section>
   ${!s && nextDay && !state.profile.days.includes(E.parse(d).getDay()) ? `<p class="foot" style="margin:10px 4px 0">Rest day on your schedule. Next planned session: ${fmtDate(nextDay, { weekday: "long" })}. Walking counts.</p>` : ""}
-  <div class="section"><h2>Daily</h2><span class="aside">${state.healthSyncAt && E.localISO(new Date(state.healthSyncAt)) === d ? `Health synced ${new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(new Date(state.healthSyncAt))}` : "Pull down to sync Health"}</span></div>
-  ${tiles(d)}
+  ${dailySection(d)}
   <div class="section"><h2>This week</h2><span class="aside">${weekDone()} of ${state.profile.days.length} sessions</span></div>
   ${weekStrip(d)}`;
 }
 function nextTrainingDay() { for (let i = 1; i <= 7; i++) { const x = E.addDays(today(), i); if (state.profile.days.includes(E.parse(x).getDay())) return x; } return null; }
 function mondayOf(d) { const g = E.parse(d).getDay(); return E.addDays(d, -((g + 6) % 7)); }
 function weekDone() { const m = mondayOf(today()); return state.sessions.filter((s) => s.completedAt && s.date >= m && s.date <= E.addDays(m, 6)).length; }
+const viewDay = () => (ui.viewDate && ui.viewDate <= today() ? ui.viewDate : today());
+function dailySection(d) {
+  const sel = viewDay(), isToday = sel === d;
+  const synced = state.healthSyncAt && E.localISO(new Date(state.healthSyncAt)) === d;
+  const aside = isToday
+    ? `<span class="aside">${synced ? `Health synced ${new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(new Date(state.healthSyncAt))}` : "Pull down to sync Health"}</span>`
+    : `<button class="pill" data-act="view-day" data-d="${d}">Back to today</button>`;
+  const done = state.sessions.filter((s) => s.completedAt && s.date === sel);
+  const workouts = done.map((s) => {
+    const sets = Object.values(s.entries).reduce((a, e) => a + E.doneSets(e).length, 0), mins = Math.round((Date.parse(s.completedAt) - Date.parse(s.startedAt)) / 60000);
+    return `<div class="row"><span class="dot-c" style="--c:var(--D)"></span><span class="grow">Full body ${esc(s.tpl)}<div class="sub">${plural(sets, "set")}${mins > 0 && mins < 300 ? `, ${mins} min` : ""}${s.ended ? ", ended early" : ""}</div></span></div>`;
+  }).join("");
+  return `<div class="section"><h2>${isToday ? "Daily" : esc(fmtDate(sel, { weekday: "long", month: "short", day: "numeric" }))}</h2>${aside}</div>
+  ${tiles(sel)}
+  ${!isToday ? `<div class="group" style="margin-top:10px">${workouts || `<div class="row"><span class="grow muted">No workout logged this day.</span></div>`}</div>` : ""}`;
+}
 function weekStrip(d) {
-  const m = mondayOf(d), did = new Set(state.sessions.filter((s) => s.completedAt).map((s) => s.date));
+  const m = mondayOf(d), sel = viewDay(), did = new Set(state.sessions.filter((s) => s.completedAt).map((s) => s.date));
   return `<div class="week">${Array.from({ length: 7 }, (_, i) => {
-    const x = E.addDays(m, i), dow = E.parse(x).getDay();
-    return `<div class="wd ${x === d ? "today" : ""} ${state.profile.days.includes(dow) ? "train" : ""} ${did.has(x) ? "did" : ""}"><span>${"SMTWTFS"[dow]}</span><b>${E.parse(x).getDate()}</b><i></i></div>`;
+    const x = E.addDays(m, i), dow = E.parse(x).getDay(), future = x > d;
+    return `<button class="wd ${x === d ? "today" : ""} ${x === sel ? "sel" : ""} ${state.profile.days.includes(dow) ? "train" : ""} ${did.has(x) ? "did" : ""}" data-act="view-day" data-d="${x}" ${future ? "disabled" : ""} aria-label="${fmtDate(x, { weekday: "long", month: "long", day: "numeric" })}"><span>${"SMTWTFS"[dow]}</span><b>${E.parse(x).getDate()}</b><i></i></button>`;
   }).join("")}</div>`;
 }
 function tiles(d) {
@@ -157,7 +172,7 @@ function tiles(d) {
   return `<div class="tiles">
     <button class="tile" data-act="metric" data-k="steps"><span class="k">Steps <svg class="ring" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" stroke="var(--s3)"/><circle cx="15" cy="15" r="13" stroke="var(--t1)" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - ringP / 100)}" transform="rotate(-90 15 15)" stroke-linecap="round"/></svg></span>
       <span class="v num">${l.steps != null ? l.steps.toLocaleString() : "—"}</span><span class="s">Goal ${p.stepGoal.toLocaleString()}</span></button>
-    <button class="tile" data-act="metric" data-k="weight"><span class="k">Weight</span><span class="v num">${l.weight ? fmtN(l.weight) : "—"}<small>lb</small></span><span class="s">${avg ? `7-day avg ${avg.toFixed(1)}` : "Weigh in after waking"}</span></button>
+    <button class="tile" data-act="metric" data-k="weight"><span class="k">Weight</span><span class="v num">${l.weight ? Number(l.weight).toFixed(1) : "—"}<small>lb</small></span><span class="s">${avg ? `7-day avg ${avg.toFixed(1)}` : "Weigh in after waking"}</span></button>
     <button class="tile" data-act="metric" data-k="active"><span class="k">Burned</span><span class="v num">${l.active != null ? l.active.toLocaleString() : "—"}<small>kcal</small></span><span class="s">Active calories</span></button>
     <button class="tile" data-act="metric" data-k="protein"><span class="k">Protein</span><span class="v num">${l.protein ? l.protein : "—"}<small>g</small></span><span class="s">of ${p.protein} g<span class="meter"><i style="width:${pct(l.protein, p.protein)}%"></i></span></span></button>
   </div>`;
@@ -341,7 +356,7 @@ function openSheet(html) {
 function closeSheet() { $("#sheet-root").innerHTML = ""; ui.discardArmed = false; document.body.classList.remove("kb"); }
 
 function metricSheet(k) {
-  const d = today(), l = state.logs[d] || {}, p = state.profile;
+  const d = viewDay(), l = state.logs[d] || {}, p = state.profile;
   const cfg = {
     weight: { t: "Weight", u: "lb", lede: "Morning, after the bathroom, before food. The 7-day average is what counts.", ph: fmtN(E.weights(state.logs).at(-1)?.[1] ?? p.startWeight), mode: "decimal" },
     steps: { t: "Steps", u: "steps", lede: `${plan.steps.split.map(([w, v]) => `${w.toLowerCase()} ${v.toLocaleString()}`).join(", ")}.`, ph: "0", mode: "numeric" },
@@ -349,10 +364,10 @@ function metricSheet(k) {
     calories: { t: "Calories", u: "kcal", lede: `Target ${p.calories.toLocaleString()}. Add as you eat or enter the day's total.`, ph: "0", mode: "numeric", add: [300, 500, 700] },
     protein: { t: "Protein", u: "g", lede: `Target ${p.protein} g — 35–50 g a meal gets you there.`, ph: "0", mode: "numeric", add: [25, 40, 50] },
   }[k];
-  openSheet(`<h2>${cfg.t}</h2><p class="lede">${esc(cfg.lede)}</p>
+  openSheet(`<h2>${cfg.t}${d !== today() ? ` · ${fmtDate(d, { weekday: "short", month: "short", day: "numeric" })}` : ""}</h2><p class="lede">${esc(cfg.lede)}</p>
     <div class="big-input"><input id="metric" inputmode="${cfg.mode}" placeholder="${cfg.ph}" value="${l[k] ?? ""}" aria-label="${cfg.t}"><span>${cfg.u}</span></div>
     ${cfg.add ? `<div class="chips">${cfg.add.map((a) => `<button class="pill num" data-act="metric-add" data-v="${a}">+${a}</button>`).join("")}</div>` : k === "weight" ? `<div class="chips"><button class="pill num" data-act="metric-add" data-v="-0.2">−0.2</button><button class="pill num" data-act="metric-add" data-v="0.2">+0.2</button></div>` : ""}
-    <div class="stack"><button class="cta" data-act="metric-save" data-k="${k}">Save</button>${l[k] != null ? `<button class="cta ghost small" data-act="metric-clear" data-k="${k}">Clear today's entry</button>` : ""}</div>`);
+    <div class="stack"><button class="cta" data-act="metric-save" data-k="${k}">Save</button>${l[k] != null ? `<button class="cta ghost small" data-act="metric-clear" data-k="${k}">Clear this entry</button>` : ""}</div>`);
   const inp = $("#metric"); inp.focus(); inp.select?.();
 }
 function swapSheet(slot) {
@@ -621,14 +636,15 @@ const actions = {
   metric: (b) => metricSheet(b.dataset.k),
   "metric-add": (b) => { const i = $("#metric"); const v = (n(i.value) ?? (b.dataset.v.includes(".") ? n(i.placeholder) : 0)) + Number(b.dataset.v); i.value = fmtN(Math.round(v * 10) / 10); },
   "metric-save": (b) => {
-    const k = b.dataset.k, v = n($("#metric").value), d = today();
+    const k = b.dataset.k, v = n($("#metric").value), d = viewDay();
     if (v == null || v < 0) return toast("Enter a number");
     if (k === "weight" && (v < 80 || v > 800)) return toast("That weight looks off — check it");
     (state.logs[d] ||= {})[k] = k === "weight" ? Math.round(v * 10) / 10 : Math.round(v);
     save(); closeSheet(); render(); haptic();
   },
-  "metric-clear": (b) => { const d = today(); if (state.logs[d]) delete state.logs[d][b.dataset.k]; save(); closeSheet(); render(); },
+  "metric-clear": (b) => { const d = viewDay(); if (state.logs[d]) delete state.logs[d][b.dataset.k]; save(); closeSheet(); render(); },
   settings: () => settingsSheet(),
+  "view-day": (b) => { ui.viewDate = b.dataset.d === today() ? null : b.dataset.d; haptic(); render(); },
   sync: () => runShortcut(),
   "run-shortcut": () => runShortcut(),
   "paste-health": () => syncHealth(),

@@ -169,9 +169,11 @@ test("assets: every exercise has its demo frames; app and service worker version
 });
 
 test("health hand-off: parses Shortcut text and JSON, ignores unrelated clipboard, converts kg", () => {
-  assert.deepEqual(E.parseHealth("drop50 steps=8,123 count weight=254.6 lb calories= protein="), { steps: 8123, weight: 254.6 });
-  assert.deepEqual(E.parseHealth('{"app":"drop50","steps":"10432","weight":"253.8 lb","calories":"2,310 kcal","protein":"182 g"}'),
-    { steps: 10432, weight: 253.8, calories: 2310, protein: 182 });
+  assert.deepEqual(E.parseHealth("drop50 steps=8,123 count weight=254.6 lb active= protein="), { steps: 8123, weight: 254.6 });
+  // "calories" from the shortcut means calories burned; food calories only via "dietary"
+  assert.deepEqual(E.parseHealth('{"app":"drop50","steps":"10432","weight":"253.8 lb","calories":"612 kcal","protein":"182 g"}'),
+    { steps: 10432, weight: 253.8, active: 612, protein: 182 });
+  assert.deepEqual(E.parseHealth("drop50 steps=5000 dietary=2,310"), { steps: 5000, calories: 2310 });
   const kg = E.parseHealth("Drop50\nsteps: 6500\nweight: 115.2 kg");
   assert.equal(kg.steps, 6500);
   assert.equal(Math.round(kg.weight * 10) / 10, 254);
