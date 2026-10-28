@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.14-0049";
+const VERSION = "2026.10.28-weights";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -258,10 +258,10 @@ function setRows(s, keys) {
   return html;
 }
 function formHTML(id) {
-  const x = ex(id), inc = incFor(id), opts = x.basis === "total" ? [5, 10, 15] : [2.5, 5, 10];
+  const x = ex(id);
   return `<div class="form"><b>${esc(x.name)}</b><ol>${x.cues.map((c) => `<li>${esc(c)}</li>`).join("")}</ol>
     <div class="warn"><b>Watch for:</b> ${esc(x.mistake)}</div>
-    <div class="inc"><span>Weight jumps</span><span class="seg">${opts.map((o) => `<button class="${o === inc ? "on" : ""}" data-act="inc" data-ex="${id}" data-v="${o}">${o} lb</button>`).join("")}</span></div></div>`;
+    </div>`;
 }
 
 /* ================= rest timer ================= */
@@ -623,7 +623,6 @@ const actions = {
   swap: (b) => { const s = active(); if (blockKeys(s, b.dataset.slot).some((k) => s.entries[k].sets.some((x) => x.done))) return toast("Uncheck this exercise's sets to swap it"); swapSheet(b.dataset.slot); },
   "do-swap": (b) => { const s = active(), e = s.entries[b.dataset.k]; e.ex = b.dataset.ex; e.sets = e.presc.map(() => ({ w: "", r: "", done: false })); save(); closeSheet(); refreshCard(slotOf(b.dataset.k)); toast(`Swapped in ${ex(b.dataset.ex).name}`); },
   history: (b) => historySheet(b.dataset.ex),
-  inc: (b) => { state.inc[b.dataset.ex] = Number(b.dataset.v); save(); refreshCard(ui.open); },
   media: (b) => b.classList.toggle("play"),
   "wk-menu": () => menuSheet(),
   finish: () => finishWorkout(false),
