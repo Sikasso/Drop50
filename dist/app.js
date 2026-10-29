@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.28-weights";
+const VERSION = "2026.10.29-backup";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -516,12 +516,12 @@ function finishSyncSheet() {
 /* ================= backup ================= */
 function backupFile() {
   const data = { format: "drop50-backup", version: 2, exportedAt: new Date().toISOString(), state };
-  return new File([JSON.stringify(data, null, 1)], `drop50-backup-${today()}.json`, { type: "application/json" });
+  return new File([JSON.stringify(data, null, 1)], "drop50-backup.json", { type: "application/json" });
 }
 function backup() {
   const file = backupFile(), done = () => { state.lastBackupAt = new Date().toISOString(); save(); toast("Backup saved"); closeSheet(); render(); };
   // navigator.share must run synchronously inside the tap
-  if (navigator.canShare?.({ files: [file] })) { navigator.share({ files: [file], title: "Drop50 backup" }).then(done).catch((e) => { if (e?.name !== "AbortError") toast("Backup didn't save — try again"); }); return; }
+  if (navigator.canShare?.({ files: [file] })) { navigator.share({ files: [file] }).then(done).catch((e) => { if (e?.name !== "AbortError") toast("Backup didn't save — try again"); }); return; }
   const a = document.createElement("a"), url = URL.createObjectURL(file);
   a.href = url; a.download = file.name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); done();
 }

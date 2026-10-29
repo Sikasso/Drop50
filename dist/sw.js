@@ -1,5 +1,5 @@
 /* Drop50 service worker: offline-first app shell. Bump VERSION on every deploy (tools/release.sh does it). */
-const VERSION = "2026.10.28-weights";
+const VERSION = "2026.10.29-backup";
 const CACHE = `drop50-${VERSION}`;
 const SHELL = ["./", "index.html", "styles.css", "engine.js", "app.js", "plan.json", "manifest.webmanifest",
   "icons/apple-touch-icon.png", "icons/icon-192.png", "icons/icon-512.png"];
