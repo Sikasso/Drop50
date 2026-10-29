@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.29-backup";
+const VERSION = "2026.10.29-superset";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -212,7 +212,7 @@ function cardHTML(s, slot) {
   const head = `<button class="card-head" data-act="open" data-slot="${slot}"><i class="bar"></i><span><span class="pat">${esc(plan.slots[slot].label)}</span><span class="name" style="display:block">${esc(names)}</span></span><span class="stat num ${done === all ? "ok" : ""}">${done === all ? "Done" : `${done}/${all}`}</span></button>`;
   if (!open) return `<section class="card" id="card-${slot}" style="--c:var(--${slot})">${head}</section>`;
   const rx = rxText(first.presc);
-  const media = keys.map((k, idx) => mediaHTML(s.entries[k].ex, idx)).join("");
+  const media = keys.map((k, idx) => `${keys.length > 1 ? `<div class="demo-label">${"abc"[idx]} · ${esc(ex(s.entries[k].ex).name)}</div>` : ""}${mediaHTML(s.entries[k].ex)}`).join("");
   const isPair = keys.length > 1;
   const lasts = keys.map((k) => lastHTML(s, k, isPair)).join("");
   return `<section class="card open" id="card-${slot}" style="--c:var(--${slot})">${head}<div class="card-body">
@@ -225,8 +225,7 @@ function cardHTML(s, slot) {
     ${ui.form[slot] ? keys.map((k) => formHTML(s.entries[k].ex)).join("") : ""}
   </div></section>`;
 }
-function mediaHTML(id, idx) {
-  if (idx > 0) return ""; // one demo per card; the superset partner's demo is under Form tips
+function mediaHTML(id) {
   const x = ex(id), still = matchMedia("(prefers-reduced-motion: reduce)").matches, step = x.frames === 3 ? 0.9 : 1.1;
   return `<div class="media ${still ? "" : "play"} ${x.frames === 2 ? "f2" : ""}" style="--dur:${step * x.frames}s;--step:${step}s" data-act="media" role="img" aria-label="${esc(x.name)} demonstration">
     ${Array.from({ length: x.frames }, (_, i) => `<img src="media/${x.id}-${i}.webp" alt="" style="--i:${i}" decoding="async">`).join("")}<div class="shade"></div></div>`;

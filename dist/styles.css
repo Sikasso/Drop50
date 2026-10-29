@@ -326,3 +326,5 @@ body.in-workout .toast { bottom: calc(var(--bot) + 84px); }
   .media.play img { animation: none; }
 }
 @media (min-width: 700px) { #app { padding-top: calc(var(--top) + 28px); } }
+
+.demo-label { margin: 0 -16px; padding: 10px 16px; background: #141412; color: #fff; font-size: 14px; font-weight: 600; }
