@@ -249,7 +249,7 @@
    ],
    "mistake": "Pelvis rolling off the pad at the bottom.",
    "group": "legs",
-   "video": "q4W4_VJbKW0",
+   "clip": false,
    "gear": "Machine"
   },
   {
@@ -267,7 +267,7 @@
    ],
    "mistake": "Heels lifting or knees caving in on the way up.",
    "group": "legs",
-   "video": "VY8ko6ecfso",
+   "clip": false,
    "gear": "Machine"
   },
   {
@@ -285,7 +285,7 @@
    ],
    "mistake": "Narrow tightrope stance that kills balance.",
    "group": "legs",
-   "video": "Wcmg-3iHwjQ",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -303,7 +303,7 @@
    ],
    "mistake": "Heels lifting or knees collapsing inward.",
    "group": "legs",
-   "video": "Xjo_fY9Hl9w",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -320,7 +320,7 @@
    ],
    "mistake": "Rounding the back to reach lower.",
    "group": "legs",
-   "video": "QFbZevA7dps",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -337,7 +337,7 @@
    ],
    "mistake": "Arching the lower back instead of extending the hips.",
    "group": "legs",
-   "video": "4hYRM_60BD4",
+   "clip": false,
    "gear": "Barbell"
   },
   {
@@ -354,7 +354,7 @@
    ],
    "mistake": "Swinging up past straight and cranking the low back.",
    "group": "legs",
-   "video": "F6xrarzGl-g",
+   "clip": false,
    "gear": "Machine"
   },
   {
@@ -371,7 +371,7 @@
    ],
    "mistake": "Arching back so it turns into an incline press.",
    "group": "shoulders",
-   "video": "rO_iEImwHyo",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -388,7 +388,8 @@
    ],
    "mistake": "Seat too low, which pinches the shoulders.",
    "group": "shoulders",
-   "video": "Gkk-6q7Rq-s",
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/543/dbfd396b-1aab-4a64-a50b-2c31ff0a2cf7.MOV",
    "gear": "Machine"
   },
   {
@@ -405,7 +406,7 @@
    ],
    "mistake": "Rushing the rotation and losing control at the top.",
    "group": "shoulders",
-   "video": "TEzehbTzBD0",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -422,7 +423,7 @@
    ],
    "mistake": "Elbows flared straight out to the sides.",
    "group": "chest",
-   "video": "M0tN99QgPyU",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -439,7 +440,8 @@
    ],
    "mistake": "Bench too steep, turning it into a shoulder press.",
    "group": "chest",
-   "video": "IP4oeKh1Sd4",
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/537/b9c937e9-daeb-42a9-be8e-7a77e368478c.MOV",
    "gear": "Dumbbell"
   },
   {
@@ -456,7 +458,7 @@
    ],
    "mistake": "Shoulders rolling forward off the pad.",
    "group": "chest",
-   "video": "NwzUje3z0qY",
+   "clip": false,
    "gear": "Machine"
   },
   {
@@ -473,7 +475,7 @@
    ],
    "mistake": "Leaning way back and swinging the weight.",
    "group": "back",
-   "video": "7JnP8dFbS14",
+   "clip": false,
    "gear": "Cable"
   },
   {
@@ -490,7 +492,7 @@
    ],
    "mistake": "Rocking the torso to move the stack.",
    "group": "back",
-   "video": "vwHG9Jfu4sw",
+   "clip": false,
    "gear": "Cable"
   },
   {
@@ -508,7 +510,7 @@
    ],
    "mistake": "Twisting the torso to heave the weight.",
    "group": "back",
-   "video": "QHRU41-NhaU",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -526,7 +528,7 @@
    ],
    "mistake": "Pulling with the arms instead of the back.",
    "group": "back",
-   "video": "IjoFCmLX7z0",
+   "clip": false,
    "gear": "Cable"
   },
   {
@@ -544,7 +546,8 @@
    ],
    "mistake": "Rocking the torso for momentum.",
    "group": "biceps",
-   "video": "Iyqr-MyDqRY",
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/92/8bfb917c-3d0d-49b9-8073-5d7e01c1b894.MOV",
    "gear": "Dumbbell"
   },
   {
@@ -562,7 +565,8 @@
    ],
    "mistake": "Swinging the dumbbells up.",
    "group": "biceps",
-   "video": "CFBZ4jN1CMI",
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/272/df069052-2173-4f24-855f-a0eebe729f24.MOV",
    "gear": "Dumbbell"
   },
   {
@@ -580,7 +584,7 @@
    ],
    "mistake": "Shoulders rolling forward to cheat the curl.",
    "group": "biceps",
-   "video": "HhHHBj3qTJ4",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -598,7 +602,7 @@
    ],
    "mistake": "Elbows flaring and shoulders taking over.",
    "group": "triceps",
-   "video": "03RVTmYUMrU",
+   "clip": false,
    "gear": "Cable"
   },
   {
@@ -616,7 +620,8 @@
    ],
    "mistake": "Elbows flaring wide.",
    "group": "triceps",
-   "video": "iB4u8yUmPnI",
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/659/1f2eb3b6-3185-429f-8330-26dc88f39aff.MOV",
    "gear": "Cable"
   },
   {
@@ -634,7 +639,7 @@
    ],
    "mistake": "Shrugging the shoulders up toward the ears.",
    "group": "triceps",
-   "video": "pMarNxAvHPc",
+   "clip": false,
    "gear": "Machine"
   },
   {
@@ -653,7 +658,8 @@
    ],
    "mistake": "Elbows drifting wide and the low back arching.",
    "group": "triceps",
-   "video": "JTczoqjnKUA",
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/211/85f6eb25-a76c-409e-9af9-497794ac0dfb.MOV",
    "gear": "Dumbbell"
   },
   {
@@ -670,7 +676,7 @@
    ],
    "mistake": "Shrugging or heaving with momentum.",
    "group": "shoulders",
-   "video": "PzsMitRdI_8",
+   "clip": false,
    "gear": "Dumbbell"
   },
   {
@@ -687,7 +693,8 @@
    ],
    "mistake": "Letting the stack crash between reps.",
    "group": "legs",
-   "video": "_2Kd0d-JEUM",
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/366/43df4b79-d4c3-4fbf-bcb5-e0d825b84120.MOV",
    "gear": "Machine"
   },
   {
@@ -704,8 +711,8 @@
     "Press the bar back up over your shoulders. Count the bar and plates in your logged weight."
    ],
    "mistake": "Bouncing the bar off your chest or lifting your hips.",
-   "frames": 0,
-   "video": "lWFknlOTbyM"
+   "frames": 2,
+   "clip": false
   },
   {
    "id": "dumbbell_floor_press",
@@ -721,8 +728,8 @@
     "Pause, then press with wrists stacked above elbows."
    ],
    "mistake": "Dropping your elbows onto the floor.",
-   "frames": 0,
-   "video": "T0Y3OBF1bNI"
+   "frames": 2,
+   "clip": false
   },
   {
    "id": "dumbbell_fly",
@@ -737,8 +744,8 @@
     "Open your arms until you feel a chest stretch, then bring them back together."
    ],
    "mistake": "Lowering beyond a comfortable range or turning it into a press.",
-   "frames": 0,
-   "video": "WE1thwwQRRw"
+   "frames": 2,
+   "clip": false
   },
   {
    "id": "kettlebell_floor_press",
@@ -753,9 +760,9 @@
     "Lower until the upper arm touches lightly, then press. Do all reps, then switch."
    ],
    "mistake": "Letting the bell pull your wrist back.",
-   "frames": 0,
+   "frames": 2,
    "uni": true,
-   "video": "P_ijh09h23s"
+   "clip": false
   },
   {
    "id": "dumbbell_reverse_lunge",
@@ -770,9 +777,9 @@
     "Lower the back knee, then drive through the front foot to stand."
    ],
    "mistake": "Pushing off the back foot instead of loading the front leg.",
-   "frames": 0,
+   "frames": 2,
    "uni": true,
-   "video": "zZaXHwFf9r8"
+   "clip": false
   },
   {
    "id": "dumbbell_calf_raise",
@@ -787,8 +794,8 @@
     "Lift both heels, pause at the top, then lower slowly."
    ],
    "mistake": "Bouncing through short reps.",
-   "frames": 0,
-   "video": "wwy3BSUjlW4"
+   "frames": 2,
+   "clip": false
   },
   {
    "id": "kettlebell_goblet_squat",
@@ -804,8 +811,8 @@
     "Push through the whole foot to stand."
    ],
    "mistake": "Letting the heels lift.",
-   "frames": 0,
-   "video": "MWHIs0zxkCU"
+   "frames": 2,
+   "clip": false
   },
   {
    "id": "kettlebell_deadlift",
@@ -821,7 +828,7 @@
    ],
    "mistake": "Rounding your back to reach the bell.",
    "frames": 0,
-   "video": "m-KlB4F4bIc"
+   "clip": false
   },
   {
    "id": "chest_supported_dumbbell_row",
@@ -836,8 +843,8 @@
     "Pull your elbows back, pause, then let the dumbbells lower under control."
    ],
    "mistake": "Lifting your chest off the bench or shrugging.",
-   "frames": 0,
-   "video": "ro2vfHfD0DQ"
+   "frames": 2,
+   "clip": false
   },
   {
    "id": "kettlebell_row",
@@ -854,7 +861,7 @@
    "mistake": "Rotating your torso to move the bell.",
    "frames": 0,
    "uni": true,
-   "video": "WmT_rBeKnuM"
+   "clip": false
   },
   {
    "id": "dumbbell_reverse_fly",
@@ -870,7 +877,7 @@
    ],
    "mistake": "Shrugging or using momentum.",
    "frames": 0,
-   "video": "D5_zfFhfyzE"
+   "clip": false
   },
   {
    "id": "kettlebell_overhead_press",
@@ -887,7 +894,7 @@
    "mistake": "Leaning back or sideways as you press.",
    "frames": 0,
    "uni": true,
-   "video": "YXtkmM_Gd5Q"
+   "clip": false
   },
   {
    "id": "dumbbell_concentration_curl",
@@ -902,10 +909,10 @@
     "Curl smoothly and lower fully. Do all reps, then switch."
    ],
    "mistake": "Moving your shoulder to help lift the weight.",
-   "frames": 0,
+   "frames": 2,
    "arm": "bi",
    "uni": true,
-   "video": "DMhaqmlT1GU"
+   "clip": false
   },
   {
    "id": "dumbbell_skull_crusher",
@@ -922,7 +929,8 @@
    "mistake": "Letting your upper arms swing or elbows flare.",
    "frames": 0,
    "arm": "tri",
-   "video": "4rI3EBpbA2U"
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/245/c253303e-9160-4f1f-b4fe-daf1e6c8661d.MOV"
   },
   {
    "id": "kettlebell_curl",
@@ -939,7 +947,7 @@
    "mistake": "Leaning back to start the rep.",
    "frames": 0,
    "arm": "bi",
-   "video": "GHQ1-gGuT0g"
+   "clip": false
   },
   {
    "id": "kettlebell_overhead_extension",
@@ -956,7 +964,7 @@
    "mistake": "Arching your back or widening your elbows.",
    "frames": 0,
    "arm": "tri",
-   "video": "Q09iNPS4LSc"
+   "clip": false
   }
  ],
  "groups": {
@@ -1666,5 +1674,5 @@
    ]
   ]
  },
- "media_credit": "Exercise videos are provided by their respective YouTube creators and require internet."
+ "media_credit": "Video: Goulart / wger, CC BY-SA 4.0. Photo poses: free-exercise-db (Unlicense). See source credits."
 }

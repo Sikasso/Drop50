@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.11.08-1138";
+const VERSION = "2026.11.08-1149";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, demo: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -230,7 +230,7 @@ function cardHTML(s, slot) {
   const sameRx = prescriptions.every((rx) => rx.sets === prescriptions[0].sets && rx.rir === prescriptions[0].rir);
   const media = demoHTML(s, slot, keys);
   const isPair = keys.length > 1;
-  const showForm = ui.form[slot] ?? keys.some((k) => !ex(s.entries[k].ex).video);
+  const showForm = ui.form[slot] ?? keys.some((k) => !ex(s.entries[k].ex).frames && !ex(s.entries[k].ex).clip);
   const lasts = keys.map((k) => lastHTML(s, k, isPair)).join("");
   return `<section class="card open" id="card-${slot}" style="${colorVar(slot)}">${head}<div class="card-body">
     ${media ? `<div class="demo">${media}</div>` : ""}
@@ -247,17 +247,18 @@ function cardHTML(s, slot) {
 }
 function demoHTML(s, slot, keys) {
   const lifts = keys.map((k) => ex(s.entries[k].ex));
-  const preferred = ui.demo[slot] ?? 0;
-  const selected = lifts[preferred]?.video ? preferred : lifts.findIndex((lift) => lift.video);
-  if (selected < 0) return "";
+  const selected = Math.min(ui.demo[slot] ?? 0, lifts.length - 1);
   const toggle = lifts.length > 1 ? `<div class="demo-toggle" role="group" aria-label="Exercise demo">
-    ${lifts.map((lift, i) => `<button data-act="demo" data-slot="${slot}" data-v="${i}" aria-label="${"AB"[i]}. ${esc(lift.name)} demonstration" aria-pressed="${i === selected}" ${lift.video ? "" : "disabled"}>${"AB"[i]}</button>`).join("")}
+    ${lifts.map((lift, i) => `<button data-act="demo" data-slot="${slot}" data-v="${i}" aria-label="${"AB"[i]}. ${esc(lift.name)} demonstration" aria-pressed="${i === selected}">${"AB"[i]}</button>`).join("")}
   </div>` : "";
   return mediaHTML(lifts[selected]) + toggle;
 }
 function mediaHTML(x) {
-  const video = esc(x.video), title = esc(x.name);
-  return `<div class="media video-panel"><button class="video-play" data-act="play-video" data-video="${video}" aria-label="Play ${title} video"><span aria-hidden="true">▶</span><b>Watch ${title}</b><small>Real exercise video · Requires internet</small></button><a class="video-link" href="https://www.youtube.com/watch?v=${video}" target="_blank" rel="noopener noreferrer">Open video on YouTube ↗</a></div>`;
+  if (x.clip) return `<div class="media local-clip"><video src="media/${esc(x.id)}.mp4" muted loop playsinline controls ${matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : "autoplay"} aria-label="${esc(x.name)} demonstration"></video></div><div class="clip-credit"><a href="${esc(x.clip_source)}" target="_blank" rel="noopener noreferrer">Video by Goulart</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · resized and muted</div>`;
+  if (!x.frames) return `<div class="media demo-missing"><b>${esc(x.name)}</b><span>Follow the form tips below</span></div>`;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches, step = x.frames === 3 ? 0.9 : 1.1;
+  return `<div class="media ${still ? "" : "play"} ${x.frames === 2 ? "f2" : ""}" style="--dur:${step * x.frames}s;--step:${step}s" data-act="media" role="img" aria-label="${esc(x.name)} pose guide">
+    ${Array.from({ length: x.frames }, (_, i) => `<img src="media/${x.id}-${i}.webp" alt="" style="--i:${i}" decoding="async">`).join("")}<div class="shade"></div><span class="pose-label">Pose guide</span></div>`;
 }
 function lastHTML(s, key, isPair) {
   const entry = s.entries[key], { hist, t } = targetsFor(s, key), last = hist[0];
@@ -483,7 +484,7 @@ function settingsSheet() {
       <label class="row" style="width:100%"><span class="grow">Restore from a backup<div class="sub">Replaces what's on this phone</div></span>${CHEV}<input type="file" id="restore" accept=".json,application/json,text/plain" hidden></label>
       <button class="row" style="width:100%;text-align:left;color:var(--danger)" data-act="erase"><span class="grow">${ui.discardArmed ? "Tap again to erase everything" : "Erase all data"}<div class="sub">Use this after your test week</div></span></button>
     </div>
-    <p class="foot" style="margin-top:14px">${esc(plan.media_credit)}</p>`);
+    <p class="foot" style="margin-top:14px">${esc(plan.media_credit)} <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener noreferrer">Photo source</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Video license</a></p>`);
 }
 function saveSettings() {
   const root = $("#settings"), p = { ...state.profile };
@@ -697,16 +698,7 @@ const actions = {
     save(); closeSheet(); render(); toast(`Swapped in ${ex(id).name}`);
   },
   history: (b) => historySheet(b.dataset.ex),
-  "play-video": (b) => {
-    const panel = b.closest(".video-panel"), id = b.dataset.video;
-    if (!panel || !/^[A-Za-z0-9_-]{11}$/.test(id)) return;
-    const frame = document.createElement("iframe");
-    frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1`;
-    frame.title = b.getAttribute("aria-label");
-    frame.allow = "autoplay; encrypted-media; picture-in-picture";
-    frame.allowFullscreen = true;
-    b.replaceWith(frame);
-  },
+  media: (b) => b.classList.toggle("play"),
   demo: (b) => {
     const s = active(), slot = b.dataset.slot, v = Number(b.dataset.v);
     const demo = b.closest(".demo");

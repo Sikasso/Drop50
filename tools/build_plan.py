@@ -168,11 +168,24 @@ EX += [
 ]
 
 
-# Public exercise-specific videos; the player loads only when tapped.
-VIDEOS = {'leg_press': 'q4W4_VJbKW0', 'hack_squat': 'VY8ko6ecfso', 'split_squat': 'Wcmg-3iHwjQ', 'goblet_squat': 'Xjo_fY9Hl9w', 'romanian_deadlift': 'QFbZevA7dps', 'hip_thrust': '4hYRM_60BD4', 'back_extension': 'F6xrarzGl-g', 'dumbbell_overhead_press': 'rO_iEImwHyo', 'machine_shoulder_press': 'Gkk-6q7Rq-s', 'arnold_press': 'TEzehbTzBD0', 'dumbbell_bench_press': 'M0tN99QgPyU', 'incline_dumbbell_press': 'IP4oeKh1Sd4', 'machine_chest_press': 'NwzUje3z0qY', 'lat_pulldown': '7JnP8dFbS14', 'seated_cable_row': 'vwHG9Jfu4sw', 'one_arm_dumbbell_row': 'QHRU41-NhaU', 'close_grip_pulldown': 'IjoFCmLX7z0', 'dumbbell_curl': 'Iyqr-MyDqRY', 'hammer_curl': 'CFBZ4jN1CMI', 'incline_dumbbell_curl': 'HhHHBj3qTJ4', 'rope_pushdown': '03RVTmYUMrU', 'overhead_rope_extension': 'iB4u8yUmPnI', 'machine_dip': 'pMarNxAvHPc', 'dumbbell_overhead_extension': 'JTczoqjnKUA', 'lateral_raise': 'PzsMitRdI_8', 'hamstring_curl': '_2Kd0d-JEUM', 'barbell_bench_press': 'lWFknlOTbyM', 'dumbbell_floor_press': 'T0Y3OBF1bNI', 'dumbbell_fly': 'WE1thwwQRRw', 'kettlebell_floor_press': 'P_ijh09h23s', 'dumbbell_reverse_lunge': 'zZaXHwFf9r8', 'dumbbell_calf_raise': 'wwy3BSUjlW4', 'kettlebell_goblet_squat': 'MWHIs0zxkCU', 'kettlebell_deadlift': 'm-KlB4F4bIc', 'chest_supported_dumbbell_row': 'ro2vfHfD0DQ', 'kettlebell_row': 'WmT_rBeKnuM', 'dumbbell_reverse_fly': 'D5_zfFhfyzE', 'kettlebell_overhead_press': 'YXtkmM_Gd5Q', 'dumbbell_concentration_curl': 'DMhaqmlT1GU', 'dumbbell_skull_crusher': '4rI3EBpbA2U', 'kettlebell_curl': 'GHQ1-gGuT0g', 'kettlebell_overhead_extension': 'Q09iNPS4LSc'}
-assert {x["id"] for x in EX} == set(VIDEOS)
+# Local licensed footage and exercise photo pairs.
+CLIPS = {
+    "incline_dumbbell_press": "https://wger.de/media/exercise-video/537/b9c937e9-daeb-42a9-be8e-7a77e368478c.MOV",
+    "machine_shoulder_press": "https://wger.de/media/exercise-video/543/dbfd396b-1aab-4a64-a50b-2c31ff0a2cf7.MOV",
+    "dumbbell_overhead_extension": "https://wger.de/media/exercise-video/211/85f6eb25-a76c-409e-9af9-497794ac0dfb.MOV",
+    "dumbbell_skull_crusher": "https://wger.de/media/exercise-video/245/c253303e-9160-4f1f-b4fe-daf1e6c8661d.MOV",
+    "overhead_rope_extension": "https://wger.de/media/exercise-video/659/1f2eb3b6-3185-429f-8330-26dc88f39aff.MOV",
+    "hamstring_curl": "https://wger.de/media/exercise-video/366/43df4b79-d4c3-4fbf-bcb5-e0d825b84120.MOV",
+    "dumbbell_curl": "https://wger.de/media/exercise-video/92/8bfb917c-3d0d-49b9-8073-5d7e01c1b894.MOV",
+    "hammer_curl": "https://wger.de/media/exercise-video/272/df069052-2173-4f24-855f-a0eebe729f24.MOV",
+}
+PHOTO_DEMOS = set("barbell_bench_press chest_supported_dumbbell_row dumbbell_calf_raise dumbbell_concentration_curl dumbbell_floor_press dumbbell_fly dumbbell_reverse_lunge kettlebell_floor_press kettlebell_goblet_squat".split())
 for exercise in EX:
-    exercise["video"] = VIDEOS[exercise["id"]]
+    exercise["clip"] = exercise["id"] in CLIPS
+    if exercise["clip"]:
+        exercise["clip_source"] = CLIPS[exercise["id"]]
+    if exercise["id"] in PHOTO_DEMOS:
+        exercise["frames"] = 2
 
 GEAR = {
     "Machine": "leg_press hack_squat back_extension machine_shoulder_press machine_chest_press machine_dip hamstring_curl",
@@ -285,7 +298,7 @@ plan = {
     "motto": "Simple and boring = faster results.",
   },
   "steps": {"goal": 10000, "split": [["Early morning", 3000], ["Mid afternoon", 4000], ["Late evening", 3000]]},
-  "media_credit": "Exercise videos are provided by their respective YouTube creators and require internet.",
+  "media_credit": "Video: Goulart / wger, CC BY-SA 4.0. Photo poses: free-exercise-db (Unlicense). See source credits.",
 }
 json.dump(plan, open(OUT, "w"), indent=1, ensure_ascii=False)
 print("wrote", OUT, len(rotation), "sessions", len(EX), "exercises")

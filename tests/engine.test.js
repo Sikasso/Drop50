@@ -201,7 +201,7 @@ test("local dates never shift at night", () => {
 
 test("assets: all declared demo frames exist; app and service worker versions match", () => {
   const fs = require("node:fs"), path = require("node:path"), dist = path.join(__dirname, "../dist");
-  for (const x of plan.exercises) assert.match(x.video, /^[A-Za-z0-9_-]{11}$/, `${x.id} video`);
+  for (const x of plan.exercises.filter((e) => e.clip)) assert.ok(fs.existsSync(path.join(dist, "media", `${x.id}.mp4`)), `${x.id} clip`);
   for (const x of plan.exercises) for (let i = 0; i < x.frames; i++) assert.ok(fs.existsSync(path.join(dist, "media", `${x.id}-${i}.webp`)), `${x.id}-${i}`);
   const v = (f) => fs.readFileSync(path.join(dist, f), "utf8").match(/VERSION = "([^"]+)"/)[1];
   assert.equal(v("app.js"), v("sw.js"));

@@ -1,5 +1,5 @@
 /* Drop50 service worker: offline-first app shell. Bump VERSION on every deploy (tools/release.sh does it). */
-const VERSION = "2026.11.08-1138";
+const VERSION = "2026.11.08-1149";
 const CACHE = `drop50-${VERSION}`;
 const SHELL = ["./", "index.html", "styles.css", "engine.js", "app.js", "plan.json", "manifest.webmanifest",
   "icons/apple-touch-icon.png", "icons/icon-192.png", "icons/icon-512.png"];
@@ -11,7 +11,8 @@ self.addEventListener("install", (e) => {
     await Promise.all(SHELL.map((u) => put(c, u)));
     const plan = await (await c.match("plan.json")).json();
     const media = plan.exercises.flatMap((x) => Array.from({ length: x.frames }, (_, i) => `media/${x.id}-${i}.webp`));
-    await Promise.all(media.map((u) => put(c, u)));
+    const clips = plan.exercises.filter((x) => x.clip).map((x) => `media/${x.id}.mp4`);
+    await Promise.all([...media, ...clips].map((u) => put(c, u)));
   }));
 });
 
@@ -24,6 +25,19 @@ self.addEventListener("message", (e) => { if (e.data === "skip-waiting") self.sk
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
+  if (req.headers.has("range")) {
+    e.respondWith((async () => {
+      const cached = await caches.match(req.url);
+      if (!cached) return fetch(req);
+      const bytes = await cached.arrayBuffer();
+      const match = /^bytes=(\d+)-(\d*)$/.exec(req.headers.get("range"));
+      if (!match) return fetch(req);
+      const start = Number(match[1]), end = Math.min(match[2] ? Number(match[2]) : bytes.byteLength - 1, bytes.byteLength - 1);
+      if (start > end) return new Response(null, { status: 416, headers: { "Content-Range": `bytes */${bytes.byteLength}` } });
+      return new Response(bytes.slice(start, end + 1), { status: 206, headers: { "Content-Type": cached.headers.get("Content-Type") || "video/mp4", "Content-Range": `bytes ${start}-${end}/${bytes.byteLength}`, "Content-Length": String(end - start + 1), "Accept-Ranges": "bytes" } });
+    })());
+    return;
+  }
   if (req.mode === "navigate") {
     e.respondWith(caches.match("index.html").then((hit) => hit || fetch(req)));
     return;
