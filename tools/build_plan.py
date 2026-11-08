@@ -92,6 +92,119 @@ EX = [
        mistake="Letting the stack crash between reps."),
 ]
 
+GROUPS = {"legs": "Legs", "chest": "Chest", "back": "Back", "shoulders": "Shoulders", "biceps": "Biceps", "triceps": "Triceps"}
+GROUP_BY_SLOT = {"A": "legs", "B": "legs", "C": "shoulders", "D": "chest", "E": "back"}
+for exercise in EX:
+    if exercise["slot"] == "F":
+        exercise["group"] = "biceps" if exercise["arm"] == "bi" else "triceps"
+    elif exercise["slot"] == "X":
+        exercise["group"] = "shoulders" if exercise["id"] == "lateral_raise" else "legs"
+    else:
+        exercise["group"] = GROUP_BY_SLOT[exercise["slot"]]
+
+def library_exercise(id, name, group, slot, gear, basis, inc, cues, mistake, **extra):
+    return dict(id=id, name=name, group=group, slot=slot, gear=gear, basis=basis, inc=inc,
+                cues=cues, mistake=mistake, frames=0, **extra)
+
+EX += [
+    library_exercise("barbell_bench_press", "Barbell bench press", "chest", "D", "Barbell", "total", 5,
+        ["Set the rack safeties or use a spotter. Plant both feet and pull your shoulder blades back.",
+         "Lower the bar to your lower chest with wrists stacked over elbows.",
+         "Press the bar back up over your shoulders. Count the bar and plates in your logged weight."],
+        "Bouncing the bar off your chest or lifting your hips."),
+    library_exercise("dumbbell_floor_press", "Dumbbell floor press", "chest", "D", "Dumbbell", "each", 5,
+        ["Lie faceup with knees bent and feet planted.", "Lower until upper arms touch the floor gently.",
+         "Pause, then press with wrists stacked above elbows."], "Dropping your elbows onto the floor."),
+    library_exercise("dumbbell_fly", "Dumbbell chest fly", "chest", "G", "Dumbbell", "each", 2.5,
+        ["Lie on a flat bench with dumbbells above your chest and elbows slightly bent.",
+         "Open your arms until you feel a chest stretch, then bring them back together."],
+        "Lowering beyond a comfortable range or turning it into a press."),
+    library_exercise("kettlebell_floor_press", "Single-arm kettlebell floor press", "chest", "D", "Kettlebell", "single", 5,
+        ["Lie faceup, grip the bell firmly, and keep your wrist straight.",
+         "Lower until the upper arm touches lightly, then press. Do all reps, then switch."],
+        "Letting the bell pull your wrist back.", uni=True),
+    library_exercise("dumbbell_reverse_lunge", "Dumbbell reverse lunge", "legs", "A", "Dumbbell", "each", 5,
+        ["Hold the dumbbells at your sides and take a controlled step back.",
+         "Lower the back knee, then drive through the front foot to stand."],
+        "Pushing off the back foot instead of loading the front leg.", uni=True),
+    library_exercise("dumbbell_calf_raise", "Standing dumbbell calf raise", "legs", "G", "Dumbbell", "each", 5,
+        ["Stand tall with dumbbells at your sides.", "Lift both heels, pause at the top, then lower slowly."],
+        "Bouncing through short reps."),
+    library_exercise("kettlebell_goblet_squat", "Kettlebell goblet squat", "legs", "A", "Kettlebell", "single", 5,
+        ["Hold the bell close to your chest and brace.", "Sit between your hips, keeping knees over toes.",
+         "Push through the whole foot to stand."], "Letting the heels lift."),
+    library_exercise("kettlebell_deadlift", "Kettlebell deadlift", "legs", "B", "Kettlebell", "single", 5,
+        ["Set the bell between your feet. Hinge at the hips and bend the knees enough to reach.",
+         "Brace, stand tall, then hinge to lower the bell to the floor."], "Rounding your back to reach the bell."),
+    library_exercise("chest_supported_dumbbell_row", "Chest-supported dumbbell row", "back", "E", "Dumbbell", "each", 5,
+        ["Lie chest-down on an incline bench with feet planted.",
+         "Pull your elbows back, pause, then let the dumbbells lower under control."],
+        "Lifting your chest off the bench or shrugging."),
+    library_exercise("kettlebell_row", "One-arm kettlebell row", "back", "E", "Kettlebell", "single", 5,
+        ["Brace your free hand on a bench and hinge with a flat back.",
+         "Pull the bell toward your hip, then lower slowly. Do all reps, then switch."],
+        "Rotating your torso to move the bell.", uni=True),
+    library_exercise("dumbbell_reverse_fly", "Dumbbell reverse fly", "shoulders", "H", "Dumbbell", "each", 2.5,
+        ["Hinge forward with a long spine and a soft bend in your elbows.",
+         "Lift both arms out to your sides, then lower under control."], "Shrugging or using momentum."),
+    library_exercise("kettlebell_overhead_press", "Single-arm kettlebell press", "shoulders", "C", "Kettlebell", "single", 5,
+        ["Start with the bell supported at the shoulder and your wrist straight.",
+         "Brace with ribs down, press overhead, then lower to the rack position. Switch sides after all reps."],
+        "Leaning back or sideways as you press.", uni=True),
+    library_exercise("dumbbell_concentration_curl", "Dumbbell concentration curl", "biceps", "F", "Dumbbell", "single", 2.5,
+        ["Sit and brace the back of your upper arm against your inner thigh.",
+         "Curl smoothly and lower fully. Do all reps, then switch."], "Moving your shoulder to help lift the weight.", arm="bi", uni=True),
+    library_exercise("dumbbell_skull_crusher", "Lying dumbbell triceps extension", "triceps", "F", "Dumbbell", "each", 2.5,
+        ["Lie on a bench with dumbbells above your shoulders and palms facing in.",
+         "Bend at the elbows to lower the dumbbells beside your head, then extend."],
+        "Letting your upper arms swing or elbows flare.", arm="tri"),
+    library_exercise("kettlebell_curl", "Two-hand kettlebell curl", "biceps", "F", "Kettlebell", "single", 5,
+        ["Stand tall and hold the bell by both horns.", "Curl without moving your upper arms, then lower slowly."],
+        "Leaning back to start the rep.", arm="bi"),
+    library_exercise("kettlebell_overhead_extension", "Kettlebell overhead triceps extension", "triceps", "F", "Kettlebell", "single", 5,
+        ["Hold the bell by the horns with both hands, then press it overhead.",
+         "Keep your ribs down and bend at the elbows to lower behind your head. Extend smoothly."],
+        "Arching your back or widening your elbows.", arm="tri"),
+]
+
+
+# Public exercise-specific videos; the player loads only when tapped.
+VIDEOS = {'leg_press': 'q4W4_VJbKW0', 'hack_squat': 'VY8ko6ecfso', 'split_squat': 'Wcmg-3iHwjQ', 'goblet_squat': 'Xjo_fY9Hl9w', 'romanian_deadlift': 'QFbZevA7dps', 'hip_thrust': '4hYRM_60BD4', 'back_extension': 'F6xrarzGl-g', 'dumbbell_overhead_press': 'rO_iEImwHyo', 'machine_shoulder_press': 'Gkk-6q7Rq-s', 'arnold_press': 'TEzehbTzBD0', 'dumbbell_bench_press': 'M0tN99QgPyU', 'incline_dumbbell_press': 'IP4oeKh1Sd4', 'machine_chest_press': 'NwzUje3z0qY', 'lat_pulldown': '7JnP8dFbS14', 'seated_cable_row': 'vwHG9Jfu4sw', 'one_arm_dumbbell_row': 'QHRU41-NhaU', 'close_grip_pulldown': 'IjoFCmLX7z0', 'dumbbell_curl': 'Iyqr-MyDqRY', 'hammer_curl': 'CFBZ4jN1CMI', 'incline_dumbbell_curl': 'HhHHBj3qTJ4', 'rope_pushdown': '03RVTmYUMrU', 'overhead_rope_extension': 'iB4u8yUmPnI', 'machine_dip': 'pMarNxAvHPc', 'dumbbell_overhead_extension': 'JTczoqjnKUA', 'lateral_raise': 'PzsMitRdI_8', 'hamstring_curl': '_2Kd0d-JEUM', 'barbell_bench_press': 'lWFknlOTbyM', 'dumbbell_floor_press': 'T0Y3OBF1bNI', 'dumbbell_fly': 'WE1thwwQRRw', 'kettlebell_floor_press': 'P_ijh09h23s', 'dumbbell_reverse_lunge': 'zZaXHwFf9r8', 'dumbbell_calf_raise': 'wwy3BSUjlW4', 'kettlebell_goblet_squat': 'MWHIs0zxkCU', 'kettlebell_deadlift': 'm-KlB4F4bIc', 'chest_supported_dumbbell_row': 'ro2vfHfD0DQ', 'kettlebell_row': 'WmT_rBeKnuM', 'dumbbell_reverse_fly': 'D5_zfFhfyzE', 'kettlebell_overhead_press': 'YXtkmM_Gd5Q', 'dumbbell_concentration_curl': 'DMhaqmlT1GU', 'dumbbell_skull_crusher': '4rI3EBpbA2U', 'kettlebell_curl': 'GHQ1-gGuT0g', 'kettlebell_overhead_extension': 'Q09iNPS4LSc'}
+assert {x["id"] for x in EX} == set(VIDEOS)
+for exercise in EX:
+    exercise["video"] = VIDEOS[exercise["id"]]
+
+GEAR = {
+    "Machine": "leg_press hack_squat back_extension machine_shoulder_press machine_chest_press machine_dip hamstring_curl",
+    "Cable": "lat_pulldown seated_cable_row close_grip_pulldown rope_pushdown overhead_rope_extension",
+    "Barbell": "hip_thrust",
+    "Dumbbell": ("split_squat goblet_squat romanian_deadlift dumbbell_overhead_press arnold_press dumbbell_bench_press "
+                 "incline_dumbbell_press one_arm_dumbbell_row dumbbell_curl hammer_curl incline_dumbbell_curl "
+                 "dumbbell_overhead_extension lateral_raise"),
+}
+legacy_gear = {id: gear for gear, ids in GEAR.items() for id in ids.split()}
+for exercise in EX:
+    if exercise["id"] in legacy_gear:
+        exercise["gear"] = legacy_gear[exercise["id"]]
+
+def focus(label, summary, minutes, **blocks):
+    return dict(label=label, summary=summary, minutes=minutes,
+                blocks=[dict(slot=slot, ex=exercises.split()) for slot, exercises in blocks.items()])
+
+FOCUSES = {
+    "full": {"label": "Full body", "summary": "Train legs, upper body, and arms in the regular three-week rotation.", "minutes": 55},
+    "legs": focus("Legs", "Start with a squat and hinge, then finish with hamstrings and calves.", 40,
+                  A="leg_press", B="romanian_deadlift", G="hamstring_curl", H="dumbbell_calf_raise"),
+    "arms": focus("Arms", "Alternate a biceps move and a triceps move in each superset. Rest after both.", 30,
+                  F="dumbbell_curl rope_pushdown", G="hammer_curl dumbbell_overhead_extension"),
+    "chest": focus("Chest", "Start with a flat press, follow with an incline press, and finish with flyes.", 35,
+                   D="barbell_bench_press", G="incline_dumbbell_press", H="dumbbell_fly"),
+    "back": focus("Back", "Start with a pulldown, then row with chest support and finish one side at a time.", 35,
+                  E="lat_pulldown", G="chest_supported_dumbbell_row", H="kettlebell_row"),
+    "shoulders": focus("Shoulders", "Start with an overhead press, then train your side and rear delts.", 30,
+                       C="dumbbell_overhead_press", G="lateral_raise", H="dumbbell_reverse_fly"),
+}
+
 POOLS = {
   "A": ["leg_press", "hack_squat", "split_squat"],
   "B": ["romanian_deadlift", "hip_thrust", "back_extension"],
@@ -131,6 +244,8 @@ plan = {
     "D": {"label": "Horizontal push", "kind": "compound", "rest": 120},
     "E": {"label": "Pull", "kind": "compound", "rest": 120},
     "F": {"label": "Arms", "kind": "arms", "rest": 75},
+    "G": {"label": "Accessory", "kind": "arms", "rest": 75},
+    "H": {"label": "Accessory", "kind": "arms", "rest": 75},
     "X": {"label": "Finisher", "kind": "finisher", "rest": 60},
   },
   "phases": [
@@ -148,6 +263,8 @@ plan = {
      "presc": {"compound": RPT(0), "arms": S(10, 12, 0, 3), "finisher": S(12, 15, 0, 2)}},
   ],
   "exercises": EX,
+  "groups": GROUPS,
+  "focuses": FOCUSES,
   "pools": {"A": POOLS["A"] + ["goblet_squat"], "B": POOLS["B"], "C": POOLS["C"], "D": POOLS["D"],
             "E": POOLS["E"] + ["close_grip_pulldown"], "Fb": POOLS["Fb"], "Ft": POOLS["Ft"] + ["dumbbell_overhead_extension"], "X": ["lateral_raise", "hamstring_curl"]},
   "rotation": rotation,
@@ -168,7 +285,7 @@ plan = {
     "motto": "Simple and boring = faster results.",
   },
   "steps": {"goal": 10000, "split": [["Early morning", 3000], ["Mid afternoon", 4000], ["Late evening", 3000]]},
-  "media_credit": "New exercise photos: free-exercise-db (public domain, Unlicense).",
+  "media_credit": "Exercise videos are provided by their respective YouTube creators and require internet.",
 }
 json.dump(plan, open(OUT, "w"), indent=1, ensure_ascii=False)
 print("wrote", OUT, len(rotation), "sessions", len(EX), "exercises")

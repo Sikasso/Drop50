@@ -29,15 +29,48 @@
 
   // Entries a session holds: A..E, F1 (biceps), F2 (triceps), X (finisher)
   E.entryKeys = (tpl) => tpl.blocks.flatMap((b) => (b.ex.length > 1 ? b.ex.map((_, i) => `${b.slot}${i + 1}`) : [b.slot]));
-  E.blockOfKey = (key) => key[0];
+  E.blockOfKey = (key) => key.replace(/\d+$/, "");
+  E.focus = (plan, id) => Object.hasOwn(plan.focuses, id) ? plan.focuses[id] : plan.focuses.full;
+  E.hasSetData = (entry) => entry.sets.some((s) => s.done || s.w != null && s.w !== "" || s.r != null && s.r !== "");
+
+  function newEntry(plan, phase, slot, ex) {
+    const presc = E.prescription(plan, phase, slot);
+    return { ex, presc, scheme: E.schemeOf(presc), sets: presc.map(() => ({ w: "", r: "", done: false })) };
+  }
+
+  E.setFocus = (plan, session, id) => {
+    if (session.completedAt || !Object.hasOwn(plan.focuses, id) || (session.focus || "full") === id) return false;
+    const blocks = E.focus(plan, id).blocks || E.template(plan, session.seq).blocks;
+    const entries = Object.fromEntries(Object.entries(session.entries).filter(([, entry]) => E.hasSetData(entry)));
+    const retained = new Set(Object.values(entries).map((entry) => entry.ex));
+    const used = new Set(Object.keys(entries).map(E.blockOfKey));
+    for (const { slot, ex } of blocks) {
+      let block = slot;
+      while (used.has(block)) block += "-next";
+      const missing = ex.filter((id) => !retained.has(id));
+      if (missing.length) used.add(block);
+      missing.forEach((id, i) => {
+        const key = missing.length > 1 ? `${block}${i + 1}` : block;
+        entries[key] = newEntry(plan, session.phase, slot, id);
+      });
+    }
+    Object.assign(session, { focus: id, entries });
+    return true;
+  };
+
+  E.swapExercise = (plan, session, key, id) => {
+    const entry = session.entries[key], next = E.exercise(plan, id);
+    if (session.completedAt || !entry || E.hasSetData(entry) || !next || entry.ex === id) return false;
+    session.entries[key] = { ...newEntry(plan, session.phase, next.slot, id), restSlot: next.slot };
+    return true;
+  };
 
   E.newSession = (plan, seq, startDate, date, now = Date.now()) => {
     const tpl = E.template(plan, seq), phase = E.phaseFor(plan, startDate, date), entries = {};
     for (const b of tpl.blocks) {
-      const presc = E.prescription(plan, phase.index, b.slot);
       b.ex.forEach((ex, i) => {
         const key = b.ex.length > 1 ? `${b.slot}${i + 1}` : b.slot;
-        entries[key] = { ex, presc, scheme: E.schemeOf(presc), sets: presc.map(() => ({ w: "", r: "", done: false })) };
+        entries[key] = newEntry(plan, phase.index, b.slot, ex);
       });
     }
     return { id: `s${now.toString(36)}`, seq, tpl: tpl.id, phase: phase.index, date, startedAt: new Date(now).toISOString(), completedAt: null, entries };

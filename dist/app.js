@@ -1,9 +1,9 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.10.29-superset";
+const VERSION = "2026.11.08-1138";
 let plan = null, state = null;
-const ui = { tab: "today", open: null, form: {}, sheet: null, rest: null, discardArmed: false, update: null };
+const ui = { tab: "today", open: null, form: {}, demo: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const today = () => E.localISO();
@@ -37,6 +37,9 @@ const colorVar = (key) => `--c:var(--${slotOf(key)})`;
 const incFor = (id) => state.inc[id] || ex(id).inc;
 const unit = (x) => (x.basis === "each" ? "lb ea" : x.basis === "added" ? "+lb" : "lb");
 const active = () => E.activeSession(state);
+const plannedFocus = (seq) => state.nextFocus?.seq === seq ? state.nextFocus.id : "full";
+const rotationLabel = (tpl) => `W${tpl.week} D${tpl.day}`;
+const focusButton = (label) => `<button class="focus-title" data-act="focus" aria-label="Change workout focus, current focus ${esc(label)}">${esc(label)} ${DOWN}</button>`;
 const phaseNow = (date = today()) => E.phaseFor(plan, state.profile.startDate, date);
 const rxText = (presc) => {
   const rir = presc[0].rir === 0 ? "to failure" : presc[0].rir >= 2 ? "2–3 in the tank" : "1–2 in the tank";
@@ -50,9 +53,17 @@ function targetsFor(session, key) {
   return { hist, t: E.liveTargets(entry, E.suggest(entry.presc, hist, incFor(entry.ex), x.basis), incFor(entry.ex)) };
 }
 function entryProgress(entry) { const d = entry.sets.filter((s) => s.done).length; return { d, of: entry.sets.length }; }
-function blockKeys(session, slot) { return Object.keys(session.entries).filter((k) => k[0] === slot); }
+function blockKeys(session, block) { return Object.keys(session.entries).filter((k) => E.blockOfKey(k) === block); }
+function blockLabel(s, block) {
+  const keys = blockKeys(s, block);
+  const swaps = keys.some((k) => s.entries[k].restSlot);
+  return swaps ? [...new Set(keys.map((k) => plan.groups[ex(s.entries[k].ex).group]))].join(" + ") : plan.slots[slotOf(block)].label;
+}
+function blockRest(s, block) {
+  return Math.max(...blockKeys(s, block).map((k) => plan.slots[s.entries[k].restSlot || slotOf(block)].rest));
+}
 function blockDone(session, slot) { return blockKeys(session, slot).every((k) => session.entries[k].sets.every((s) => s.done)); }
-function slotsOf(session) { return [...new Set(Object.keys(session.entries).map((k) => k[0]))]; }
+function slotsOf(session) { return [...new Set(Object.keys(session.entries).map(E.blockOfKey))]; }
 function minutesSince(iso) { return Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 60000)); }
 function clock(sec) { sec = Math.max(0, Math.round(sec)); return `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`; }
 
@@ -110,14 +121,18 @@ function render() {
 function todayView() {
   const d = today(), ph = phaseNow(d), s = active(), seq = s ? s.seq : E.nextSeq(state), tpl = E.template(plan, seq);
   const cycle = Math.floor(seq / plan.rotation.length) + 1;
+  const focus = E.focus(plan, s ? s.focus : plannedFocus(seq));
   const kicker = ph.preview ? `Test week. Starts ${fmtDate(state.profile.startDate, { weekday: "short", month: "short", day: "numeric" })}` : `Week ${ph.week}, month ${ph.index + 1}`;
   const stale = s && minutesSince(s.startedAt) > 12 * 60;
-  const rows = tpl.blocks.map((b) => {
-    const key = b.ex.length > 1 ? `${b.slot}1` : b.slot;
-    const ids = s ? blockKeys(s, b.slot).map((k) => s.entries[k].ex) : b.ex;
-    const presc = E.prescription(plan, s ? s.phase : ph.index, b.slot);
-    const done = s && blockDone(s, b.slot);
-    return `<div class="lineup-row ${done ? "done" : ""}" style="${colorVar(key)}"><i class="bar"></i><div><div class="name">${ids.map((i) => esc(ex(i).name)).join(" + ")}</div><div class="pat">${esc(plan.slots[b.slot].label)}${b.slot === "X" ? " · optional" : ""}</div></div><span class="rx num">${rxText(presc).sets}</span></div>`;
+  const blocks = s ? slotsOf(s).map((block) => {
+    const entries = blockKeys(s, block).map((k) => s.entries[k]);
+    return { slot: slotOf(block), ex: entries.map((e) => e.ex), presc: entries.map((e) => e.presc), label: blockLabel(s, block), done: blockDone(s, block) };
+  }) : (focus.blocks || tpl.blocks).map((b) => ({
+    ...b, presc: [E.prescription(plan, ph.index, b.slot)], label: plan.slots[b.slot].label,
+  }));
+  const rows = blocks.map((b) => {
+    const sets = [...new Set(b.presc.map((p) => rxText(p).sets))].join(" + ");
+    return `<div class="lineup-row ${b.done ? "done" : ""}" style="${colorVar(b.slot)}"><i class="bar"></i><div><div class="name">${b.ex.map((i) => esc(ex(i).name)).join(" + ")}</div><div class="pat">${esc(b.label)}${b.slot === "X" ? " · optional" : ""}</div></div><span class="rx num">${sets}</span></div>`;
   }).join("");
   const progress = s ? Object.values(s.entries).reduce((a, e) => a + e.sets.filter((x) => x.done).length, 0) : 0;
   const total = s ? Object.values(s.entries).reduce((a, e) => a + e.sets.length, 0) : 0;
@@ -128,11 +143,11 @@ function todayView() {
   ${installHint()}${updateBanner()}
   ${stale ? `<div class="banner"><p>You have an unfinished workout from ${fmtDate(s.date)}.</p><div class="acts"><button class="pill" data-act="resume">Resume</button><button class="pill" data-act="end">Save as finished</button><button class="pill" data-act="discard-sheet">Discard</button></div></div>` : ""}
   <section class="hero" aria-label="Today's workout">
-    <div class="hero-top"><div><div class="hero-kicker">${kicker}</div><h2>Full body ${tpl.id.replace("W", "· W").replace("D", " D")}</h2></div>
+    <div class="hero-top"><div><div class="hero-kicker">${kicker}</div><h2>${focusButton(`${focus.label} · ${rotationLabel(tpl)}`)}</h2></div>
       ${s ? `<span class="tag live">In progress</span>` : `<span class="tag">${esc(ph.name)}</span>`}</div>
     <div class="lineup">${rows}</div>
     <button class="cta" data-act="${s ? "resume" : "start"}">${s ? `Resume workout · ${progress}/${total} sets` : "Start workout"}</button>
-    <div class="hero-foot"><span>${cycle > 1 ? `Cycle ${cycle} · ` : ""}Session ${(seq % plan.rotation.length) + 1} of ${plan.rotation.length}</span><span>About 55 min</span></div>
+    <div class="hero-foot"><span>${cycle > 1 ? `Cycle ${cycle} · ` : ""}Session ${(seq % plan.rotation.length) + 1} of ${plan.rotation.length}</span><span>${s && s.focusChanged ? "Includes saved work" : `About ${focus.minutes} min`}</span></div>
   </section>
   ${!s && nextDay && !state.profile.days.includes(E.parse(d).getDay()) ? `<p class="foot" style="margin:10px 4px 0">Rest day on your schedule. Next planned session: ${fmtDate(nextDay, { weekday: "long" })}. Walking counts.</p>` : ""}
   ${dailySection(d)}
@@ -152,7 +167,7 @@ function dailySection(d) {
   const done = state.sessions.filter((s) => s.completedAt && s.date === sel);
   const workouts = done.map((s) => {
     const sets = Object.values(s.entries).reduce((a, e) => a + E.doneSets(e).length, 0), mins = Math.round((Date.parse(s.completedAt) - Date.parse(s.startedAt)) / 60000);
-    return `<div class="row"><span class="dot-c" style="--c:var(--D)"></span><span class="grow">Full body ${esc(s.tpl)}<div class="sub">${plural(sets, "set")}${mins > 0 && mins < 300 ? `, ${mins} min` : ""}${s.ended ? ", ended early" : ""}</div></span></div>`;
+    return `<div class="row"><span class="dot-c" style="--c:var(--D)"></span><span class="grow">${esc(E.focus(plan, s.focus).label)} · ${rotationLabel(E.template(plan, s.seq))}<div class="sub">${plural(sets, "set")}${mins > 0 && mins < 300 ? `, ${mins} min` : ""}${s.ended ? ", ended early" : ""}</div></span></div>`;
   }).join("");
   return `<div class="section"><h2>${isToday ? "Daily" : esc(fmtDate(sel, { weekday: "long", month: "short", day: "numeric" }))}</h2>${aside}</div>
   ${tiles(sel)}
@@ -190,13 +205,13 @@ function renderWorkout() {
   if (!s || !ui.workoutOpen) { root.hidden = true; root.innerHTML = ""; keepAwake(false); return; }
   const scroll = root.scrollTop;
   root.hidden = false;
-  const tpl = plan.rotation.find((t) => t.id === s.tpl), slots = slotsOf(s);
+  const tpl = E.template(plan, s.seq), slots = slotsOf(s);
   if (!ui.open || !s.entries[blockKeys(s, ui.open)[0]]) ui.open = slots.find((sl) => !blockDone(s, sl)) || slots[0];
-  const strip = slots.map((sl) => { const ks = blockKeys(s, sl), all = ks.reduce((a, k) => a + s.entries[k].sets.length, 0), d = ks.reduce((a, k) => a + entryProgress(s.entries[k]).d, 0); return `<i style="--c:var(--${sl});--p:${(d / all) * 100}%"></i>`; }).join("");
+  const strip = slots.map((sl) => { const ks = blockKeys(s, sl), all = ks.reduce((a, k) => a + s.entries[k].sets.length, 0), d = ks.reduce((a, k) => a + entryProgress(s.entries[k]).d, 0); return `<i style="${colorVar(sl)};--p:${(d / all) * 100}%"></i>`; }).join("");
   root.innerHTML = `
     <div class="wk-bar"><div class="wk-row">
       <button class="round-btn" data-act="minimize" aria-label="Back to Today">${DOWN}</button>
-      <div class="wk-title"><b>Full body · ${tpl.id}</b><span class="num" id="elapsed">${minutesSince(s.startedAt)} min</span></div>
+      <div class="wk-title"><b>${focusButton(`${E.focus(plan, s.focus).label} · ${rotationLabel(tpl)}`)}</b><span class="num" id="elapsed">${minutesSince(s.startedAt)} min</span></div>
       <button class="round-btn" data-act="wk-menu" aria-label="Workout options">${MORE}</button></div>
       <div class="strip">${strip}</div></div>
     <div class="wk-body">${slots.map((sl) => cardHTML(s, sl)).join("")}
@@ -208,27 +223,41 @@ function renderWorkout() {
 function cardHTML(s, slot) {
   const keys = blockKeys(s, slot), first = s.entries[keys[0]], x = ex(first.ex), open = ui.open === slot;
   const done = keys.reduce((a, k) => a + entryProgress(s.entries[k]).d, 0), all = keys.reduce((a, k) => a + s.entries[k].sets.length, 0);
-  const names = keys.map((k) => ex(s.entries[k].ex).name).join(" + ");
-  const head = `<button class="card-head" data-act="open" data-slot="${slot}"><i class="bar"></i><span><span class="pat">${esc(plan.slots[slot].label)}</span><span class="name" style="display:block">${esc(names)}</span></span><span class="stat num ${done === all ? "ok" : ""}">${done === all ? "Done" : `${done}/${all}`}</span></button>`;
-  if (!open) return `<section class="card" id="card-${slot}" style="--c:var(--${slot})">${head}</section>`;
-  const rx = rxText(first.presc);
-  const media = keys.map((k, idx) => `${keys.length > 1 ? `<div class="demo-label">${"abc"[idx]} · ${esc(ex(s.entries[k].ex).name)}</div>` : ""}${mediaHTML(s.entries[k].ex)}`).join("");
+  const names = keys.map((k) => ex(s.entries[k].ex).name).join(" + "), label = blockLabel(s, slot);
+  const head = `<button class="card-head" data-act="open" data-slot="${slot}"><i class="bar"></i><span><span class="pat">${esc(label)}</span><span class="name" style="display:block">${esc(names)}</span></span><span class="stat num ${done === all ? "ok" : ""}">${done === all ? "Done" : `${done}/${all}`}</span></button>`;
+  if (!open) return `<section class="card" id="card-${slot}" style="${colorVar(slot)}">${head}</section>`;
+  const prescriptions = keys.map((k) => rxText(s.entries[k].presc));
+  const sameRx = prescriptions.every((rx) => rx.sets === prescriptions[0].sets && rx.rir === prescriptions[0].rir);
+  const media = demoHTML(s, slot, keys);
   const isPair = keys.length > 1;
+  const showForm = ui.form[slot] ?? keys.some((k) => !ex(s.entries[k].ex).video);
   const lasts = keys.map((k) => lastHTML(s, k, isPair)).join("");
-  return `<section class="card open" id="card-${slot}" style="--c:var(--${slot})">${head}<div class="card-body">
-    ${media}
-    <div class="ex-title"><div class="pat">${esc(plan.slots[slot].label)}${slot === "X" ? " · optional" : ""}</div><h3>${esc(names)}</h3>${isPair ? `<div class="ss">Superset: do <b>a</b> ${esc(ex(s.entries[keys[0]].ex).name.toLowerCase())}, then <b>b</b> ${esc(ex(s.entries[keys[1]].ex).name.toLowerCase())}, then rest.</div>` : x.uni ? `<div class="ss">Reps are per side.</div>` : ""}</div>
-    <div class="rx-line"><span class="tag num">${rx.sets}</span><span class="tag">${rx.rir}</span><span class="tag num">Rest ${clock(plan.slots[slot].rest)}</span></div>
+  return `<section class="card open" id="card-${slot}" style="${colorVar(slot)}">${head}<div class="card-body">
+    ${media ? `<div class="demo">${media}</div>` : ""}
+    <div class="ex-title ${media ? "" : "no-media"}"><div class="pat">${esc(label)}${slotOf(slot) === "X" ? " · optional" : ""}</div><h3>${esc(names)}</h3>${isPair ? `<div class="ss">Superset: do ${keys.map((k, i) => {
+      const lift = ex(s.entries[k].ex);
+      return `<b>${"ab"[i]}</b> ${esc(lift.name.toLowerCase())}${lift.uni ? " (reps per side)" : ""}`;
+    }).join(", then ")}, then rest.</div>` : x.uni ? `<div class="ss">Reps are per side.</div>` : ""}</div>
+    <div class="rx-line">${(sameRx ? prescriptions.slice(0, 1) : prescriptions).map((rx, i) => `<span class="tag num">${sameRx ? "" : `${"ab"[i]} · `}${rx.sets} · ${rx.rir}</span>`).join("")}<span class="tag num">Rest ${clock(blockRest(s, slot))}</span></div>
     ${lasts}
     <div class="sets"><div class="sets-head"><span>Set</span><span>Weight</span><span style="text-align:center">Reps</span><span></span></div>${setRows(s, keys)}</div>
-    <div class="card-tools"><button class="pill" data-act="form" data-slot="${slot}">${ui.form[slot] ? "Hide form" : "Form tips"}</button><button class="pill" data-act="swap" data-slot="${slot}">Swap</button><button class="pill" data-act="history" data-ex="${keys.map((k) => s.entries[k].ex).join(",")}">History</button></div>
-    ${ui.form[slot] ? keys.map((k) => formHTML(s.entries[k].ex)).join("") : ""}
+    <div class="card-tools"><button class="pill" data-act="form" data-slot="${slot}">${showForm ? "Hide form" : "Form tips"}</button><button class="pill" data-act="swap" data-slot="${slot}">Swap</button><button class="pill" data-act="history" data-ex="${keys.map((k) => s.entries[k].ex).join(",")}">History</button></div>
+    ${showForm ? keys.map((k) => formHTML(s.entries[k].ex)).join("") : ""}
   </div></section>`;
 }
-function mediaHTML(id) {
-  const x = ex(id), still = matchMedia("(prefers-reduced-motion: reduce)").matches, step = x.frames === 3 ? 0.9 : 1.1;
-  return `<div class="media ${still ? "" : "play"} ${x.frames === 2 ? "f2" : ""}" style="--dur:${step * x.frames}s;--step:${step}s" data-act="media" role="img" aria-label="${esc(x.name)} demonstration">
-    ${Array.from({ length: x.frames }, (_, i) => `<img src="media/${x.id}-${i}.webp" alt="" style="--i:${i}" decoding="async">`).join("")}<div class="shade"></div></div>`;
+function demoHTML(s, slot, keys) {
+  const lifts = keys.map((k) => ex(s.entries[k].ex));
+  const preferred = ui.demo[slot] ?? 0;
+  const selected = lifts[preferred]?.video ? preferred : lifts.findIndex((lift) => lift.video);
+  if (selected < 0) return "";
+  const toggle = lifts.length > 1 ? `<div class="demo-toggle" role="group" aria-label="Exercise demo">
+    ${lifts.map((lift, i) => `<button data-act="demo" data-slot="${slot}" data-v="${i}" aria-label="${"AB"[i]}. ${esc(lift.name)} demonstration" aria-pressed="${i === selected}" ${lift.video ? "" : "disabled"}>${"AB"[i]}</button>`).join("")}
+  </div>` : "";
+  return mediaHTML(lifts[selected]) + toggle;
+}
+function mediaHTML(x) {
+  const video = esc(x.video), title = esc(x.name);
+  return `<div class="media video-panel"><button class="video-play" data-act="play-video" data-video="${video}" aria-label="Play ${title} video"><span aria-hidden="true">▶</span><b>Watch ${title}</b><small>Real exercise video · Requires internet</small></button><a class="video-link" href="https://www.youtube.com/watch?v=${video}" target="_blank" rel="noopener noreferrer">Open video on YouTube ↗</a></div>`;
 }
 function lastHTML(s, key, isPair) {
   const entry = s.entries[key], { hist, t } = targetsFor(s, key), last = hist[0];
@@ -283,8 +312,9 @@ setInterval(() => {
 /* ================= workout actions ================= */
 function startWorkout() {
   const seq = E.nextSeq(state), s = E.newSession(plan, seq, state.profile.startDate, today());
+  E.setFocus(plan, s, plannedFocus(seq));
   state.sessions.push(s); save();
-  ui.workoutOpen = true; ui.open = null; ui.form = {};
+  ui.workoutOpen = true; ui.open = null; ui.form = {}; ui.demo = {};
   unlockAudio(); render();
 }
 function setField(key, i, f, v) {
@@ -294,26 +324,26 @@ function setField(key, i, f, v) {
   save();
 }
 function check(key, i) {
-  const s = active(), entry = s.entries[key], st = entry.sets[i], x = ex(entry.ex);
+  const s = active(), entry = s.entries[key], st = entry.sets[i];
   unlockAudio();
-  if (st.done) { st.done = false; save(); refreshCard(slotOf(key)); toast("Set unchecked"); return; }
+  if (st.done) { st.done = false; save(); refreshCard(E.blockOfKey(key)); toast("Set unchecked"); return; }
   const tg = targetsFor(s, key).t.sets[i];
   const w = n(st.w) ?? tg.w, r = n(st.r) ?? tg.r;
   if (w == null) { const inp = $(`input[data-k="${key}"][data-i="${i}"][data-f="w"]`); inp?.focus(); toast("Enter the weight you used"); return; }
   if (!r) { toast("Enter your reps"); return; }
   Object.assign(st, { w, r, done: true });
   haptic(); save();
-  const slot = slotOf(key), keys = blockKeys(s, slot);
+  const slot = E.blockOfKey(key), keys = blockKeys(s, slot);
   // superset: rest only after the pair is done for this round
   const pairDone = keys.every((k) => !s.entries[k].sets[i] || s.entries[k].sets[i].done);
   if (blockDone(s, slot)) {
     ui.rest = null;
     const nextSlot = slotsOf(s).find((sl) => !blockDone(s, sl));
-    if (nextSlot) { startRest(plan.slots[slot].rest, ex(blockKeys(s, nextSlot).map((k) => s.entries[k].ex)[0]).name); setTimeout(() => { ui.open = nextSlot; renderWorkout(); $(`#card-${nextSlot}`)?.scrollIntoView({ behavior: "smooth", block: "start" }); }, 450); }
+    if (nextSlot) { startRest(blockRest(s, slot), ex(blockKeys(s, nextSlot).map((k) => s.entries[k].ex)[0]).name); setTimeout(() => { if (active() !== s || !ui.workoutOpen || !blockKeys(s, nextSlot).length) return; ui.open = nextSlot; renderWorkout(); $(`#card-${nextSlot}`)?.scrollIntoView({ behavior: "smooth", block: "start" }); }, 450); }
     else toast("Every set done. Finish when you're ready.");
     refreshCard(slot);
   } else {
-    if (pairDone) startRest(plan.slots[slot].rest, keys.length > 1 ? `Round ${i + 2} next` : `Set ${i + 2} next`);
+    if (pairDone) startRest(blockRest(s, slot), keys.length > 1 ? `Round ${i + 2} next` : `Set ${i + 2} next`);
     refreshCard(slot);
   }
 }
@@ -322,7 +352,7 @@ function refreshCard(slot) {
   if (!s || !el) return renderWorkout();
   el.outerHTML = cardHTML(s, slot);
   const strip = $(".strip");
-  if (strip) strip.outerHTML = `<div class="strip">${slotsOf(s).map((sl) => { const ks = blockKeys(s, sl), all = ks.reduce((a, k) => a + s.entries[k].sets.length, 0), d = ks.reduce((a, k) => a + entryProgress(s.entries[k]).d, 0); return `<i style="--c:var(--${sl});--p:${(d / all) * 100}%"></i>`; }).join("")}</div>`;
+  if (strip) strip.outerHTML = `<div class="strip">${slotsOf(s).map((sl) => { const ks = blockKeys(s, sl), all = ks.reduce((a, k) => a + s.entries[k].sets.length, 0), d = ks.reduce((a, k) => a + entryProgress(s.entries[k]).d, 0); return `<i style="${colorVar(sl)};--p:${(d / all) * 100}%"></i>`; }).join("")}</div>`;
   renderRest();
 }
 function finishWorkout(early) {
@@ -369,14 +399,53 @@ function metricSheet(k) {
     <div class="stack"><button class="cta" data-act="metric-save" data-k="${k}">Save</button>${l[k] != null ? `<button class="cta ghost small" data-act="metric-clear" data-k="${k}">Clear this entry</button>` : ""}</div>`);
   const inp = $("#metric"); inp.focus(); inp.select?.();
 }
-function swapSheet(slot) {
-  const s = active(), keys = blockKeys(s, slot);
-  const groups = keys.map((k) => {
-    const cur = s.entries[k].ex, pool = slot === "F" ? plan.pools[ex(cur).arm === "bi" ? "Fb" : "Ft"] : plan.pools[slot];
-    return `<div class="section" style="margin-top:14px"><h2 style="font-size:17px">Instead of ${esc(ex(cur).name)}</h2></div><div class="group">${pool.filter((id) => id !== cur).map((id) => `<button class="row" style="width:100%;text-align:left" data-act="do-swap" data-k="${k}" data-ex="${id}"><span class="grow">${esc(ex(id).name)}<div class="sub">${E.exposures(state, id).length ? `Last: ${setsTxt(E.exposures(state, id)[0].entry)}` : "Not logged yet"}</div></span>${CHEV}</button>`).join("")}</div>`;
-  }).join("");
-  openSheet(`<h2>Swap exercise</h2><p class="lede">Machine taken? Pick another ${esc(plan.slots[slot].label.toLowerCase())} move — its own history comes with it.</p>${groups}`);
+function focusSheet() {
+  const s = active(), seq = s?.seq ?? E.nextSeq(state);
+  const current = (s ? s.focus : plannedFocus(seq)) || "full";
+  const saved = s && Object.values(s.entries).some(E.hasSetData);
+  openSheet(`<h2>Workout focus</h2><p class="lede">${rotationLabel(E.template(plan, seq))}. ${saved ? "Exercises with entered sets will stay. The rest of the lineup will change." : "Choose what to train for this session."}</p>
+    <div class="group">${Object.entries(plan.focuses).map(([id, focus]) => `<button class="row sheet-row" data-act="set-focus" data-v="${id}" aria-pressed="${id === current}"><span class="grow">${esc(focus.label)}<span class="sub">${esc(focus.summary)}</span></span>${id === current ? '<span class="tag live">Selected</span>' : CHEV}</button>`).join("")}</div>`);
 }
+function setFocus(id) {
+  const s = active(), seq = s?.seq ?? E.nextSeq(state);
+  if (!Object.hasOwn(plan.focuses, id)) return;
+  if (s && E.setFocus(plan, s, id)) {
+    s.focusChanged = Object.values(s.entries).some(E.hasSetData);
+    ui.open = null; ui.form = {}; ui.demo = {}; ui.rest = null;
+    $("#workout").scrollTop = 0;
+  }
+  state.nextFocus = { seq, id };
+  save(); closeSheet(); render();
+}
+function swapSheet(block, key, group) {
+  const s = active(); if (!s) return;
+  const keys = blockKeys(s, block), available = keys.filter((k) => !E.hasSetData(s.entries[k]));
+  if (!available.length) return toast("This exercise has entered sets");
+  key = available.includes(key) ? key : available[0];
+  const cur = ex(s.entries[key].ex);
+  group ??= cur.group;
+  const gear = [...new Set(plan.exercises.map((x) => x.gear))].sort();
+  const options = (entries, selected) => entries.map(([id, label]) => `<option value="${esc(id)}" ${id === selected ? "selected" : ""}>${esc(label)}</option>`).join("");
+  openSheet(`<h2>Swap exercise</h2><p class="lede">Replace ${esc(cur.name)}. Each exercise keeps its own history and set targets.</p>
+    ${keys.length > 1 ? `<div class="chips swap-filters">${keys.map((k) => `<button class="pill" data-act="swap" data-slot="${block}" data-k="${k}" aria-pressed="${k === key}" ${available.includes(k) ? "" : "disabled"}>${esc(ex(s.entries[k].ex).name)}</button>`).join("")}</div>` : ""}
+    <div class="swap-selects">
+      <label>Muscle group<select id="swap-group">${options([["all", "All groups"], ...Object.entries(plan.groups)], group)}</select></label>
+      <label>Equipment<select id="swap-gear">${options([["all", "All equipment"], ...gear.map((x) => [x, x])], "all")}</select></label>
+    </div>
+    <div class="group" id="swap-list" data-k="${key}"></div>`);
+  renderSwapList();
+}
+function renderSwapList() {
+  const list = $("#swap-list"), key = list.dataset.k, cur = active()?.entries[key]?.ex;
+  const group = $("#swap-group").value, gear = $("#swap-gear").value;
+  const choices = plan.exercises.filter((x) => (group === "all" || x.group === group) && (gear === "all" || x.gear === gear));
+  list.innerHTML = choices.map((x) => {
+    const last = E.exposures(state, x.id)[0];
+    const detail = [plan.groups[x.group], x.gear, last ? `Last ${setsTxt(last.entry)}` : "New to your log"].join(" · ");
+    return `<button class="row sheet-row" data-act="do-swap" data-k="${key}" data-ex="${x.id}" ${x.id === cur ? "disabled" : ""}><span class="grow">${esc(x.name)}<span class="sub">${esc(detail)}</span></span>${x.id === cur ? '<span class="tag live">Current</span>' : CHEV}</button>`;
+  }).join("") || '<div class="row muted">No exercises match these filters.</div>';
+}
+
 function historySheet(ids) {
   openSheet(ids.split(",").map((id, i) => {
     const hist = E.exposures(state, id);
@@ -390,7 +459,7 @@ function menuSheet() {
 }
 function sessionPreview(seq) {
   const tpl = plan.rotation[seq];
-  openSheet(`<h2>Full body · ${tpl.id}</h2><p class="lede">Week ${tpl.week}, day ${tpl.day} of the 3-week rotation.</p>
+  openSheet(`<h2>Full body</h2><p class="lede">${rotationLabel(tpl)} of the 3-week rotation.</p>
     <div class="group">${tpl.blocks.map((b) => `<div class="row" style="${colorVar(b.slot)}"><span class="dot-c"></span><span class="grow">${b.ex.map((i) => esc(ex(i).name)).join(" + ")}<div class="sub">${esc(plan.slots[b.slot].label)}${b.slot === "X" ? " · optional" : ""}</div></span></div>`).join("")}</div>`);
 }
 function settingsSheet() {
@@ -618,11 +687,34 @@ const actions = {
     st.r = Math.max(0, base + Number(b.dataset.d)); save();
     const inp = $(`input[data-k="${key}"][data-i="${i}"][data-f="r"]`); if (inp) inp.value = st.r;
   },
-  form: (b) => { ui.form[b.dataset.slot] = !ui.form[b.dataset.slot]; refreshCard(b.dataset.slot); },
-  swap: (b) => { const s = active(); if (blockKeys(s, b.dataset.slot).some((k) => s.entries[k].sets.some((x) => x.done))) return toast("Uncheck this exercise's sets to swap it"); swapSheet(b.dataset.slot); },
-  "do-swap": (b) => { const s = active(), e = s.entries[b.dataset.k]; e.ex = b.dataset.ex; e.sets = e.presc.map(() => ({ w: "", r: "", done: false })); save(); closeSheet(); refreshCard(slotOf(b.dataset.k)); toast(`Swapped in ${ex(b.dataset.ex).name}`); },
+  form: (b) => { ui.form[b.dataset.slot] = b.textContent === "Form tips"; refreshCard(b.dataset.slot); },
+  focus: () => focusSheet(),
+  "set-focus": (b) => setFocus(b.dataset.v),
+  swap: (b) => swapSheet(b.dataset.slot, b.dataset.k, b.dataset.group),
+  "do-swap": (b) => {
+    const s = active(), { k, ex: id } = b.dataset;
+    if (!s || !E.swapExercise(plan, s, k, id)) return;
+    save(); closeSheet(); render(); toast(`Swapped in ${ex(id).name}`);
+  },
   history: (b) => historySheet(b.dataset.ex),
-  media: (b) => b.classList.toggle("play"),
+  "play-video": (b) => {
+    const panel = b.closest(".video-panel"), id = b.dataset.video;
+    if (!panel || !/^[A-Za-z0-9_-]{11}$/.test(id)) return;
+    const frame = document.createElement("iframe");
+    frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1`;
+    frame.title = b.getAttribute("aria-label");
+    frame.allow = "autoplay; encrypted-media; picture-in-picture";
+    frame.allowFullscreen = true;
+    b.replaceWith(frame);
+  },
+  demo: (b) => {
+    const s = active(), slot = b.dataset.slot, v = Number(b.dataset.v);
+    const demo = b.closest(".demo");
+    if (!s || !demo || b.getAttribute("aria-pressed") === "true") return;
+    ui.demo[slot] = v;
+    demo.innerHTML = demoHTML(s, slot, blockKeys(s, slot));
+    demo.querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
+  },
   "wk-menu": () => menuSheet(),
   finish: () => finishWorkout(false),
   end: () => { closeSheet(); finishWorkout(true); },
@@ -666,6 +758,7 @@ document.addEventListener("click", (e) => {
 document.addEventListener("change", (e) => {
   const i = e.target;
   if (i.id === "restore") return restore(i);
+  if (i.id === "swap-group" || i.id === "swap-gear") return renderSwapList();
   if (i.dataset.f && i.dataset.k) setField(i.dataset.k, +i.dataset.i, i.dataset.f, i.value.replace(",", "."));
 });
 document.addEventListener("keydown", (e) => {

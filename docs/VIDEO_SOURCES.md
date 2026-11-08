@@ -1,0 +1,46 @@
+# Exercise video sources
+
+Titles and creators verified via YouTube oEmbed. These are third-party videos; individual clips and presenter identities have not all been visually reviewed. Embedding may be restricted by the creator.
+
+- Leg press: [How To Do A 45 Degree Leg Press](https://www.youtube.com/watch?v=q4W4_VJbKW0) — PureGym
+- Hack squat: [How To Do A MACHINE HACK SQUAT | Exercise Demonstration Video and Guide](https://www.youtube.com/watch?v=VY8ko6ecfso) — Live Lean TV Daily Exercises
+- Dumbbell split squat: [Dumbbell Split Squat](https://www.youtube.com/watch?v=Wcmg-3iHwjQ) — OPEX Fitness
+- Goblet squat: [How To Do A DUMBBELL GOBLET SQUAT | Exercise Demonstration Video and Guide](https://www.youtube.com/watch?v=Xjo_fY9Hl9w) — Live Lean TV Daily Exercises
+- Dumbbell Romanian deadlift: [How to do a Dumbbell Romanian Deadlift | Proper Form & Technique | NASM](https://www.youtube.com/watch?v=QFbZevA7dps) — National Academy of Sports Medicine (NASM)
+- Barbell hip thrust: [HOW TO BARBELL HIP THRUST | Coach Kelly Cues](https://www.youtube.com/watch?v=4hYRM_60BD4) — Kelly Matthews
+- 45° back extension: [How To Do a 45 Degree Back Extension (Build a More Resilient Lower Back)](https://www.youtube.com/watch?v=F6xrarzGl-g) — Ruben Parada
+- Seated dumbbell press: [How to do the SEATED DUMBBELL SHOULDER PRESS! | 2 Minute Tutorial](https://www.youtube.com/watch?v=rO_iEImwHyo) — Max Euceda
+- Machine shoulder press: [How to Perform the Machine Shoulder Press](https://www.youtube.com/watch?v=Gkk-6q7Rq-s) — Andrew Kwong (DeltaBolic)
+- Arnold press: [Dumbbell Arnold Press | How To | Proper Form & Technique](https://www.youtube.com/watch?v=TEzehbTzBD0) — FITTR
+- Dumbbell bench press: [How to Do the Flat Dumbbell Bench Press | Perfect Form in 30 Seconds](https://www.youtube.com/watch?v=M0tN99QgPyU) — All Strength Training
+- Incline dumbbell press: [How to do the INCLINE DUMBBELL BENCH PRESS! | 2 Minute Tutorial](https://www.youtube.com/watch?v=IP4oeKh1Sd4) — Max Euceda
+- Machine chest press: [Machine Chest Press](https://www.youtube.com/watch?v=NwzUje3z0qY) — Renaissance Periodization
+- Lat pulldown: [How To Do A Wide Grip Lat Pulldown](https://www.youtube.com/watch?v=7JnP8dFbS14) — PureGym
+- Seated cable row: [How to do the SEATED CABLE ROW! | 2 Minute Tutorial](https://www.youtube.com/watch?v=vwHG9Jfu4sw) — Max Euceda
+- One-arm dumbbell row: [Dumbbell One Arm Row (Bench)](https://www.youtube.com/watch?v=QHRU41-NhaU) — Outright Fitness and Performance
+- Close-grip pulldown: [How To Do A Close Grip Lat Pulldown](https://www.youtube.com/watch?v=IjoFCmLX7z0) — PureGym
+- Dumbbell curl: [How To Do The Standing Dumbbell Curl | Beachbody](https://www.youtube.com/watch?v=Iyqr-MyDqRY) — BODi
+- Hammer curl: [How to do a Dumbbell Hammer Curl](https://www.youtube.com/watch?v=CFBZ4jN1CMI) — National Academy of Sports Medicine (NASM)
+- Incline dumbbell curl: [How to do the INCLINE DUMBBELL CURL! | 2 Minute Tutorial](https://www.youtube.com/watch?v=HhHHBj3qTJ4) — Max Euceda
+- Rope pushdown: [HOW TO: Triceps Rope Pushdown 💪](https://www.youtube.com/watch?v=03RVTmYUMrU) — Gold's Gym Newburgh/Middletown
+- Overhead rope extension: [Cable Overhead Rope Triceps Extension ](https://www.youtube.com/watch?v=iB4u8yUmPnI) — NOVA Strength and Conditioning
+- Machine dip: [How To Do A MACHINE SEATED DIP | Exercise Demonstration Video and Guide](https://www.youtube.com/watch?v=pMarNxAvHPc) — Live Lean TV Daily Exercises
+- Seated dumbbell overhead extension: [¿Cómo hacer EXTENSIÓN de TRÍCEPS tras nuca con MANCUERNAS a DOS MANOS sentado en banco? ✅ #2](https://www.youtube.com/watch?v=JTczoqjnKUA) — Sergio Álvarez - El Templo de la Hipertrofia
+- Dumbbell lateral raise: [How to do the DUMBBELL LATERAL RAISE! | 2 Minute Tutorial](https://www.youtube.com/watch?v=PzsMitRdI_8) — Max Euceda
+- Seated hamstring curl: [How to do a Seated Leg Curl  | Proper Form & Technique | NASM](https://www.youtube.com/watch?v=_2Kd0d-JEUM) — National Academy of Sports Medicine (NASM)
+- Barbell bench press: [How to do the BARBELL BENCH PRESS! | 2 Minute Tutorial](https://www.youtube.com/watch?v=lWFknlOTbyM) — Max Euceda
+- Dumbbell floor press: [How To Do A Dumbbell Floor Press](https://www.youtube.com/watch?v=T0Y3OBF1bNI) — PureGym
+- Dumbbell chest fly: [Dumbbell Chest Fly | Nuffield Health](https://www.youtube.com/watch?v=WE1thwwQRRw) — Nuffield Health
+- Single-arm kettlebell floor press: [Single Arm Kettlebell Floor Press - Opex Exercise Library](https://www.youtube.com/watch?v=P_ijh09h23s) — OPEX Fitness
+- Dumbbell reverse lunge: [Dumbbell Reverse Lunge](https://www.youtube.com/watch?v=zZaXHwFf9r8) — Girls Gone Strong | Women's Health & Fitness
+- Standing dumbbell calf raise: [Standing Dumbbell Calf Raise](https://www.youtube.com/watch?v=wwy3BSUjlW4) — Testosterone Nation
+- Kettlebell goblet squat: [How to do a Kettlebell Goblet Squat](https://www.youtube.com/watch?v=MWHIs0zxkCU) — National Academy of Sports Medicine (NASM)
+- Kettlebell deadlift: [How To Do Kettlebell Deadlift | Exercise Demo](https://www.youtube.com/watch?v=m-KlB4F4bIc) — OriGym
+- Chest-supported dumbbell row: [How To Do A Chest Supported Dumbbell Row Correctly](https://www.youtube.com/watch?v=ro2vfHfD0DQ) — Jack Hanrahan Fitness 
+- One-arm kettlebell row: [How To Do One Arm Kettlebell Row | Exercise Demo](https://www.youtube.com/watch?v=WmT_rBeKnuM) — OriGym
+- Dumbbell reverse fly: [Bent Over Dumbbell Reverse Fly](https://www.youtube.com/watch?v=D5_zfFhfyzE) — ShapeSense
+- Single-arm kettlebell press: [Single Arm Kettlebell Shoulder Press](https://www.youtube.com/watch?v=YXtkmM_Gd5Q) — My PT Hub
+- Dumbbell concentration curl: [Dumbbell Concentration Curl | SFS Exercise Library](https://www.youtube.com/watch?v=DMhaqmlT1GU) — SET FOR SET
+- Lying dumbbell triceps extension: [How To Do Lying Dumbbell Tricep Extension | Exercise Demo](https://www.youtube.com/watch?v=4rI3EBpbA2U) — OriGym
+- Two-hand kettlebell curl: [Two handed horn grip kettlebell curls](https://www.youtube.com/watch?v=GHQ1-gGuT0g) — HYROX HUB
+- Kettlebell overhead triceps extension: [Kettlebell Overhead Triceps Extension](https://www.youtube.com/watch?v=Q09iNPS4LSc) — Greg Corso

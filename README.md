@@ -31,6 +31,8 @@ python3 -m http.server 47311 --directory dist   # then open http://127.0.0.1:473
 node --test tests/
 ```
 
-Media: the original 11 demos are generated monochrome sprites; the 14 newer ones are photos from
-[free-exercise-db](https://github.com/yuhonas/free-exercise-db) (public domain), graded to match.
+Exercise cards link to third-party YouTube videos for all 42 exercises. Videos load only after tapping
+Watch and require internet; use the YouTube link if the embedded player is unavailable. Titles and
+creators are listed in [VIDEO_SOURCES.md](docs/VIDEO_SOURCES.md). The original offline media remains
+in the project but is no longer shown in exercise cards.
 This is a general fitness tool, not medical advice.

@@ -17,6 +17,8 @@
   --D: #30b55c;  /* horizontal push — green 10 */
   --E: #f2f2f2;  /* pull — white 5 */
   --F: #a5a5ad;  /* arms — chrome change plates */
+  --G: #c89cf0;  /* accessory */
+  --H: #6acbc7;  /* accessory */
   --X: #636366;  /* finisher */
   --f: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", sans-serif;
   --fr: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif;
@@ -153,6 +155,11 @@ body.in-workout .tabbar, body.kb .tabbar { opacity: 0; pointer-events: none; tra
 .card.open .card-body { display: block; animation: fade 0.25s ease; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
+.demo { position: relative; }
+.demo-toggle { position: absolute; top: 10px; right: -6px; display: flex; gap: 3px; padding: 3px; border-radius: 14px; background: rgba(0, 0, 0, 0.75); }
+.demo-toggle button { min-width: 44px; min-height: 44px; border-radius: 11px; font: 700 15px var(--fr); }
+.demo-toggle button[aria-pressed="true"] { background: var(--t1); color: var(--bg); }
+.demo-toggle button:disabled { opacity: 0.4; }
 .media { position: relative; margin: 0 -16px; aspect-ratio: 4 / 3; background: #141412; overflow: hidden; }
 .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
 .media img:first-child { opacity: 1; }
@@ -327,4 +334,26 @@ body.in-workout .toast { bottom: calc(var(--bot) + 84px); }
 }
 @media (min-width: 700px) { #app { padding-top: calc(var(--top) + 28px); } }
 
-.demo-label { margin: 0 -16px; padding: 10px 16px; background: #141412; color: #fff; font-size: 14px; font-weight: 600; }
+/* Workout focus and exercise library */
+.focus-title { display: inline-flex; align-items: center; gap: 4px; padding: 0; font: inherit; text-align: inherit; }
+.focus-title svg { width: 20px; height: 20px; flex: none; }
+.rotation-label { margin-top: 2px; font-size: 13px; color: var(--t2); }
+.ex-title.no-media { margin-top: 0; }
+.sheet-row { width: 100%; text-align: left; }
+.sheet-row .sub { display: block; }
+.swap-filters { justify-content: flex-start; }
+.swap-filters .pill { height: auto; min-height: 36px; padding-block: 5px; }
+.swap-filters [aria-pressed="true"] { background: var(--t1); color: var(--bg); }
+.swap-filters :disabled { opacity: 0.5; }
+.swap-selects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 14px; }
+.swap-selects label { display: grid; gap: 4px; color: var(--t2); font-size: 13px; }
+.swap-selects select { width: 100%; min-height: 44px; padding: 0 8px; background: var(--s2); color: var(--t1); border: 1px solid var(--s3); border-radius: 12px; font: 16px var(--f); }
+
+.video-panel { display: flex; align-items: center; justify-content: center; flex-direction: column; aspect-ratio: 16 / 9; background: #171714; }
+.video-play { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; flex: 1; color: var(--t1); text-align: center; padding: 20px; }
+.video-play span { font-size: 28px; }
+.video-play b { font-size: 17px; }
+.video-play small { color: var(--t2); font-size: 13px; }
+.video-link { color: var(--t1); font-size: 13px; padding: 10px; text-decoration: underline; }
+.video-panel iframe { position: absolute; inset: 0; width: 100%; height: calc(100% - 36px); border: 0; }
+.video-panel:has(iframe) .video-link { position: absolute; bottom: 0; }

@@ -23,7 +23,46 @@ test("rotation: 9 sessions, six slots each, every pool exercise 3x, never back t
   });
   for (const [x, n] of Object.entries(counts)) assert.equal(n, 3, x);
   for (const id of Object.keys(counts)) assert.ok(E.exercise(plan, id), id);
-  for (const ex of plan.exercises) assert.ok(ex.cues.length === 3 && ex.mistake && ex.frames, ex.id);
+  for (const ex of plan.exercises) assert.ok(ex.cues.length >= 2 && ex.mistake && ex.gear && Number.isInteger(ex.frames) && ex.frames >= 0 && plan.groups[ex.group], ex.id);
+});
+
+test("changing focus keeps checked and typed sets, even when the new workout uses the same slot", () => {
+  const s = E.newSession(plan, 0, START, START);
+  const checked = s.entries.A, typed = s.entries.F1;
+  Object.assign(checked.sets[0], { w: 75, r: 8, done: true });
+  typed.sets[0].w = 0;
+
+  assert.equal(E.setFocus(plan, s, "legs"), true);
+  assert.equal(s.entries.A, checked);
+  assert.equal(s.entries.F1, typed);
+  assert.equal(s.entries["A-next"].ex, "leg_press");
+  assert.equal(s.entries.C, undefined);
+  assert.equal(E.blockOfKey("A-next"), "A-next");
+
+  assert.equal(E.setFocus(plan, s, "arms"), true);
+  assert.equal(s.entries.A, checked);
+  assert.equal(s.entries.F1, typed);
+  assert.equal(s.entries["F-next1"].ex, "dumbbell_curl");
+  assert.equal(E.blockOfKey("F-next2"), "F-next");
+  assert.equal(s.seq, 0);
+  assert.equal(s.tpl, "W1D1");
+  assert.equal(E.setFocus(plan, s, "full"), true);
+  assert.equal(s.entries.A, checked);
+  assert.equal(s.entries.F1, typed);
+  assert.equal(s.entries["F-next"].ex, plan.rotation[0].blocks[5].ex[1]);
+});
+
+test("cross-group swaps use the replacement prescription and protect entered sets", () => {
+  const s = E.newSession(plan, 0, START, E.addDays(START, 28));
+  const pair = s.entries.F1;
+  pair.sets[0].r = 10;
+  assert.equal(E.swapExercise(plan, s, "F1", "barbell_bench_press"), false);
+  assert.equal(E.swapExercise(plan, s, "F2", "barbell_bench_press"), true);
+  assert.equal(s.entries.F1, pair);
+  assert.equal(s.entries.F2.ex, "barbell_bench_press");
+  assert.deepEqual(s.entries.F2.presc, M2);
+  assert.equal(s.entries.F2.scheme, "rpt");
+  assert.equal(s.entries.F2.restSlot, "D");
 });
 
 test("phases by date: preview before start, months at day 28 and 56, month 3 continues", () => {
@@ -160,8 +199,9 @@ test("local dates never shift at night", () => {
   assert.equal(E.nextMonday("2026-10-12"), "2026-10-19");
 });
 
-test("assets: every exercise has its demo frames; app and service worker versions match", () => {
+test("assets: all declared demo frames exist; app and service worker versions match", () => {
   const fs = require("node:fs"), path = require("node:path"), dist = path.join(__dirname, "../dist");
+  for (const x of plan.exercises) assert.match(x.video, /^[A-Za-z0-9_-]{11}$/, `${x.id} video`);
   for (const x of plan.exercises) for (let i = 0; i < x.frames; i++) assert.ok(fs.existsSync(path.join(dist, "media", `${x.id}-${i}.webp`)), `${x.id}-${i}`);
   const v = (f) => fs.readFileSync(path.join(dist, f), "utf8").match(/VERSION = "([^"]+)"/)[1];
   assert.equal(v("app.js"), v("sw.js"));

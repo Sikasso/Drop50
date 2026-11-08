@@ -33,6 +33,16 @@
    "kind": "arms",
    "rest": 75
   },
+  "G": {
+   "label": "Accessory",
+   "kind": "arms",
+   "rest": 75
+  },
+  "H": {
+   "label": "Accessory",
+   "kind": "arms",
+   "rest": 75
+  },
   "X": {
    "label": "Finisher",
    "kind": "finisher",
@@ -237,7 +247,10 @@
     "Lower until hips are about to curl off the pad.",
     "Drive through the whole foot; stop just short of locking the knees."
    ],
-   "mistake": "Pelvis rolling off the pad at the bottom."
+   "mistake": "Pelvis rolling off the pad at the bottom.",
+   "group": "legs",
+   "video": "q4W4_VJbKW0",
+   "gear": "Machine"
   },
   {
    "id": "hack_squat",
@@ -252,7 +265,10 @@
     "Sit straight down, knees tracking over toes.",
     "Stand by pushing the floor away; keep hips on the pad."
    ],
-   "mistake": "Heels lifting or knees caving in on the way up."
+   "mistake": "Heels lifting or knees caving in on the way up.",
+   "group": "legs",
+   "video": "VY8ko6ecfso",
+   "gear": "Machine"
   },
   {
    "id": "split_squat",
@@ -267,7 +283,10 @@
     "Drop the back knee straight down; front knee over toes.",
     "Push through the front foot. Do all reps, then switch legs."
    ],
-   "mistake": "Narrow tightrope stance that kills balance."
+   "mistake": "Narrow tightrope stance that kills balance.",
+   "group": "legs",
+   "video": "Wcmg-3iHwjQ",
+   "gear": "Dumbbell"
   },
   {
    "id": "goblet_squat",
@@ -282,7 +301,10 @@
     "Sit between your hips, knees tracking over toes.",
     "Stand tall without letting the chest drop."
    ],
-   "mistake": "Heels lifting or knees collapsing inward."
+   "mistake": "Heels lifting or knees collapsing inward.",
+   "group": "legs",
+   "video": "Xjo_fY9Hl9w",
+   "gear": "Dumbbell"
   },
   {
    "id": "romanian_deadlift",
@@ -296,7 +318,10 @@
     "Push hips back until you feel a strong hamstring stretch.",
     "Stand by driving the hips forward; squeeze glutes at the top."
    ],
-   "mistake": "Rounding the back to reach lower."
+   "mistake": "Rounding the back to reach lower.",
+   "group": "legs",
+   "video": "QFbZevA7dps",
+   "gear": "Dumbbell"
   },
   {
    "id": "hip_thrust",
@@ -310,7 +335,10 @@
     "Tuck the chin and ribs; drive through the heels.",
     "Lock out with glutes, pause one second, lower under control."
    ],
-   "mistake": "Arching the lower back instead of extending the hips."
+   "mistake": "Arching the lower back instead of extending the hips.",
+   "group": "legs",
+   "video": "4hYRM_60BD4",
+   "gear": "Barbell"
   },
   {
    "id": "back_extension",
@@ -324,7 +352,10 @@
     "Hinge down with a long spine; hold a plate to add load.",
     "Rise until body is in a straight line — no hyperextending."
    ],
-   "mistake": "Swinging up past straight and cranking the low back."
+   "mistake": "Swinging up past straight and cranking the low back.",
+   "group": "legs",
+   "video": "F6xrarzGl-g",
+   "gear": "Machine"
   },
   {
    "id": "dumbbell_overhead_press",
@@ -338,7 +369,10 @@
     "Brace ribs down before every rep.",
     "Press up and slightly in; lower to ear level."
    ],
-   "mistake": "Arching back so it turns into an incline press."
+   "mistake": "Arching back so it turns into an incline press.",
+   "group": "shoulders",
+   "video": "rO_iEImwHyo",
+   "gear": "Dumbbell"
   },
   {
    "id": "machine_shoulder_press",
@@ -352,7 +386,10 @@
     "Back flat on the pad, core braced.",
     "Press without shrugging; control the return."
    ],
-   "mistake": "Seat too low, which pinches the shoulders."
+   "mistake": "Seat too low, which pinches the shoulders.",
+   "group": "shoulders",
+   "video": "Gkk-6q7Rq-s",
+   "gear": "Machine"
   },
   {
    "id": "arnold_press",
@@ -366,7 +403,10 @@
     "Rotate palms forward as you press up.",
     "Reverse the rotation on the way down."
    ],
-   "mistake": "Rushing the rotation and losing control at the top."
+   "mistake": "Rushing the rotation and losing control at the top.",
+   "group": "shoulders",
+   "video": "TEzehbTzBD0",
+   "gear": "Dumbbell"
   },
   {
    "id": "dumbbell_bench_press",
@@ -380,7 +420,10 @@
     "Lower to mid-chest, elbows about 45° from your body.",
     "Press up without bouncing."
    ],
-   "mistake": "Elbows flared straight out to the sides."
+   "mistake": "Elbows flared straight out to the sides.",
+   "group": "chest",
+   "video": "M0tN99QgPyU",
+   "gear": "Dumbbell"
   },
   {
    "id": "incline_dumbbell_press",
@@ -394,7 +437,10 @@
     "Lower to upper chest with forearms vertical.",
     "Press up and slightly together."
    ],
-   "mistake": "Bench too steep, turning it into a shoulder press."
+   "mistake": "Bench too steep, turning it into a shoulder press.",
+   "group": "chest",
+   "video": "IP4oeKh1Sd4",
+   "gear": "Dumbbell"
   },
   {
    "id": "machine_chest_press",
@@ -408,7 +454,10 @@
     "Shoulder blades back against the pad.",
     "Press out smoothly; let the stack touch down lightly."
    ],
-   "mistake": "Shoulders rolling forward off the pad."
+   "mistake": "Shoulders rolling forward off the pad.",
+   "group": "chest",
+   "video": "NwzUje3z0qY",
+   "gear": "Machine"
   },
   {
    "id": "lat_pulldown",
@@ -422,7 +471,10 @@
     "Drive elbows down to your sides, bar to upper chest.",
     "Let arms go long at the top without shrugging."
    ],
-   "mistake": "Leaning way back and swinging the weight."
+   "mistake": "Leaning way back and swinging the weight.",
+   "group": "back",
+   "video": "7JnP8dFbS14",
+   "gear": "Cable"
   },
   {
    "id": "seated_cable_row",
@@ -436,7 +488,10 @@
     "Pull elbows to your waist and pause.",
     "Reach forward under control without rounding."
    ],
-   "mistake": "Rocking the torso to move the stack."
+   "mistake": "Rocking the torso to move the stack.",
+   "group": "back",
+   "video": "vwHG9Jfu4sw",
+   "gear": "Cable"
   },
   {
    "id": "one_arm_dumbbell_row",
@@ -451,7 +506,10 @@
     "Pull the dumbbell toward your hip.",
     "Lower to a full stretch. All reps, then switch."
    ],
-   "mistake": "Twisting the torso to heave the weight."
+   "mistake": "Twisting the torso to heave the weight.",
+   "group": "back",
+   "video": "QHRU41-NhaU",
+   "gear": "Dumbbell"
   },
   {
    "id": "close_grip_pulldown",
@@ -466,7 +524,10 @@
     "Pull to upper chest, elbows tight.",
     "Control the bar back up."
    ],
-   "mistake": "Pulling with the arms instead of the back."
+   "mistake": "Pulling with the arms instead of the back.",
+   "group": "back",
+   "video": "IjoFCmLX7z0",
+   "gear": "Cable"
   },
   {
    "id": "dumbbell_curl",
@@ -481,7 +542,10 @@
     "Curl without letting the elbows drift forward.",
     "Lower all the way under control."
    ],
-   "mistake": "Rocking the torso for momentum."
+   "mistake": "Rocking the torso for momentum.",
+   "group": "biceps",
+   "video": "Iyqr-MyDqRY",
+   "gear": "Dumbbell"
   },
   {
    "id": "hammer_curl",
@@ -496,7 +560,10 @@
     "Elbows stay at your sides.",
     "Squeeze at the top, lower slowly."
    ],
-   "mistake": "Swinging the dumbbells up."
+   "mistake": "Swinging the dumbbells up.",
+   "group": "biceps",
+   "video": "CFBZ4jN1CMI",
+   "gear": "Dumbbell"
   },
   {
    "id": "incline_dumbbell_curl",
@@ -511,7 +578,10 @@
     "Curl without moving the upper arm forward.",
     "Full stretch at the bottom of every rep."
    ],
-   "mistake": "Shoulders rolling forward to cheat the curl."
+   "mistake": "Shoulders rolling forward to cheat the curl.",
+   "group": "biceps",
+   "video": "HhHHBj3qTJ4",
+   "gear": "Dumbbell"
   },
   {
    "id": "rope_pushdown",
@@ -526,7 +596,10 @@
     "Push down and spread the rope at the bottom.",
     "Control it back to 90° at the elbow."
    ],
-   "mistake": "Elbows flaring and shoulders taking over."
+   "mistake": "Elbows flaring and shoulders taking over.",
+   "group": "triceps",
+   "video": "03RVTmYUMrU",
+   "gear": "Cable"
   },
   {
    "id": "overhead_rope_extension",
@@ -541,7 +614,10 @@
     "Elbows point forward, upper arms still.",
     "Extend fully overhead, then stretch back."
    ],
-   "mistake": "Elbows flaring wide."
+   "mistake": "Elbows flaring wide.",
+   "group": "triceps",
+   "video": "iB4u8yUmPnI",
+   "gear": "Cable"
   },
   {
    "id": "machine_dip",
@@ -556,7 +632,10 @@
     "Press down until arms are straight.",
     "Return slowly to about 90° at the elbow."
    ],
-   "mistake": "Shrugging the shoulders up toward the ears."
+   "mistake": "Shrugging the shoulders up toward the ears.",
+   "group": "triceps",
+   "video": "pMarNxAvHPc",
+   "gear": "Machine"
   },
   {
    "id": "dumbbell_overhead_extension",
@@ -572,7 +651,10 @@
     "Lower it behind your head, elbows pointing up.",
     "Extend fully without flaring the elbows."
    ],
-   "mistake": "Elbows drifting wide and the low back arching."
+   "mistake": "Elbows drifting wide and the low back arching.",
+   "group": "triceps",
+   "video": "JTczoqjnKUA",
+   "gear": "Dumbbell"
   },
   {
    "id": "lateral_raise",
@@ -586,7 +668,10 @@
     "Raise out and slightly forward to shoulder height.",
     "Lower slowly — no torso swing."
    ],
-   "mistake": "Shrugging or heaving with momentum."
+   "mistake": "Shrugging or heaving with momentum.",
+   "group": "shoulders",
+   "video": "PzsMitRdI_8",
+   "gear": "Dumbbell"
   },
   {
    "id": "hamstring_curl",
@@ -600,9 +685,422 @@
     "Hips stay down on the seat.",
     "Curl hard, return slowly."
    ],
-   "mistake": "Letting the stack crash between reps."
+   "mistake": "Letting the stack crash between reps.",
+   "group": "legs",
+   "video": "_2Kd0d-JEUM",
+   "gear": "Machine"
+  },
+  {
+   "id": "barbell_bench_press",
+   "name": "Barbell bench press",
+   "group": "chest",
+   "slot": "D",
+   "gear": "Barbell",
+   "basis": "total",
+   "inc": 5,
+   "cues": [
+    "Set the rack safeties or use a spotter. Plant both feet and pull your shoulder blades back.",
+    "Lower the bar to your lower chest with wrists stacked over elbows.",
+    "Press the bar back up over your shoulders. Count the bar and plates in your logged weight."
+   ],
+   "mistake": "Bouncing the bar off your chest or lifting your hips.",
+   "frames": 0,
+   "video": "lWFknlOTbyM"
+  },
+  {
+   "id": "dumbbell_floor_press",
+   "name": "Dumbbell floor press",
+   "group": "chest",
+   "slot": "D",
+   "gear": "Dumbbell",
+   "basis": "each",
+   "inc": 5,
+   "cues": [
+    "Lie faceup with knees bent and feet planted.",
+    "Lower until upper arms touch the floor gently.",
+    "Pause, then press with wrists stacked above elbows."
+   ],
+   "mistake": "Dropping your elbows onto the floor.",
+   "frames": 0,
+   "video": "T0Y3OBF1bNI"
+  },
+  {
+   "id": "dumbbell_fly",
+   "name": "Dumbbell chest fly",
+   "group": "chest",
+   "slot": "G",
+   "gear": "Dumbbell",
+   "basis": "each",
+   "inc": 2.5,
+   "cues": [
+    "Lie on a flat bench with dumbbells above your chest and elbows slightly bent.",
+    "Open your arms until you feel a chest stretch, then bring them back together."
+   ],
+   "mistake": "Lowering beyond a comfortable range or turning it into a press.",
+   "frames": 0,
+   "video": "WE1thwwQRRw"
+  },
+  {
+   "id": "kettlebell_floor_press",
+   "name": "Single-arm kettlebell floor press",
+   "group": "chest",
+   "slot": "D",
+   "gear": "Kettlebell",
+   "basis": "single",
+   "inc": 5,
+   "cues": [
+    "Lie faceup, grip the bell firmly, and keep your wrist straight.",
+    "Lower until the upper arm touches lightly, then press. Do all reps, then switch."
+   ],
+   "mistake": "Letting the bell pull your wrist back.",
+   "frames": 0,
+   "uni": true,
+   "video": "P_ijh09h23s"
+  },
+  {
+   "id": "dumbbell_reverse_lunge",
+   "name": "Dumbbell reverse lunge",
+   "group": "legs",
+   "slot": "A",
+   "gear": "Dumbbell",
+   "basis": "each",
+   "inc": 5,
+   "cues": [
+    "Hold the dumbbells at your sides and take a controlled step back.",
+    "Lower the back knee, then drive through the front foot to stand."
+   ],
+   "mistake": "Pushing off the back foot instead of loading the front leg.",
+   "frames": 0,
+   "uni": true,
+   "video": "zZaXHwFf9r8"
+  },
+  {
+   "id": "dumbbell_calf_raise",
+   "name": "Standing dumbbell calf raise",
+   "group": "legs",
+   "slot": "G",
+   "gear": "Dumbbell",
+   "basis": "each",
+   "inc": 5,
+   "cues": [
+    "Stand tall with dumbbells at your sides.",
+    "Lift both heels, pause at the top, then lower slowly."
+   ],
+   "mistake": "Bouncing through short reps.",
+   "frames": 0,
+   "video": "wwy3BSUjlW4"
+  },
+  {
+   "id": "kettlebell_goblet_squat",
+   "name": "Kettlebell goblet squat",
+   "group": "legs",
+   "slot": "A",
+   "gear": "Kettlebell",
+   "basis": "single",
+   "inc": 5,
+   "cues": [
+    "Hold the bell close to your chest and brace.",
+    "Sit between your hips, keeping knees over toes.",
+    "Push through the whole foot to stand."
+   ],
+   "mistake": "Letting the heels lift.",
+   "frames": 0,
+   "video": "MWHIs0zxkCU"
+  },
+  {
+   "id": "kettlebell_deadlift",
+   "name": "Kettlebell deadlift",
+   "group": "legs",
+   "slot": "B",
+   "gear": "Kettlebell",
+   "basis": "single",
+   "inc": 5,
+   "cues": [
+    "Set the bell between your feet. Hinge at the hips and bend the knees enough to reach.",
+    "Brace, stand tall, then hinge to lower the bell to the floor."
+   ],
+   "mistake": "Rounding your back to reach the bell.",
+   "frames": 0,
+   "video": "m-KlB4F4bIc"
+  },
+  {
+   "id": "chest_supported_dumbbell_row",
+   "name": "Chest-supported dumbbell row",
+   "group": "back",
+   "slot": "E",
+   "gear": "Dumbbell",
+   "basis": "each",
+   "inc": 5,
+   "cues": [
+    "Lie chest-down on an incline bench with feet planted.",
+    "Pull your elbows back, pause, then let the dumbbells lower under control."
+   ],
+   "mistake": "Lifting your chest off the bench or shrugging.",
+   "frames": 0,
+   "video": "ro2vfHfD0DQ"
+  },
+  {
+   "id": "kettlebell_row",
+   "name": "One-arm kettlebell row",
+   "group": "back",
+   "slot": "E",
+   "gear": "Kettlebell",
+   "basis": "single",
+   "inc": 5,
+   "cues": [
+    "Brace your free hand on a bench and hinge with a flat back.",
+    "Pull the bell toward your hip, then lower slowly. Do all reps, then switch."
+   ],
+   "mistake": "Rotating your torso to move the bell.",
+   "frames": 0,
+   "uni": true,
+   "video": "WmT_rBeKnuM"
+  },
+  {
+   "id": "dumbbell_reverse_fly",
+   "name": "Dumbbell reverse fly",
+   "group": "shoulders",
+   "slot": "H",
+   "gear": "Dumbbell",
+   "basis": "each",
+   "inc": 2.5,
+   "cues": [
+    "Hinge forward with a long spine and a soft bend in your elbows.",
+    "Lift both arms out to your sides, then lower under control."
+   ],
+   "mistake": "Shrugging or using momentum.",
+   "frames": 0,
+   "video": "D5_zfFhfyzE"
+  },
+  {
+   "id": "kettlebell_overhead_press",
+   "name": "Single-arm kettlebell press",
+   "group": "shoulders",
+   "slot": "C",
+   "gear": "Kettlebell",
+   "basis": "single",
+   "inc": 5,
+   "cues": [
+    "Start with the bell supported at the shoulder and your wrist straight.",
+    "Brace with ribs down, press overhead, then lower to the rack position. Switch sides after all reps."
+   ],
+   "mistake": "Leaning back or sideways as you press.",
+   "frames": 0,
+   "uni": true,
+   "video": "YXtkmM_Gd5Q"
+  },
+  {
+   "id": "dumbbell_concentration_curl",
+   "name": "Dumbbell concentration curl",
+   "group": "biceps",
+   "slot": "F",
+   "gear": "Dumbbell",
+   "basis": "single",
+   "inc": 2.5,
+   "cues": [
+    "Sit and brace the back of your upper arm against your inner thigh.",
+    "Curl smoothly and lower fully. Do all reps, then switch."
+   ],
+   "mistake": "Moving your shoulder to help lift the weight.",
+   "frames": 0,
+   "arm": "bi",
+   "uni": true,
+   "video": "DMhaqmlT1GU"
+  },
+  {
+   "id": "dumbbell_skull_crusher",
+   "name": "Lying dumbbell triceps extension",
+   "group": "triceps",
+   "slot": "F",
+   "gear": "Dumbbell",
+   "basis": "each",
+   "inc": 2.5,
+   "cues": [
+    "Lie on a bench with dumbbells above your shoulders and palms facing in.",
+    "Bend at the elbows to lower the dumbbells beside your head, then extend."
+   ],
+   "mistake": "Letting your upper arms swing or elbows flare.",
+   "frames": 0,
+   "arm": "tri",
+   "video": "4rI3EBpbA2U"
+  },
+  {
+   "id": "kettlebell_curl",
+   "name": "Two-hand kettlebell curl",
+   "group": "biceps",
+   "slot": "F",
+   "gear": "Kettlebell",
+   "basis": "single",
+   "inc": 5,
+   "cues": [
+    "Stand tall and hold the bell by both horns.",
+    "Curl without moving your upper arms, then lower slowly."
+   ],
+   "mistake": "Leaning back to start the rep.",
+   "frames": 0,
+   "arm": "bi",
+   "video": "GHQ1-gGuT0g"
+  },
+  {
+   "id": "kettlebell_overhead_extension",
+   "name": "Kettlebell overhead triceps extension",
+   "group": "triceps",
+   "slot": "F",
+   "gear": "Kettlebell",
+   "basis": "single",
+   "inc": 5,
+   "cues": [
+    "Hold the bell by the horns with both hands, then press it overhead.",
+    "Keep your ribs down and bend at the elbows to lower behind your head. Extend smoothly."
+   ],
+   "mistake": "Arching your back or widening your elbows.",
+   "frames": 0,
+   "arm": "tri",
+   "video": "Q09iNPS4LSc"
   }
  ],
+ "groups": {
+  "legs": "Legs",
+  "chest": "Chest",
+  "back": "Back",
+  "shoulders": "Shoulders",
+  "biceps": "Biceps",
+  "triceps": "Triceps"
+ },
+ "focuses": {
+  "full": {
+   "label": "Full body",
+   "summary": "Train legs, upper body, and arms in the regular three-week rotation.",
+   "minutes": 55
+  },
+  "legs": {
+   "label": "Legs",
+   "summary": "Start with a squat and hinge, then finish with hamstrings and calves.",
+   "minutes": 40,
+   "blocks": [
+    {
+     "slot": "A",
+     "ex": [
+      "leg_press"
+     ]
+    },
+    {
+     "slot": "B",
+     "ex": [
+      "romanian_deadlift"
+     ]
+    },
+    {
+     "slot": "G",
+     "ex": [
+      "hamstring_curl"
+     ]
+    },
+    {
+     "slot": "H",
+     "ex": [
+      "dumbbell_calf_raise"
+     ]
+    }
+   ]
+  },
+  "arms": {
+   "label": "Arms",
+   "summary": "Alternate a biceps move and a triceps move in each superset. Rest after both.",
+   "minutes": 30,
+   "blocks": [
+    {
+     "slot": "F",
+     "ex": [
+      "dumbbell_curl",
+      "rope_pushdown"
+     ]
+    },
+    {
+     "slot": "G",
+     "ex": [
+      "hammer_curl",
+      "dumbbell_overhead_extension"
+     ]
+    }
+   ]
+  },
+  "chest": {
+   "label": "Chest",
+   "summary": "Start with a flat press, follow with an incline press, and finish with flyes.",
+   "minutes": 35,
+   "blocks": [
+    {
+     "slot": "D",
+     "ex": [
+      "barbell_bench_press"
+     ]
+    },
+    {
+     "slot": "G",
+     "ex": [
+      "incline_dumbbell_press"
+     ]
+    },
+    {
+     "slot": "H",
+     "ex": [
+      "dumbbell_fly"
+     ]
+    }
+   ]
+  },
+  "back": {
+   "label": "Back",
+   "summary": "Start with a pulldown, then row with chest support and finish one side at a time.",
+   "minutes": 35,
+   "blocks": [
+    {
+     "slot": "E",
+     "ex": [
+      "lat_pulldown"
+     ]
+    },
+    {
+     "slot": "G",
+     "ex": [
+      "chest_supported_dumbbell_row"
+     ]
+    },
+    {
+     "slot": "H",
+     "ex": [
+      "kettlebell_row"
+     ]
+    }
+   ]
+  },
+  "shoulders": {
+   "label": "Shoulders",
+   "summary": "Start with an overhead press, then train your side and rear delts.",
+   "minutes": 30,
+   "blocks": [
+    {
+     "slot": "C",
+     "ex": [
+      "dumbbell_overhead_press"
+     ]
+    },
+    {
+     "slot": "G",
+     "ex": [
+      "lateral_raise"
+     ]
+    },
+    {
+     "slot": "H",
+     "ex": [
+      "dumbbell_reverse_fly"
+     ]
+    }
+   ]
+  }
+ },
  "pools": {
   "A": [
    "leg_press",
@@ -1168,5 +1666,5 @@
    ]
   ]
  },
- "media_credit": "New exercise photos: free-exercise-db (public domain, Unlicense)."
+ "media_credit": "Exercise videos are provided by their respective YouTube creators and require internet."
 }
