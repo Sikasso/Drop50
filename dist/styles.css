@@ -357,3 +357,68 @@ body.in-workout .toast { bottom: calc(var(--bot) + 84px); }
 
 .clip-credit { margin: 0 -16px; padding: 6px 16px; background: #141412; color: var(--t2); font-size: 11px; }
 .clip-credit a { color: inherit; text-decoration: underline; }
+
+/* A quieter, task-first workout */
+:root { --s1:#141414; --s2:#222; --s3:#383838; --sep:rgba(255,255,255,.12); --t2:rgba(255,255,255,.64); --t3:rgba(255,255,255,.35); --A:#ddd; --B:#ddd; --C:#ddd; --D:#ddd; --E:#ddd; --F:#ddd; --G:#ddd; --H:#ddd; --X:#ddd; --fr:var(--f); }
+#app { padding-top:calc(var(--top) + 18px); }
+.head { align-items:center; margin-bottom:24px; }
+.head .date { font-size:13px; letter-spacing:.02em; }
+.head h1 { font-size:32px; line-height:38px; font-weight:650; }
+.round-btn { width:44px; height:44px; background:#1a1a1a; }
+.hero { padding:22px 20px 8px; border:1px solid rgba(255,255,255,.08); border-radius:24px; }
+.hero h2 { font-size:24px; line-height:32px; }
+.hero-kicker { font-size:13px; }
+.hero-summary { margin:10px 0 20px; color:var(--t2); font-size:14px; }
+.hero .cta { height:54px; }
+.preview { border-top:1px solid var(--sep); margin-top:20px; }
+.preview summary { list-style:none; min-height:52px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-size:14px; font-weight:600; }
+.preview summary::-webkit-details-marker { display:none; }
+.preview summary span { color:var(--t2); font-weight:400; }
+.preview summary::after { content:'+'; color:var(--t2); font-size:21px; margin-left:12px; }
+.preview[open] summary::after { content:'−'; }
+.preview .lineup { margin:0 0 16px; gap:10px; }
+.preview .lineup-row .name { font-size:15px; }
+.preview .lineup-row .bar { background:#777; }
+.tiles { gap:8px; }
+.tile { min-height:96px; border-radius:18px; background:#111; border:1px solid rgba(255,255,255,.06); }
+.tile .v { font-size:26px; }
+.wk-bar { background:rgba(0,0,0,.9); }
+.wk-body { padding-top:14px; }
+.card { background:#111; border:1px solid rgba(255,255,255,.07); border-radius:20px; }
+.card.open { background:#151515; }
+.card.open .card-body { padding:20px 16px 18px; }
+.ex-title, .ex-title.no-media { margin:0; }
+.ex-title .pat { color:var(--t2); font-size:13px; text-transform:uppercase; letter-spacing:.07em; }
+.ex-title .pat::before { display:none; }
+.ex-title h3 { font-size:25px; line-height:31px; margin-top:7px; }
+.rx-line { margin-top:12px; }
+.tag { background:#252525; }
+.last { background:transparent; border:1px solid var(--sep); margin-top:16px; }
+.sets { margin-top:20px; }
+.sets-head { text-transform:uppercase; font-size:11px; letter-spacing:.06em; }
+.set.next .chk { border-color:#fff; }
+.set.next .chk svg { stroke:#fff; }
+.set.done .chk { background:#fff; border-color:#fff; }
+.card-tools { margin-top:16px; }
+.pill { min-height:44px; height:auto; padding:0 16px; border-radius:22px; }
+.guidance { margin-top:22px; border-top:1px solid var(--sep); padding-top:14px; }
+.guidance-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.guidance-head > b { font-size:15px; }
+.guidance-tabs { display:flex; padding:3px; background:#242424; border-radius:12px; }
+.guidance-tabs button { min-width:58px; min-height:44px; padding:0 12px; border-radius:9px; color:var(--t2); font-size:13px; font-weight:600; }
+.guidance-tabs button[aria-pressed="true"] { color:#111; background:#fff; }
+.guidance .media { margin:0; border-radius:14px; }
+.guidance .clip-credit { margin:0; padding:8px 2px; background:transparent; }
+.guidance .form { margin-top:8px; }
+.demo-toggle { right:8px; top:8px; z-index:2; }
+.rest.over { background:#454545; }
+@media(max-width:390px) { .set,.sets-head { grid-template-columns:28px minmax(0,1fr) minmax(0,1.25fr) 48px; gap:6px; } .chk { width:48px; height:48px; } .reps { grid-template-columns:32px minmax(0,1fr) 32px; } }
+.hero-top > div { min-width:0; width:100%; }
+.hero h2 .focus-title { white-space:nowrap; }
+.guidance-tabs button:disabled { opacity:.35; }
+.swap-search { display:grid; gap:5px; color:var(--t2); font-size:13px; margin:16px 0 12px; }
+.swap-search input { width:100%; min-height:48px; border-radius:12px; border:1px solid var(--s3); background:var(--s2); padding:0 14px; color:var(--t1); font-size:16px; }
+.next-exercise { margin-top:18px; color:var(--t2); font-size:13px; }
+.next-exercise span { color:var(--t1); margin-left:8px; }
+.reps { grid-template-columns:44px minmax(0,1fr) 44px; }
+@media(max-width:390px) { .reps { grid-template-columns:44px minmax(0,1fr) 44px; } }

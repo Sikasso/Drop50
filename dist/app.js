@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.11.08-1149";
+const VERSION = "2026.11.08-2102";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, demo: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -136,7 +136,7 @@ function todayView() {
   }).join("");
   const progress = s ? Object.values(s.entries).reduce((a, e) => a + e.sets.filter((x) => x.done).length, 0) : 0;
   const total = s ? Object.values(s.entries).reduce((a, e) => a + e.sets.length, 0) : 0;
-  const nextDay = nextTrainingDay();
+  const nextDay = nextTrainingDay(), exerciseCount = blocks.reduce((count, block) => count + block.ex.length, 0);
   return `
   <header class="head"><div><div class="date">${fmtDate(d, { weekday: "long", month: "long", day: "numeric" })}</div><h1>Today</h1></div>
     <div class="head-btns"><button class="round-btn" data-act="sync" aria-label="Sync from Apple Health">${SYNC}</button><button class="round-btn" data-act="settings" aria-label="Settings">${GEAR}</button></div></header>
@@ -144,10 +144,10 @@ function todayView() {
   ${stale ? `<div class="banner"><p>You have an unfinished workout from ${fmtDate(s.date)}.</p><div class="acts"><button class="pill" data-act="resume">Resume</button><button class="pill" data-act="end">Save as finished</button><button class="pill" data-act="discard-sheet">Discard</button></div></div>` : ""}
   <section class="hero" aria-label="Today's workout">
     <div class="hero-top"><div><div class="hero-kicker">${kicker}</div><h2>${focusButton(`${focus.label} · ${rotationLabel(tpl)}`)}</h2></div>
-      ${s ? `<span class="tag live">In progress</span>` : `<span class="tag">${esc(ph.name)}</span>`}</div>
-    <div class="lineup">${rows}</div>
+      </div>
+    <div class="hero-summary">${exerciseCount} exercises · ${s && s.focusChanged ? "includes saved work" : `about ${focus.minutes} min`}</div>
     <button class="cta" data-act="${s ? "resume" : "start"}">${s ? `Resume workout · ${progress}/${total} sets` : "Start workout"}</button>
-    <div class="hero-foot"><span>${cycle > 1 ? `Cycle ${cycle} · ` : ""}Session ${(seq % plan.rotation.length) + 1} of ${plan.rotation.length}</span><span>${s && s.focusChanged ? "Includes saved work" : `About ${focus.minutes} min`}</span></div>
+    <details class="preview"><summary>Workout preview <span>${exerciseCount} exercises</span></summary><div class="lineup">${rows}</div></details>
   </section>
   ${!s && nextDay && !state.profile.days.includes(E.parse(d).getDay()) ? `<p class="foot" style="margin:10px 4px 0">Rest day on your schedule. Next planned session: ${fmtDate(nextDay, { weekday: "long" })}. Walking counts.</p>` : ""}
   ${dailySection(d)}
@@ -229,20 +229,24 @@ function cardHTML(s, slot) {
   const prescriptions = keys.map((k) => rxText(s.entries[k].presc));
   const sameRx = prescriptions.every((rx) => rx.sets === prescriptions[0].sets && rx.rir === prescriptions[0].rir);
   const media = demoHTML(s, slot, keys);
+  const hasDemo = keys.some((k) => { const lift = ex(s.entries[k].ex); return lift.clip || lift.frames; });
   const isPair = keys.length > 1;
+  const order = slotsOf(s), nextSlot = order[order.indexOf(slot) + 1];
+  const nextName = nextSlot ? blockKeys(s, nextSlot).map((k) => ex(s.entries[k].ex).name).join(" + ") : null;
   const showForm = ui.form[slot] ?? keys.some((k) => !ex(s.entries[k].ex).frames && !ex(s.entries[k].ex).clip);
   const lasts = keys.map((k) => lastHTML(s, k, isPair)).join("");
   return `<section class="card open" id="card-${slot}" style="${colorVar(slot)}">${head}<div class="card-body">
-    ${media ? `<div class="demo">${media}</div>` : ""}
-    <div class="ex-title ${media ? "" : "no-media"}"><div class="pat">${esc(label)}${slotOf(slot) === "X" ? " · optional" : ""}</div><h3>${esc(names)}</h3>${isPair ? `<div class="ss">Superset: do ${keys.map((k, i) => {
+    <div class="ex-title"><div class="pat">${esc(label)}${slotOf(slot) === "X" ? " · optional" : ""}</div><h3>${esc(names)}</h3>${isPair ? `<div class="ss">Superset: do ${keys.map((k, i) => {
       const lift = ex(s.entries[k].ex);
       return `<b>${"ab"[i]}</b> ${esc(lift.name.toLowerCase())}${lift.uni ? " (reps per side)" : ""}`;
     }).join(", then ")}, then rest.</div>` : x.uni ? `<div class="ss">Reps are per side.</div>` : ""}</div>
     <div class="rx-line">${(sameRx ? prescriptions.slice(0, 1) : prescriptions).map((rx, i) => `<span class="tag num">${sameRx ? "" : `${"ab"[i]} · `}${rx.sets} · ${rx.rir}</span>`).join("")}<span class="tag num">Rest ${clock(blockRest(s, slot))}</span></div>
     ${lasts}
     <div class="sets"><div class="sets-head"><span>Set</span><span>Weight</span><span style="text-align:center">Reps</span><span></span></div>${setRows(s, keys)}</div>
-    <div class="card-tools"><button class="pill" data-act="form" data-slot="${slot}">${showForm ? "Hide form" : "Form tips"}</button><button class="pill" data-act="swap" data-slot="${slot}">Swap</button><button class="pill" data-act="history" data-ex="${keys.map((k) => s.entries[k].ex).join(",")}">History</button></div>
-    ${showForm ? keys.map((k) => formHTML(s.entries[k].ex)).join("") : ""}
+    <div class="card-tools"><button class="pill" data-act="swap" data-slot="${slot}">Swap exercise</button><button class="pill" data-act="history" data-ex="${keys.map((k) => s.entries[k].ex).join(",")}">History</button></div>
+    ${nextName ? `<div class="next-exercise">Next <span>${esc(nextName)}</span></div>` : ""}
+    <section class="guidance" aria-label="Exercise guidance"><div class="guidance-head"><b>Guidance</b><div class="guidance-tabs" role="group" aria-label="Guidance view"><button data-act="guide" data-slot="${slot}" data-v="demo" aria-pressed="${!showForm}" ${hasDemo ? "" : "disabled"}>Demo</button><button data-act="guide" data-slot="${slot}" data-v="form" aria-pressed="${showForm}">Form</button></div></div>
+    ${showForm ? keys.map((k) => formHTML(s.entries[k].ex)).join("") : `<div class="demo">${media}</div>`}</section>
   </div></section>`;
 }
 function demoHTML(s, slot, keys) {
@@ -429,6 +433,7 @@ function swapSheet(block, key, group) {
   const options = (entries, selected) => entries.map(([id, label]) => `<option value="${esc(id)}" ${id === selected ? "selected" : ""}>${esc(label)}</option>`).join("");
   openSheet(`<h2>Swap exercise</h2><p class="lede">Replace ${esc(cur.name)}. Each exercise keeps its own history and set targets.</p>
     ${keys.length > 1 ? `<div class="chips swap-filters">${keys.map((k) => `<button class="pill" data-act="swap" data-slot="${block}" data-k="${k}" aria-pressed="${k === key}" ${available.includes(k) ? "" : "disabled"}>${esc(ex(s.entries[k].ex).name)}</button>`).join("")}</div>` : ""}
+    <label class="swap-search"><span>Search exercises</span><input id="swap-search" type="search" placeholder="Name or equipment" autocomplete="off"></label>
     <div class="swap-selects">
       <label>Muscle group<select id="swap-group">${options([["all", "All groups"], ...Object.entries(plan.groups)], group)}</select></label>
       <label>Equipment<select id="swap-gear">${options([["all", "All equipment"], ...gear.map((x) => [x, x])], "all")}</select></label>
@@ -438,8 +443,8 @@ function swapSheet(block, key, group) {
 }
 function renderSwapList() {
   const list = $("#swap-list"), key = list.dataset.k, cur = active()?.entries[key]?.ex;
-  const group = $("#swap-group").value, gear = $("#swap-gear").value;
-  const choices = plan.exercises.filter((x) => (group === "all" || x.group === group) && (gear === "all" || x.gear === gear));
+  const group = $("#swap-group").value, gear = $("#swap-gear").value, query = $("#swap-search").value.trim().toLowerCase();
+  const choices = plan.exercises.filter((x) => (group === "all" || x.group === group) && (gear === "all" || x.gear === gear) && (!query || `${x.name} ${x.gear} ${plan.groups[x.group]}`.toLowerCase().includes(query)));
   list.innerHTML = choices.map((x) => {
     const last = E.exposures(state, x.id)[0];
     const detail = [plan.groups[x.group], x.gear, last ? `Last ${setsTxt(last.entry)}` : "New to your log"].join(" · ");
@@ -688,7 +693,7 @@ const actions = {
     st.r = Math.max(0, base + Number(b.dataset.d)); save();
     const inp = $(`input[data-k="${key}"][data-i="${i}"][data-f="r"]`); if (inp) inp.value = st.r;
   },
-  form: (b) => { ui.form[b.dataset.slot] = b.textContent === "Form tips"; refreshCard(b.dataset.slot); },
+  guide: (b) => { ui.form[b.dataset.slot] = b.dataset.v === "form"; refreshCard(b.dataset.slot); },
   focus: () => focusSheet(),
   "set-focus": (b) => setFocus(b.dataset.v),
   swap: (b) => swapSheet(b.dataset.slot, b.dataset.k, b.dataset.group),
@@ -747,6 +752,7 @@ document.addEventListener("click", (e) => {
   const fn = actions[b.dataset.act];
   if (fn) { e.preventDefault(); fn(b, e); }
 });
+document.addEventListener("input", (e) => { if (e.target.id === "swap-search") renderSwapList(); });
 document.addEventListener("change", (e) => {
   const i = e.target;
   if (i.id === "restore") return restore(i);
