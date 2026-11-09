@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.11.08-2102";
+const VERSION = "2026.11.08-2123";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, demo: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -258,7 +258,7 @@ function demoHTML(s, slot, keys) {
   return mediaHTML(lifts[selected]) + toggle;
 }
 function mediaHTML(x) {
-  if (x.clip) return `<div class="media local-clip"><video src="media/${esc(x.id)}.mp4" muted loop playsinline controls ${matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : "autoplay"} aria-label="${esc(x.name)} demonstration"></video></div><div class="clip-credit"><a href="${esc(x.clip_source)}" target="_blank" rel="noopener noreferrer">Video by Goulart</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · resized and muted</div>`;
+  if (x.clip) return `<div class="media local-clip"><video src="media/${esc(x.id)}.mp4" muted loop playsinline disablepictureinpicture disableremoteplayback ${matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : "autoplay"} aria-label="${esc(x.name)} demonstration"></video><button class="clip-control" data-act="toggle-clip" aria-label="Play ${esc(x.name)} demonstration" title="Play demonstration"><span aria-hidden="true">▶</span></button></div><div class="clip-credit"><a href="${esc(x.clip_source)}" target="_blank" rel="noopener noreferrer">Video by Goulart</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · resized and muted</div>`;
   if (!x.frames) return `<div class="media demo-missing"><b>${esc(x.name)}</b><span>Follow the form tips below</span></div>`;
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches, step = x.frames === 3 ? 0.9 : 1.1;
   return `<div class="media ${still ? "" : "play"} ${x.frames === 2 ? "f2" : ""}" style="--dur:${step * x.frames}s;--step:${step}s" data-act="media" role="img" aria-label="${esc(x.name)} pose guide">
@@ -704,6 +704,12 @@ const actions = {
   },
   history: (b) => historySheet(b.dataset.ex),
   media: (b) => b.classList.toggle("play"),
+  "toggle-clip": (b) => {
+    const video = b.closest(".local-clip")?.querySelector("video");
+    if (!video) return;
+    if (video.paused) video.play().catch(() => syncClipControl(video));
+    else video.pause();
+  },
   demo: (b) => {
     const s = active(), slot = b.dataset.slot, v = Number(b.dataset.v);
     const demo = b.closest(".demo");
@@ -746,6 +752,17 @@ const actions = {
   "hint-off": () => { localStorage.setItem("drop50.hint", "off"); render(); },
   "apply-update": () => { ui.update?.postMessage("skip-waiting"); },
 };
+function syncClipControl(video) {
+  const button = video.closest(".local-clip")?.querySelector(".clip-control");
+  if (!button) return;
+  const playing = !video.paused && !video.ended;
+  button.setAttribute("aria-label", `${playing ? "Pause" : "Play"} ${video.getAttribute("aria-label") || "demonstration"}`);
+  button.title = `${playing ? "Pause" : "Play"} demonstration`;
+  button.querySelector("span").textContent = playing ? "Ⅱ" : "▶";
+}
+["play", "pause", "ended"].forEach((type) => document.addEventListener(type, (event) => {
+  if (event.target.matches?.(".local-clip video")) syncClipControl(event.target);
+}, true));
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-act]");
   if (!b || b.disabled) return;

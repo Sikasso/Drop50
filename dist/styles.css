@@ -422,3 +422,4 @@ body.in-workout .toast { bottom: calc(var(--bot) + 84px); }
 .next-exercise span { color:var(--t1); margin-left:8px; }
 .reps { grid-template-columns:44px minmax(0,1fr) 44px; }
 @media(max-width:390px) { .reps { grid-template-columns:44px minmax(0,1fr) 44px; } }
+.clip-control { position:absolute; left:10px; bottom:10px; z-index:2; display:grid; place-items:center; min-width:44px; min-height:44px; border-radius:50%; background:rgba(0,0,0,.72); color:#fff; font-size:17px; }
