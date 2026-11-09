@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.11.08-2123";
+const VERSION = "2026.11.09-0702";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, demo: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
@@ -258,7 +258,7 @@ function demoHTML(s, slot, keys) {
   return mediaHTML(lifts[selected]) + toggle;
 }
 function mediaHTML(x) {
-  if (x.clip) return `<div class="media local-clip"><video src="media/${esc(x.id)}.mp4" muted loop playsinline disablepictureinpicture disableremoteplayback ${matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : "autoplay"} aria-label="${esc(x.name)} demonstration"></video><button class="clip-control" data-act="toggle-clip" aria-label="Play ${esc(x.name)} demonstration" title="Play demonstration"><span aria-hidden="true">▶</span></button></div><div class="clip-credit"><a href="${esc(x.clip_source)}" target="_blank" rel="noopener noreferrer">Video by Goulart</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · resized and muted</div>`;
+  if (x.clip) return `<div class="media local-clip"><video src="media/${esc(x.id)}.mp4" muted loop playsinline disablepictureinpicture disableremoteplayback ${matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : "autoplay"} aria-label="${esc(x.name)} demonstration"></video><button class="clip-control" data-act="toggle-clip" aria-label="Play ${esc(x.name)} demonstration" title="Play demonstration"><span aria-hidden="true">▶</span></button></div><div class="clip-credit"><a href="${esc(x.clip_source)}" target="_blank" rel="noopener noreferrer">Video by ${esc(x.clip_author || "Goulart")}</a> · <a href="${esc(x.clip_license_url || "https://creativecommons.org/licenses/by-sa/4.0/")}" target="_blank" rel="noopener noreferrer">${esc(x.clip_license || "CC BY-SA 4.0")}</a> · trimmed and muted</div>`;
   if (!x.frames) return `<div class="media demo-missing"><b>${esc(x.name)}</b><span>Follow the form tips below</span></div>`;
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches, step = x.frames === 3 ? 0.9 : 1.1;
   return `<div class="media ${still ? "" : "play"} ${x.frames === 2 ? "f2" : ""}" style="--dur:${step * x.frames}s;--step:${step}s" data-act="media" role="img" aria-label="${esc(x.name)} pose guide">
@@ -489,7 +489,7 @@ function settingsSheet() {
       <label class="row" style="width:100%"><span class="grow">Restore from a backup<div class="sub">Replaces what's on this phone</div></span>${CHEV}<input type="file" id="restore" accept=".json,application/json,text/plain" hidden></label>
       <button class="row" style="width:100%;text-align:left;color:var(--danger)" data-act="erase"><span class="grow">${ui.discardArmed ? "Tap again to erase everything" : "Erase all data"}<div class="sub">Use this after your test week</div></span></button>
     </div>
-    <p class="foot" style="margin-top:14px">${esc(plan.media_credit)} <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener noreferrer">Photo source</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Video license</a></p>`);
+    <p class="foot" style="margin-top:14px">${esc(plan.media_credit)} <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener noreferrer">Photo source</a> · <a href="https://github.com/Sikasso/Drop50/blob/main/docs/MEDIA_SOURCES.md" target="_blank" rel="noopener noreferrer">All sources</a></p>`);
 }
 function saveSettings() {
   const root = $("#settings"), p = { ...state.profile };

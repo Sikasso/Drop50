@@ -31,7 +31,7 @@ python3 -m http.server 47311 --directory dist   # then open http://127.0.0.1:473
 node --test tests/
 ```
 
-Exercise cards use local, ad-free media. Eight exercises have looping footage; 28 use pose guides
-that alternate still images; six show written form tips only. The media is cached for offline use.
+Exercise cards use local, ad-free media. Fourteen exercises have looping footage; 28 use pose guides
+that alternate still images. The media is cached for offline use.
 Credits and licenses are documented in [MEDIA_SOURCES.md](docs/MEDIA_SOURCES.md).
 This is a general fitness tool, not medical advice.

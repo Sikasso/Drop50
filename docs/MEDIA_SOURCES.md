@@ -29,4 +29,15 @@ The following paired photos are from [free-exercise-db](https://github.com/yuhon
 
 ## Original media
 
-The original 26 exercise pose guides are retained from the project baseline. The project README described 11 as generated monochrome sprites and 15 as free-exercise-db photo pairs; the original per-exercise upstream image mappings were not recorded. Some are superseded in the interface by the video clips above. The six exercises without local media show form tips.
+The original 26 exercise pose guides are retained from the project baseline. The project README described 11 as generated monochrome sprites and 15 as free-exercise-db photo pairs; the original per-exercise upstream image mappings were not recorded. Some are superseded in the interface by the video clips above. Exercises without local media show form tips.
+
+## Additional video clips
+
+The following videos are licensed [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) by their uploaders. They were excerpted, muted, and converted to H.264 MP4 for offline playback.
+
+- `kettlebell_deadlift.mp4` — [Kettlebell Deadlift](https://www.youtube.com/watch?v=B7q35TKact0), Lance Goyke.
+- `kettlebell_row.mp4` — [Kettlebell single arm row](https://www.youtube.com/watch?v=SyNxj7epvPE), Men'sPower.
+- `kettlebell_overhead_press.mp4` — [Kettlebell Training: How To Do An Overhead Press](https://www.youtube.com/watch?v=nnuHtXD2z6w), Strive4impact.
+- `dumbbell_reverse_fly.mp4` — [Dumbbell bent over lateral raise](https://www.youtube.com/watch?v=0WGfrGFsr-k), Fitnessyard.
+- `kettlebell_curl.mp4` — [Curl de biceps con la kettlebell](https://www.youtube.com/watch?v=MMXjeLrdHks), KettleWarrior; cropped.
+- `kettlebell_overhead_extension.mp4` — [Kettlebell French Press Technique](https://www.youtube.com/watch?v=OLG2S5d1fu8), Eaton PT; cropped.

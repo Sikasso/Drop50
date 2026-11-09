@@ -179,11 +179,24 @@ CLIPS = {
     "dumbbell_curl": "https://wger.de/media/exercise-video/92/8bfb917c-3d0d-49b9-8073-5d7e01c1b894.MOV",
     "hammer_curl": "https://wger.de/media/exercise-video/272/df069052-2173-4f24-855f-a0eebe729f24.MOV",
 }
+CC_CLIPS = {
+    "dumbbell_reverse_fly": ("https://www.youtube.com/watch?v=0WGfrGFsr-k", "Fitnessyard"),
+    "kettlebell_curl": ("https://www.youtube.com/watch?v=MMXjeLrdHks", "KettleWarrior"),
+    "kettlebell_overhead_extension": ("https://www.youtube.com/watch?v=OLG2S5d1fu8", "Eaton PT"),
+    "kettlebell_deadlift": ("https://www.youtube.com/watch?v=B7q35TKact0", "Lance Goyke"),
+    "kettlebell_row": ("https://www.youtube.com/watch?v=SyNxj7epvPE", "Men’sPower"),
+    "kettlebell_overhead_press": ("https://www.youtube.com/watch?v=nnuHtXD2z6w", "Strive4impact"),
+}
 PHOTO_DEMOS = set("barbell_bench_press chest_supported_dumbbell_row dumbbell_calf_raise dumbbell_concentration_curl dumbbell_floor_press dumbbell_fly dumbbell_reverse_lunge kettlebell_floor_press kettlebell_goblet_squat".split())
 for exercise in EX:
-    exercise["clip"] = exercise["id"] in CLIPS
+    exercise["clip"] = exercise["id"] in CLIPS or exercise["id"] in CC_CLIPS
     if exercise["clip"]:
-        exercise["clip_source"] = CLIPS[exercise["id"]]
+        if exercise["id"] in CC_CLIPS:
+            exercise["clip_source"], exercise["clip_author"] = CC_CLIPS[exercise["id"]]
+            exercise["clip_license"] = "CC BY 3.0"
+            exercise["clip_license_url"] = "https://creativecommons.org/licenses/by/3.0/"
+        else:
+            exercise["clip_source"] = CLIPS[exercise["id"]]
     if exercise["id"] in PHOTO_DEMOS:
         exercise["frames"] = 2
 
@@ -298,7 +311,7 @@ plan = {
     "motto": "Simple and boring = faster results.",
   },
   "steps": {"goal": 10000, "split": [["Early morning", 3000], ["Mid afternoon", 4000], ["Late evening", 3000]]},
-  "media_credit": "Video: Goulart / wger, CC BY-SA 4.0. Photo poses: free-exercise-db (Unlicense). See source credits.",
+  "media_credit": "Video and photo credits appear with each demonstration.",
 }
 json.dump(plan, open(OUT, "w"), indent=1, ensure_ascii=False)
 print("wrote", OUT, len(rotation), "sessions", len(EX), "exercises")

@@ -828,7 +828,11 @@
    ],
    "mistake": "Rounding your back to reach the bell.",
    "frames": 0,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=B7q35TKact0",
+   "clip_author": "Lance Goyke",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "chest_supported_dumbbell_row",
@@ -861,7 +865,11 @@
    "mistake": "Rotating your torso to move the bell.",
    "frames": 0,
    "uni": true,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=SyNxj7epvPE",
+   "clip_author": "Men’sPower",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "dumbbell_reverse_fly",
@@ -877,7 +885,11 @@
    ],
    "mistake": "Shrugging or using momentum.",
    "frames": 0,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=0WGfrGFsr-k",
+   "clip_author": "Fitnessyard",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "kettlebell_overhead_press",
@@ -894,7 +906,11 @@
    "mistake": "Leaning back or sideways as you press.",
    "frames": 0,
    "uni": true,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=nnuHtXD2z6w",
+   "clip_author": "Strive4impact",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "dumbbell_concentration_curl",
@@ -947,7 +963,11 @@
    "mistake": "Leaning back to start the rep.",
    "frames": 0,
    "arm": "bi",
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=MMXjeLrdHks",
+   "clip_author": "KettleWarrior",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "kettlebell_overhead_extension",
@@ -964,7 +984,11 @@
    "mistake": "Arching your back or widening your elbows.",
    "frames": 0,
    "arm": "tri",
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=OLG2S5d1fu8",
+   "clip_author": "Eaton PT",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   }
  ],
  "groups": {
@@ -1674,5 +1698,5 @@
    ]
   ]
  },
- "media_credit": "Video: Goulart / wger, CC BY-SA 4.0. Photo poses: free-exercise-db (Unlicense). See source credits."
+ "media_credit": "Video and photo credits appear with each demonstration."
 }
