@@ -170,6 +170,11 @@ EX += [
 
 # Local licensed footage and exercise photo pairs.
 CLIPS = {
+    'lateral_raise': 'https://wger.de/media/exercise-video/348/de69928a-8a35-4096-821c-1f46de5e0e03.MOV',
+    'hack_squat': 'https://wger.de/media/exercise-video/375/effa7a81-dbdd-4014-83ee-ddf0fd835301.MOV',
+    'leg_press': 'https://wger.de/media/exercise-video/371/6aae16b4-01b9-4eb4-935c-3250f84d2c59.MOV',
+    'dumbbell_bench_press': 'https://wger.de/media/exercise-video/75/080c799b-8afd-4130-8d72-9cef0cd79f54.MOV',
+
     "incline_dumbbell_press": "https://wger.de/media/exercise-video/537/b9c937e9-daeb-42a9-be8e-7a77e368478c.MOV",
     "machine_shoulder_press": "https://wger.de/media/exercise-video/543/dbfd396b-1aab-4a64-a50b-2c31ff0a2cf7.MOV",
     "dumbbell_overhead_extension": "https://wger.de/media/exercise-video/211/85f6eb25-a76c-409e-9af9-497794ac0dfb.MOV",
@@ -180,6 +185,32 @@ CLIPS = {
     "hammer_curl": "https://wger.de/media/exercise-video/272/df069052-2173-4f24-855f-a0eebe729f24.MOV",
 }
 CC_CLIPS = {
+    "dumbbell_fly": ("https://www.youtube.com/watch?v=T-Ecfg7smog", "Fitnessyard"),
+    "machine_dip": ("https://www.youtube.com/watch?v=iZ9Oq8-cU4A", "David Kimmerle"),
+    "chest_supported_dumbbell_row": ("https://www.youtube.com/watch?v=llFTFDwmGcw", "Colossus Fitness"),
+    "machine_chest_press": ("https://www.youtube.com/watch?v=oM7lwgPFXf8", "Avid Fitness"),
+    "back_extension": ("https://www.youtube.com/watch?v=1ZHDQK4UxXI", "Fitnessyard"),
+    "lat_pulldown": ("https://www.youtube.com/watch?v=ZxgD_89klTQ", "Colossus Fitness"),
+    "barbell_bench_press": ("https://www.youtube.com/watch?v=nU35lVLojjM", "Avid Fitness"),
+    "dumbbell_overhead_press": ('https://commons.wikimedia.org/wiki/File:How_To_Properly_Dumbbell_Shoulder_Press.webm', 'Colossus Fitness'),
+    "close_grip_pulldown": ('https://www.youtube.com/watch?v=Gspnzli9v2Y', 'Colossus Fitness'),
+    'split_squat': ('https://www.youtube.com/watch?v=YAl7_P5X-Pg', 'John Coleman'),
+    'goblet_squat': ('https://www.youtube.com/watch?v=IkzC-EFch3g', 'David Kimmerle'),
+    'romanian_deadlift': ('https://www.youtube.com/watch?v=4gvDmkwkfis', 'Lance Goyke'),
+    'hip_thrust': ('https://www.youtube.com/watch?v=qiKrci3j2Sw', 'Strength and Performance Stockport'),
+    'arnold_press': ('https://www.youtube.com/watch?v=OiolbUqJUnc', 'Lance Goyke'),
+    'one_arm_dumbbell_row': ('https://www.youtube.com/watch?v=9VOqrs1XDEQ', 'Fitnessyard'),
+    'seated_cable_row': ('https://www.youtube.com/watch?v=rBxR5ewesFk', 'Paul Sandburg Fitness'),
+    'incline_dumbbell_curl': ('https://www.youtube.com/watch?v=EGO5tEUq1Kc', 'Avid Fitness'),
+    'rope_pushdown': ('https://www.youtube.com/watch?v=F9WsyO8mk_k', 'Lance Goyke'),
+    'dumbbell_floor_press': ('https://www.youtube.com/watch?v=HaCcFcWwlI4', 'Lance Goyke'),
+    'kettlebell_floor_press': ('https://www.youtube.com/watch?v=nROrDDlXg30', 'Cavemantraining'),
+    'dumbbell_reverse_lunge': ('https://www.youtube.com/watch?v=Xd0jXnqLDEQ', 'Avid Fitness'),
+    'dumbbell_calf_raise': ('https://www.youtube.com/watch?v=oufRL_SB6Mk', 'David Kimmerle'),
+    'kettlebell_goblet_squat': ('https://www.youtube.com/watch?v=yi8acorycAw', 'Strive4impact'),
+    'dumbbell_concentration_curl': ('https://www.youtube.com/watch?v=-9N7N67GzFQ', 'Fitnessyard'),
+    'close_grip_pulldown': ('https://www.youtube.com/watch?v=Gspnzli9v2Y', 'Colossus Fitness'),
+
     "dumbbell_reverse_fly": ("https://www.youtube.com/watch?v=0WGfrGFsr-k", "Fitnessyard"),
     "kettlebell_curl": ("https://www.youtube.com/watch?v=MMXjeLrdHks", "KettleWarrior"),
     "kettlebell_overhead_extension": ("https://www.youtube.com/watch?v=OLG2S5d1fu8", "Eaton PT"),

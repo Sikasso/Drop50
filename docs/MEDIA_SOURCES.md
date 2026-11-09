@@ -41,3 +41,42 @@ The following videos are licensed [CC BY 3.0](https://creativecommons.org/licens
 - `dumbbell_reverse_fly.mp4` — [Dumbbell bent over lateral raise](https://www.youtube.com/watch?v=0WGfrGFsr-k), Fitnessyard.
 - `kettlebell_curl.mp4` — [Curl de biceps con la kettlebell](https://www.youtube.com/watch?v=MMXjeLrdHks), KettleWarrior; cropped.
 - `kettlebell_overhead_extension.mp4` — [Kettlebell French Press Technique](https://www.youtube.com/watch?v=OLG2S5d1fu8), Eaton PT; cropped.
+
+## Additional local exercise demos
+
+These excerpts are muted and resized; source videos are licensed CC BY 3.0 by their uploaders.
+
+- `split_squat.mp4` — [John Coleman](https://www.youtube.com/watch?v=YAl7_P5X-Pg).
+- `goblet_squat.mp4` — [David Kimmerle](https://www.youtube.com/watch?v=IkzC-EFch3g).
+- `romanian_deadlift.mp4` — [Lance Goyke](https://www.youtube.com/watch?v=4gvDmkwkfis).
+- `hip_thrust.mp4` — [Strength and Performance Stockport](https://www.youtube.com/watch?v=qiKrci3j2Sw).
+- `arnold_press.mp4` — [Lance Goyke](https://www.youtube.com/watch?v=OiolbUqJUnc).
+- `one_arm_dumbbell_row.mp4` — [Fitnessyard](https://www.youtube.com/watch?v=9VOqrs1XDEQ).
+- `seated_cable_row.mp4` — [Paul Sandburg Fitness](https://www.youtube.com/watch?v=rBxR5ewesFk).
+- `incline_dumbbell_curl.mp4` — [Avid Fitness](https://www.youtube.com/watch?v=EGO5tEUq1Kc).
+- `rope_pushdown.mp4` — [Lance Goyke](https://www.youtube.com/watch?v=F9WsyO8mk_k).
+- `dumbbell_floor_press.mp4` — [Lance Goyke](https://www.youtube.com/watch?v=HaCcFcWwlI4).
+- `kettlebell_floor_press.mp4` — [Cavemantraining](https://www.youtube.com/watch?v=nROrDDlXg30).
+- `dumbbell_reverse_lunge.mp4` — [Avid Fitness](https://www.youtube.com/watch?v=Xd0jXnqLDEQ).
+- `dumbbell_calf_raise.mp4` — [David Kimmerle](https://www.youtube.com/watch?v=oufRL_SB6Mk).
+- `kettlebell_goblet_squat.mp4` — [Strive4impact](https://www.youtube.com/watch?v=yi8acorycAw).
+- `dumbbell_concentration_curl.mp4` — [Fitnessyard](https://www.youtube.com/watch?v=-9N7N67GzFQ).
+- `close_grip_pulldown.mp4` — [Colossus Fitness](https://www.youtube.com/watch?v=Gspnzli9v2Y).
+- `close_grip_pulldown.mp4` — [Colossus Fitness](https://www.youtube.com/watch?v=Gspnzli9v2Y).
+
+## Additional wger videos
+
+Clips by Goulart, CC BY-SA 4.0, resized and muted.
+
+- `lateral_raise.mp4` — [original video](https://wger.de/media/exercise-video/348/de69928a-8a35-4096-821c-1f46de5e0e03.MOV).
+- `hack_squat.mp4` — [original video](https://wger.de/media/exercise-video/375/effa7a81-dbdd-4014-83ee-ddf0fd835301.MOV).
+- `leg_press.mp4` — [original video](https://wger.de/media/exercise-video/371/6aae16b4-01b9-4eb4-935c-3250f84d2c59.MOV).
+- `dumbbell_bench_press.mp4` — [original video](https://wger.de/media/exercise-video/75/080c799b-8afd-4130-8d72-9cef0cd79f54.MOV).
+- `dumbbell_overhead_press.mp4` — [Colossus Fitness](https://commons.wikimedia.org/wiki/File:How_To_Properly_Dumbbell_Shoulder_Press.webm), CC BY 3.0, trimmed and muted.
+- `barbell_bench_press.mp4` — [Avid Fitness](https://www.youtube.com/watch?v=nU35lVLojjM), CC BY 3.0, excerpted and muted.
+- `back_extension.mp4` — [Fitnessyard](https://www.youtube.com/watch?v=1ZHDQK4UxXI), CC BY 3.0, excerpted and muted.
+- `lat_pulldown.mp4` — [Colossus Fitness](https://www.youtube.com/watch?v=ZxgD_89klTQ), CC BY 3.0, excerpted and muted.
+- `machine_chest_press.mp4` — [Avid Fitness](https://www.youtube.com/watch?v=oM7lwgPFXf8), CC BY 3.0, excerpted and muted.
+- `dumbbell_fly.mp4` — [Fitnessyard](https://www.youtube.com/watch?v=T-Ecfg7smog), CC BY 3.0, excerpted, resized and muted.
+- `machine_dip.mp4` — [David Kimmerle](https://www.youtube.com/watch?v=iZ9Oq8-cU4A), CC BY 3.0, excerpted, resized and muted.
+- `chest_supported_dumbbell_row.mp4` — [Colossus Fitness](https://www.youtube.com/watch?v=llFTFDwmGcw), CC BY 3.0, excerpted, resized and muted.

@@ -249,7 +249,8 @@
    ],
    "mistake": "Pelvis rolling off the pad at the bottom.",
    "group": "legs",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/371/6aae16b4-01b9-4eb4-935c-3250f84d2c59.MOV",
    "gear": "Machine"
   },
   {
@@ -267,7 +268,8 @@
    ],
    "mistake": "Heels lifting or knees caving in on the way up.",
    "group": "legs",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/375/effa7a81-dbdd-4014-83ee-ddf0fd835301.MOV",
    "gear": "Machine"
   },
   {
@@ -285,7 +287,11 @@
    ],
    "mistake": "Narrow tightrope stance that kills balance.",
    "group": "legs",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=YAl7_P5X-Pg",
+   "clip_author": "John Coleman",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Dumbbell"
   },
   {
@@ -303,7 +309,11 @@
    ],
    "mistake": "Heels lifting or knees collapsing inward.",
    "group": "legs",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=IkzC-EFch3g",
+   "clip_author": "David Kimmerle",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Dumbbell"
   },
   {
@@ -320,7 +330,11 @@
    ],
    "mistake": "Rounding the back to reach lower.",
    "group": "legs",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=4gvDmkwkfis",
+   "clip_author": "Lance Goyke",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Dumbbell"
   },
   {
@@ -337,7 +351,11 @@
    ],
    "mistake": "Arching the lower back instead of extending the hips.",
    "group": "legs",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=qiKrci3j2Sw",
+   "clip_author": "Strength and Performance Stockport",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Barbell"
   },
   {
@@ -354,7 +372,11 @@
    ],
    "mistake": "Swinging up past straight and cranking the low back.",
    "group": "legs",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=1ZHDQK4UxXI",
+   "clip_author": "Fitnessyard",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Machine"
   },
   {
@@ -371,7 +393,11 @@
    ],
    "mistake": "Arching back so it turns into an incline press.",
    "group": "shoulders",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://commons.wikimedia.org/wiki/File:How_To_Properly_Dumbbell_Shoulder_Press.webm",
+   "clip_author": "Colossus Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Dumbbell"
   },
   {
@@ -406,7 +432,11 @@
    ],
    "mistake": "Rushing the rotation and losing control at the top.",
    "group": "shoulders",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=OiolbUqJUnc",
+   "clip_author": "Lance Goyke",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Dumbbell"
   },
   {
@@ -423,7 +453,8 @@
    ],
    "mistake": "Elbows flared straight out to the sides.",
    "group": "chest",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/75/080c799b-8afd-4130-8d72-9cef0cd79f54.MOV",
    "gear": "Dumbbell"
   },
   {
@@ -458,7 +489,11 @@
    ],
    "mistake": "Shoulders rolling forward off the pad.",
    "group": "chest",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=oM7lwgPFXf8",
+   "clip_author": "Avid Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Machine"
   },
   {
@@ -475,7 +510,11 @@
    ],
    "mistake": "Leaning way back and swinging the weight.",
    "group": "back",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=ZxgD_89klTQ",
+   "clip_author": "Colossus Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Cable"
   },
   {
@@ -492,7 +531,11 @@
    ],
    "mistake": "Rocking the torso to move the stack.",
    "group": "back",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=rBxR5ewesFk",
+   "clip_author": "Paul Sandburg Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Cable"
   },
   {
@@ -510,7 +553,11 @@
    ],
    "mistake": "Twisting the torso to heave the weight.",
    "group": "back",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=9VOqrs1XDEQ",
+   "clip_author": "Fitnessyard",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Dumbbell"
   },
   {
@@ -528,7 +575,11 @@
    ],
    "mistake": "Pulling with the arms instead of the back.",
    "group": "back",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=Gspnzli9v2Y",
+   "clip_author": "Colossus Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Cable"
   },
   {
@@ -584,7 +635,11 @@
    ],
    "mistake": "Shoulders rolling forward to cheat the curl.",
    "group": "biceps",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=EGO5tEUq1Kc",
+   "clip_author": "Avid Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Dumbbell"
   },
   {
@@ -602,7 +657,11 @@
    ],
    "mistake": "Elbows flaring and shoulders taking over.",
    "group": "triceps",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=F9WsyO8mk_k",
+   "clip_author": "Lance Goyke",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Cable"
   },
   {
@@ -639,7 +698,11 @@
    ],
    "mistake": "Shrugging the shoulders up toward the ears.",
    "group": "triceps",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=iZ9Oq8-cU4A",
+   "clip_author": "David Kimmerle",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/",
    "gear": "Machine"
   },
   {
@@ -676,7 +739,8 @@
    ],
    "mistake": "Shrugging or heaving with momentum.",
    "group": "shoulders",
-   "clip": false,
+   "clip": true,
+   "clip_source": "https://wger.de/media/exercise-video/348/de69928a-8a35-4096-821c-1f46de5e0e03.MOV",
    "gear": "Dumbbell"
   },
   {
@@ -712,7 +776,11 @@
    ],
    "mistake": "Bouncing the bar off your chest or lifting your hips.",
    "frames": 2,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=nU35lVLojjM",
+   "clip_author": "Avid Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "dumbbell_floor_press",
@@ -729,7 +797,11 @@
    ],
    "mistake": "Dropping your elbows onto the floor.",
    "frames": 2,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=HaCcFcWwlI4",
+   "clip_author": "Lance Goyke",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "dumbbell_fly",
@@ -745,7 +817,11 @@
    ],
    "mistake": "Lowering beyond a comfortable range or turning it into a press.",
    "frames": 2,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=T-Ecfg7smog",
+   "clip_author": "Fitnessyard",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "kettlebell_floor_press",
@@ -762,7 +838,11 @@
    "mistake": "Letting the bell pull your wrist back.",
    "frames": 2,
    "uni": true,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=nROrDDlXg30",
+   "clip_author": "Cavemantraining",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "dumbbell_reverse_lunge",
@@ -779,7 +859,11 @@
    "mistake": "Pushing off the back foot instead of loading the front leg.",
    "frames": 2,
    "uni": true,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=Xd0jXnqLDEQ",
+   "clip_author": "Avid Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "dumbbell_calf_raise",
@@ -795,7 +879,11 @@
    ],
    "mistake": "Bouncing through short reps.",
    "frames": 2,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=oufRL_SB6Mk",
+   "clip_author": "David Kimmerle",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "kettlebell_goblet_squat",
@@ -812,7 +900,11 @@
    ],
    "mistake": "Letting the heels lift.",
    "frames": 2,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=yi8acorycAw",
+   "clip_author": "Strive4impact",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "kettlebell_deadlift",
@@ -848,7 +940,11 @@
    ],
    "mistake": "Lifting your chest off the bench or shrugging.",
    "frames": 2,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=llFTFDwmGcw",
+   "clip_author": "Colossus Fitness",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "kettlebell_row",
@@ -928,7 +1024,11 @@
    "frames": 2,
    "arm": "bi",
    "uni": true,
-   "clip": false
+   "clip": true,
+   "clip_source": "https://www.youtube.com/watch?v=-9N7N67GzFQ",
+   "clip_author": "Fitnessyard",
+   "clip_license": "CC BY 3.0",
+   "clip_license_url": "https://creativecommons.org/licenses/by/3.0/"
   },
   {
    "id": "dumbbell_skull_crusher",

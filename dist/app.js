@@ -1,7 +1,7 @@
 /* Drop50 v2 — UI. All data lives on this device (localStorage); see engine.js for program + progression logic. */
 "use strict";
 const E = window.Engine;
-const VERSION = "2026.11.09-0702";
+const VERSION = "2026.11.09-1623";
 let plan = null, state = null;
 const ui = { tab: "today", open: null, form: {}, demo: {}, sheet: null, rest: null, discardArmed: false, update: null };
 const $ = (s, r = document) => r.querySelector(s);
